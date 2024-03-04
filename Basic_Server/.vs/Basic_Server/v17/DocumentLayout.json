@@ -1,0 +1,157 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "D:\\GitHub\\Donet\\Basic_Server\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{03D8EB12-F759-4763-9E59-81FBFCBC3F94}|Basic_Server\\Server.csproj|d:\\github\\donet\\basic_server\\basic_server\\sender.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{03D8EB12-F759-4763-9E59-81FBFCBC3F94}|Basic_Server\\Server.csproj|solutionrelative:basic_server\\sender.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{03D8EB12-F759-4763-9E59-81FBFCBC3F94}|Basic_Server\\Server.csproj|d:\\github\\donet\\basic_server\\basic_server\\session.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{03D8EB12-F759-4763-9E59-81FBFCBC3F94}|Basic_Server\\Server.csproj|solutionrelative:basic_server\\session.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{03D8EB12-F759-4763-9E59-81FBFCBC3F94}|Basic_Server\\Server.csproj|d:\\github\\donet\\basic_server\\basic_server\\listener.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{03D8EB12-F759-4763-9E59-81FBFCBC3F94}|Basic_Server\\Server.csproj|solutionrelative:basic_server\\listener.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{03D8EB12-F759-4763-9E59-81FBFCBC3F94}|Basic_Server\\MyFramework.csproj|d:\\github\\donet\\basic_server\\basic_server\\connecter.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{03D8EB12-F759-4763-9E59-81FBFCBC3F94}|Basic_Server\\MyFramework.csproj|solutionrelative:basic_server\\connecter.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{03D8EB12-F759-4763-9E59-81FBFCBC3F94}|Basic_Server\\Server.csproj|d:\\github\\donet\\basic_server\\basic_server\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{03D8EB12-F759-4763-9E59-81FBFCBC3F94}|Basic_Server\\Server.csproj|solutionrelative:basic_server\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{03D8EB12-F759-4763-9E59-81FBFCBC3F94}|Basic_Server\\Server.csproj|d:\\github\\donet\\basic_server\\basic_server\\receiver.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{03D8EB12-F759-4763-9E59-81FBFCBC3F94}|Basic_Server\\Server.csproj|solutionrelative:basic_server\\receiver.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{03D8EB12-F759-4763-9E59-81FBFCBC3F94}|Basic_Server\\Server.csproj|d:\\github\\donet\\basic_server\\basic_server\\buffermanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{03D8EB12-F759-4763-9E59-81FBFCBC3F94}|Basic_Server\\Server.csproj|solutionrelative:basic_server\\buffermanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 274,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Sender.cs",
+              "DocumentMoniker": "D:\\GitHub\\Donet\\Basic_Server\\Basic_Server\\Sender.cs",
+              "RelativeDocumentMoniker": "Basic_Server\\Sender.cs",
+              "ToolTip": "D:\\GitHub\\Donet\\Basic_Server\\Basic_Server\\Sender.cs",
+              "RelativeToolTip": "Basic_Server\\Sender.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABUAAAAJAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-03-04T10:05:08.126Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "Receiver.cs",
+              "DocumentMoniker": "D:\\GitHub\\Donet\\Basic_Server\\Basic_Server\\Receiver.cs",
+              "RelativeDocumentMoniker": "Basic_Server\\Receiver.cs",
+              "ToolTip": "D:\\GitHub\\Donet\\Basic_Server\\Basic_Server\\Receiver.cs",
+              "RelativeToolTip": "Basic_Server\\Receiver.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABAAAAAJAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-03-03T23:34:34.181Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "BufferManager.cs",
+              "DocumentMoniker": "D:\\GitHub\\Donet\\Basic_Server\\Basic_Server\\BufferManager.cs",
+              "RelativeDocumentMoniker": "Basic_Server\\BufferManager.cs",
+              "ToolTip": "D:\\GitHub\\Donet\\Basic_Server\\Basic_Server\\BufferManager.cs",
+              "RelativeToolTip": "Basic_Server\\BufferManager.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAsAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-03-04T00:28:58.51Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Session.cs",
+              "DocumentMoniker": "D:\\GitHub\\Donet\\Basic_Server\\Basic_Server\\Session.cs",
+              "RelativeDocumentMoniker": "Basic_Server\\Session.cs",
+              "ToolTip": "D:\\GitHub\\Donet\\Basic_Server\\Basic_Server\\Session.cs",
+              "RelativeToolTip": "Basic_Server\\Session.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAsAAAAdAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-03-03T23:34:34.188Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Listener.cs",
+              "DocumentMoniker": "D:\\GitHub\\Donet\\Basic_Server\\Basic_Server\\Listener.cs",
+              "RelativeDocumentMoniker": "Basic_Server\\Listener.cs",
+              "ToolTip": "D:\\GitHub\\Donet\\Basic_Server\\Basic_Server\\Listener.cs",
+              "RelativeToolTip": "Basic_Server\\Listener.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAgAAAAhAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-03-03T23:34:34.202Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Connecter.cs",
+              "DocumentMoniker": "D:\\GitHub\\Donet\\Basic_Server\\Basic_Server\\Connecter.cs",
+              "RelativeDocumentMoniker": "Basic_Server\\Connecter.cs",
+              "ToolTip": "D:\\GitHub\\Donet\\Basic_Server\\Basic_Server\\Connecter.cs",
+              "RelativeToolTip": "Basic_Server\\Connecter.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAACIAAAAcAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-03-04T10:56:13.106Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Program.cs",
+              "DocumentMoniker": "D:\\GitHub\\Donet\\Basic_Server\\Basic_Server\\Program.cs",
+              "RelativeDocumentMoniker": "Basic_Server\\Program.cs",
+              "ToolTip": "D:\\GitHub\\Donet\\Basic_Server\\Basic_Server\\Program.cs",
+              "RelativeToolTip": "Basic_Server\\Program.cs",
+              "ViewState": "AQIAABkAAAAAAAAAAAAkwCUAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-03-03T23:34:34.205Z",
+              "EditorCaption": ""
+            }
+          ]
+        },
+        {
+          "DockedWidth": 274,
+          "SelectedChildIndex": -1,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{d78612c7-9962-4b83-95d9-268046dad23a}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{34e76e81-ee4a-11d0-ae2e-00a0c90fffc3}"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

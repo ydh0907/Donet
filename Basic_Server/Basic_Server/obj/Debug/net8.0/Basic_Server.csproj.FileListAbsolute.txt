@@ -1,0 +1,14 @@
+D:\GitHub\Donet\Basic_Server\Basic_Server\bin\Debug\net8.0\Basic_Server.exe
+D:\GitHub\Donet\Basic_Server\Basic_Server\bin\Debug\net8.0\Basic_Server.deps.json
+D:\GitHub\Donet\Basic_Server\Basic_Server\bin\Debug\net8.0\Basic_Server.runtimeconfig.json
+D:\GitHub\Donet\Basic_Server\Basic_Server\bin\Debug\net8.0\Basic_Server.dll
+D:\GitHub\Donet\Basic_Server\Basic_Server\bin\Debug\net8.0\Basic_Server.pdb
+D:\GitHub\Donet\Basic_Server\Basic_Server\obj\Debug\net8.0\Basic_Server.GeneratedMSBuildEditorConfig.editorconfig
+D:\GitHub\Donet\Basic_Server\Basic_Server\obj\Debug\net8.0\Basic_Server.AssemblyInfoInputs.cache
+D:\GitHub\Donet\Basic_Server\Basic_Server\obj\Debug\net8.0\Basic_Server.AssemblyInfo.cs
+D:\GitHub\Donet\Basic_Server\Basic_Server\obj\Debug\net8.0\Basic_Server.csproj.CoreCompileInputs.cache
+D:\GitHub\Donet\Basic_Server\Basic_Server\obj\Debug\net8.0\Basic_Server.dll
+D:\GitHub\Donet\Basic_Server\Basic_Server\obj\Debug\net8.0\refint\Basic_Server.dll
+D:\GitHub\Donet\Basic_Server\Basic_Server\obj\Debug\net8.0\Basic_Server.pdb
+D:\GitHub\Donet\Basic_Server\Basic_Server\obj\Debug\net8.0\Basic_Server.genruntimeconfig.cache
+D:\GitHub\Donet\Basic_Server\Basic_Server\obj\Debug\net8.0\ref\Basic_Server.dll
