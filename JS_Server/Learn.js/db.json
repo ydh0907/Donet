@@ -1,0 +1,24 @@
+{
+  "users": [
+    {
+      "id": "xq_Vz6PLO",
+      "email": "asdf",
+      "password": "asdf",
+      "nickname": "asdf"
+    },
+    {
+      "id": "cbl40vZSM",
+      "email": "zxcv",
+      "password": "zxcv",
+      "nickname": "zxcv"
+    }
+  ],
+  "topics": [
+    {
+      "id": "2lchUojCE",
+      "title": "asdf",
+      "description": "asdf",
+      "user_id": "xq_Vz6PLO"
+    }
+  ]
+}

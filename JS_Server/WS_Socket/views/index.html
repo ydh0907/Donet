@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>채팅방</title>
+</head>
+<body>
+    <div>F12를 눌러 network 탭을 확인하세요</div>
+    <script src="socket.io/socket.io.js"></script>
+    <script>
+        const webSocket = io.connect("http://localhost:3001", {path:'/socket.io'});
+        webSocket.on('heart beat', function(data){
+            console.log(data);
+            webSocket.emit('eco', 'it is active client');
+        })
+    </script>
+</body>
+</html>
