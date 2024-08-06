@@ -2,58 +2,81 @@
 {
     public class RAB
     {
-        public static RAB SharedBuffer = new RAB(1048576);
-        public static RAB UniqueBuffer
+        internal static ArraySegment<byte> AcquireFromPool(int size)
         {
-            get
+            ArraySegment<byte> segment;
+            for (int i = 0; i < pool.Count; i++)
             {
-                if (!uniqueBuffer.IsValueCreated)
-                    uniqueBuffer.Value = new RAB(32768);
-                return uniqueBuffer.Value;
+                segment = pool[i].Acquire(size);
+                if (segment != null)
+                    return segment;
             }
+            pool.Add(new RAB(16777216 > size ? 16777216 : size));
+            return pool[^1].Acquire(size);
         }
-        private static ThreadLocal<RAB> uniqueBuffer = new ThreadLocal<RAB>();
+        internal static bool ReleaseToPool(ArraySegment<byte> segment)
+        {
+            for (int i = 0; i < pool.Count; i++)
+            {
+                if (pool[i].Release(segment))
+                    return true;
+            }
+            return false;
+        }
+
+        private static List<RAB> pool = new List<RAB>();
 
         private byte[] buffer;
         private List<ArraySegment<byte>> segments;
 
-        public RAB(int size)
+        private RAB(int size)
         {
             buffer = new byte[size];
             segments = new(128);
         }
 
-        public ArraySegment<byte> Acquire(int size)
+        private ArraySegment<byte> Acquire(int size)
         {
+            Console.WriteLine($"[RAB] Acquired {size}B");
             lock (this)
             {
-                ArraySegment<byte> segment = FindSegment(size);
-                while (segment == null)
-                {
-                    Resize(buffer.Length * 2);
-                    segment = FindSegment(size);
-                }
-                return segment;
+                return FindSegment(size); ;
             }
         }
+
         private ArraySegment<byte> FindSegment(int size)
         {
             lock (this)
             {
+                #region CheckEmpty
                 if (segments.Count == 0)
                 {
                     ArraySegment<byte> segment = new(buffer, 0, size);
                     segments.Add(segment);
                     return segment;
                 }
-                int current = 0;
-                int space = segments[0].Offset;
+                #endregion
+                #region CheckLast
+                int current = segments[^1].Offset + segments[^1].Count;
+                int space = buffer.Length - current;
+                if (space >= size)
+                {
+                    ArraySegment<byte> segment = new(buffer, current, size);
+                    segments.Add(segment);
+                    return segment;
+                }
+                #endregion
+                #region CheckFirst
+                current = 0;
+                space = segments[0].Offset;
                 if (space >= size)
                 {
                     ArraySegment<byte> segment = new(buffer, current, size);
                     segments.Insert(0, segment);
                     return segment;
                 }
+                #endregion
+                #region CheckMiddle
                 for (int i = 0; i < segments.Count - 1; i++)
                 {
                     current = segments[i].Offset + segments[i].Count;
@@ -65,32 +88,17 @@
                         return segment;
                     }
                 }
-                current = segments[^1].Offset + segments[^1].Count;
-                space = buffer.Length - current;
-                if (space >= size)
-                {
-                    ArraySegment<byte> segment = new(buffer, current, size);
-                    segments.Add(segment);
-                    return segment;
-                }
+                #endregion
                 return null;
             }
         }
-        public void Resize(int size)
+
+        private bool Release(ArraySegment<byte> segment)
         {
-            lock (this)
-            {
-                segments.Clear();
-                buffer = new byte[size];
-            }
-        }
-        public bool Release(ref ArraySegment<byte> segment)
-        {
+            Console.WriteLine($"[RAB] Released {segment.Count}B");
             lock (this)
             {
                 bool success = segments.Remove(segment);
-                if (success)
-                    segment = new();
                 return success;
             }
         }

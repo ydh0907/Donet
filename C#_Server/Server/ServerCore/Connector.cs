@@ -3,17 +3,18 @@ using System.Net.Sockets;
 
 namespace ServerCore
 {
-    public class Connector<T> where T : Session, new()
+    public class Connector
     {
+        private Func<Session> factory;
         private Func<int, long, int> verify;
+        private Action<Session> callback;
 
-        public Connector(Func<int, long, int> verify)
+        public void Connect(IPEndPoint endPoint, Func<Session> factory, Func<int, long, int> verify, Action<Session> callback)
         {
+            this.factory = factory;
             this.verify = verify;
-        }
+            this.callback = callback;
 
-        public void Connect(IPEndPoint endPoint)
-        {
             Socket socket = new Socket(endPoint.AddressFamily, SocketType.Stream, ProtocolType.Tcp);
 
             SocketAsyncEventArgs args = new();
@@ -29,8 +30,6 @@ namespace ServerCore
             Socket socket = args.UserToken as Socket;
             if (socket == null)
                 return;
-
-            args.UserToken = typeof(T);
 
             bool pending = socket.ConnectAsync(args);
             if (!pending)
@@ -68,12 +67,14 @@ namespace ServerCore
 
             if (accept)
             {
-                T session = new T();
-                session.Init(server);
+                Session session = factory();
+                session.Start(server);
+                callback(session);
             }
             else
             {
-                Console.WriteLine("disconnect by wrong verify");
+                server.Shutdown(SocketShutdown.Both);
+                server.Close();
             }
         }
     }

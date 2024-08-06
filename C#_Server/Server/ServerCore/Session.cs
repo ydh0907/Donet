@@ -9,7 +9,7 @@ namespace ServerCore
         private int connected = 0;
 
         private SocketAsyncEventArgs recvArgs = new();
-        private ReceiveBuffer recvBuffer;
+        private ReceiveBuffer receiver;
         private int readPoint = 0;
 
         private SocketAsyncEventArgs sendArgs = new();
@@ -22,12 +22,7 @@ namespace ServerCore
         public abstract void OnSend(int transferred);
         public abstract void OnDisconnected(EndPoint endPoint);
 
-        ~Session()
-        {
-            RAB.SharedBuffer.Release(ref recvBuffer.buffer);
-        }
-
-        public void Init(Socket socket)
+        public void Start(Socket socket, int receiveBufferSize = 16384)
         {
             if (Interlocked.Exchange(ref connected, 1) == 1)
                 return;
@@ -35,7 +30,7 @@ namespace ServerCore
             this.socket = socket;
 
             recvArgs.Completed += ReceiveHandler;
-            this.recvBuffer = new ReceiveBuffer(RAB.SharedBuffer.Acquire(8192));
+            receiver = new ReceiveBuffer(receiveBufferSize);
             RegisterReceive();
 
             sendArgs.Completed += OnSendCompleted;
@@ -119,7 +114,8 @@ namespace ServerCore
         #region Receive
         private void RegisterReceive()
         {
-            ArraySegment<byte> writeSegment = recvBuffer.WriteSegment;
+            receiver.Clean();
+            ArraySegment<byte> writeSegment = receiver.WriteSegment;
             recvArgs.SetBuffer(writeSegment.Array, writeSegment.Offset, writeSegment.Count);
             bool pending = socket.ReceiveAsync(recvArgs);
             if (!pending)
@@ -150,26 +146,24 @@ namespace ServerCore
 
         private void HandleReceive(SocketAsyncEventArgs args)
         {
-            if (!recvBuffer.Write(args.BytesTransferred))
+            if (receiver.Write(args.BytesTransferred))
                 Disconnect();
 
             Console.WriteLine($"[Session] Handle Size : {args.BytesTransferred}");
 
-            while (recvBuffer.DataCount >= 2)
+            while (receiver.DataCount >= 2)
             {
-                ArraySegment<byte> data = recvBuffer.DataSegment;
+                ArraySegment<byte> data = receiver.DataSegment;
                 ushort length = BitConverter.ToUInt16(data.Array, data.Offset);
 
-                if (length <= recvBuffer.DataCount)
+                if (length <= receiver.DataCount)
                 {
                     OnReceive(new ArraySegment<byte>(data.Array, data.Offset, length));
-                    recvBuffer.Read(length);
+                    receiver.Read(length);
                 }
                 else
                     break;
             }
-
-            recvBuffer.Clean();
         }
         #endregion
     }

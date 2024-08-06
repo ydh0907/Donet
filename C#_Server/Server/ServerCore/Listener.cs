@@ -3,14 +3,18 @@ using System.Net.Sockets;
 
 namespace ServerCore
 {
-    public class Listener<T> where T : Session, new()
+    public class Listener
     {
         private Socket listener;
+        private Func<Session> factory;
         private Func<int, long, int> verify;
+        private Action<Session> callback;
 
-        public void Init(IPEndPoint endPoint, Func<int, long, int> verify)
+        public void Listen(IPEndPoint endPoint, Func<Session> factory, Func<int, long, int> verify, Action<Session> callback)
         {
+            this.factory = factory;
             this.verify = verify;
+            this.callback = callback;
 
             SocketAsyncEventArgs args = new();
             args.Completed += AcceptHandle;
@@ -69,8 +73,9 @@ namespace ServerCore
             if (clientValue == serverValue)
             {
                 Console.WriteLine($"verify : {serverValue}");
-                T session = new T();
-                session.Init(client);
+                Session session = factory();
+                session.Start(client);
+                callback?.Invoke(session);
             }
             else
             {

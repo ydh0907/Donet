@@ -1,14 +1,19 @@
 ﻿namespace ServerCore
 {
-    internal class ReceiveBuffer
+    public class ReceiveBuffer
     {
         public ArraySegment<byte> buffer;
         private int write = 0;
         private int read = 0;
 
-        public ReceiveBuffer(ArraySegment<byte> buffer)
+        public ReceiveBuffer(int size)
         {
-            this.buffer = buffer;
+            buffer = RAB.AcquireFromPool(size);
+        }
+
+        ~ReceiveBuffer()
+        {
+            RAB.ReleaseToPool(buffer);
         }
 
         public int WriteCount => buffer.Count - write;

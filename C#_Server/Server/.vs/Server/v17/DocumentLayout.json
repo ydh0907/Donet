@@ -3,32 +3,52 @@
   "WorkspaceRootPath": "D:\\GitHub\\Donet\\C#_Server\\Server\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{BE90FF72-ADB7-4A53-BA89-7E4A8E30BC76}|ServerCore\\ServerCore.csproj|d:\\github\\donet\\c#_server\\server\\servercore\\session.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{BE90FF72-ADB7-4A53-BA89-7E4A8E30BC76}|ServerCore\\ServerCore.csproj|solutionrelative:servercore\\session.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{BE90FF72-ADB7-4A53-BA89-7E4A8E30BC76}|ServerCore\\ServerCore.csproj|d:\\github\\donet\\c#_server\\server\\servercore\\serializer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BE90FF72-ADB7-4A53-BA89-7E4A8E30BC76}|ServerCore\\ServerCore.csproj|solutionrelative:servercore\\serializer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BE90FF72-ADB7-4A53-BA89-7E4A8E30BC76}|ServerCore\\ServerCore.csproj|d:\\github\\donet\\c#_server\\server\\servercore\\packetfactory.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BE90FF72-ADB7-4A53-BA89-7E4A8E30BC76}|ServerCore\\ServerCore.csproj|solutionrelative:servercore\\packetfactory.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BE90FF72-ADB7-4A53-BA89-7E4A8E30BC76}|ServerCore\\ServerCore.csproj|d:\\github\\donet\\c#_server\\server\\servercore\\packet.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BE90FF72-ADB7-4A53-BA89-7E4A8E30BC76}|ServerCore\\ServerCore.csproj|solutionrelative:servercore\\packet.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E7C3A9EF-F119-446C-9A38-F333D9B23C9C}|Server\\Server.csproj|d:\\github\\donet\\c#_server\\server\\server\\clientsession.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E7C3A9EF-F119-446C-9A38-F333D9B23C9C}|Server\\Server.csproj|solutionrelative:server\\clientsession.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{5955187C-E0F2-43A0-816A-2D501EAB2597}|DummyClient\\DummyClient.csproj|d:\\github\\donet\\c#_server\\server\\dummyclient\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{5955187C-E0F2-43A0-816A-2D501EAB2597}|DummyClient\\DummyClient.csproj|solutionrelative:dummyclient\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{E7C3A9EF-F119-446C-9A38-F333D9B23C9C}|Server\\Server.csproj|d:\\github\\donet\\c#_server\\server\\server\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{E7C3A9EF-F119-446C-9A38-F333D9B23C9C}|Server\\Server.csproj|solutionrelative:server\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{BE90FF72-ADB7-4A53-BA89-7E4A8E30BC76}|ServerCore\\ServerCore.csproj|d:\\github\\donet\\c#_server\\server\\servercore\\connector.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BE90FF72-ADB7-4A53-BA89-7E4A8E30BC76}|ServerCore\\ServerCore.csproj|solutionrelative:servercore\\connector.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{BE90FF72-ADB7-4A53-BA89-7E4A8E30BC76}|ServerCore\\ServerCore.csproj|d:\\github\\donet\\c#_server\\server\\servercore\\rab.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{BE90FF72-ADB7-4A53-BA89-7E4A8E30BC76}|ServerCore\\ServerCore.csproj|solutionrelative:servercore\\rab.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{E7C3A9EF-F119-446C-9A38-F333D9B23C9C}|Server\\Server.csproj|d:\\github\\donet\\c#_server\\server\\server\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E7C3A9EF-F119-446C-9A38-F333D9B23C9C}|Server\\Server.csproj|solutionrelative:server\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{BE90FF72-ADB7-4A53-BA89-7E4A8E30BC76}|ServerCore\\ServerCore.csproj|d:\\github\\donet\\c#_server\\server\\servercore\\receivebuffer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{BE90FF72-ADB7-4A53-BA89-7E4A8E30BC76}|ServerCore\\ServerCore.csproj|solutionrelative:servercore\\receivebuffer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{BE90FF72-ADB7-4A53-BA89-7E4A8E30BC76}|ServerCore\\ServerCore.csproj|d:\\github\\donet\\c#_server\\server\\servercore\\listener.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{BE90FF72-ADB7-4A53-BA89-7E4A8E30BC76}|ServerCore\\ServerCore.csproj|solutionrelative:servercore\\listener.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{BE90FF72-ADB7-4A53-BA89-7E4A8E30BC76}|ServerCore\\ServerCore.csproj|d:\\github\\donet\\c#_server\\server\\servercore\\sendbuffer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BE90FF72-ADB7-4A53-BA89-7E4A8E30BC76}|ServerCore\\ServerCore.csproj|solutionrelative:servercore\\sendbuffer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{BE90FF72-ADB7-4A53-BA89-7E4A8E30BC76}|ServerCore\\ServerCore.csproj|d:\\github\\donet\\c#_server\\server\\servercore\\connector.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{BE90FF72-ADB7-4A53-BA89-7E4A8E30BC76}|ServerCore\\ServerCore.csproj|solutionrelative:servercore\\connector.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{BE90FF72-ADB7-4A53-BA89-7E4A8E30BC76}|ServerCore\\ServerCore.csproj|d:\\github\\donet\\c#_server\\server\\servercore\\rab.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BE90FF72-ADB7-4A53-BA89-7E4A8E30BC76}|ServerCore\\ServerCore.csproj|solutionrelative:servercore\\rab.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BE90FF72-ADB7-4A53-BA89-7E4A8E30BC76}|ServerCore\\ServerCore.csproj|d:\\github\\donet\\c#_server\\server\\servercore\\session.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BE90FF72-ADB7-4A53-BA89-7E4A8E30BC76}|ServerCore\\ServerCore.csproj|solutionrelative:servercore\\session.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5955187C-E0F2-43A0-816A-2D501EAB2597}|DummyClient\\DummyClient.csproj|d:\\github\\donet\\c#_server\\server\\dummyclient\\serversession.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5955187C-E0F2-43A0-816A-2D501EAB2597}|DummyClient\\DummyClient.csproj|solutionrelative:dummyclient\\serversession.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -38,101 +58,167 @@
       "DocumentGroups": [
         {
           "DockedWidth": 183,
-          "SelectedChildIndex": 5,
+          "SelectedChildIndex": 1,
           "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Packet.cs",
+              "DocumentMoniker": "D:\\GitHub\\Donet\\C#_Server\\Server\\ServerCore\\Packet.cs",
+              "RelativeDocumentMoniker": "ServerCore\\Packet.cs",
+              "ToolTip": "D:\\GitHub\\Donet\\C#_Server\\Server\\ServerCore\\Packet.cs",
+              "RelativeToolTip": "ServerCore\\Packet.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAYAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-08-05T00:45:53.705Z",
+              "IsPinned": true,
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Serializer.cs",
+              "DocumentMoniker": "D:\\GitHub\\Donet\\C#_Server\\Server\\ServerCore\\Serializer.cs",
+              "RelativeDocumentMoniker": "ServerCore\\Serializer.cs",
+              "ToolTip": "D:\\GitHub\\Donet\\C#_Server\\Server\\ServerCore\\Serializer.cs",
+              "RelativeToolTip": "ServerCore\\Serializer.cs",
+              "ViewState": "AQIAAOEBAAAAAAAAAAApwCICAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-08-05T00:46:40.384Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "PacketFactory.cs",
+              "DocumentMoniker": "D:\\GitHub\\Donet\\C#_Server\\Server\\ServerCore\\PacketFactory.cs",
+              "RelativeDocumentMoniker": "ServerCore\\PacketFactory.cs",
+              "ToolTip": "D:\\GitHub\\Donet\\C#_Server\\Server\\ServerCore\\PacketFactory.cs",
+              "RelativeToolTip": "ServerCore\\PacketFactory.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAoAAAAJAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-08-06T15:59:35.832Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "ClientSession.cs",
+              "DocumentMoniker": "D:\\GitHub\\Donet\\C#_Server\\Server\\Server\\ClientSession.cs",
+              "RelativeDocumentMoniker": "Server\\ClientSession.cs",
+              "ToolTip": "D:\\GitHub\\Donet\\C#_Server\\Server\\Server\\ClientSession.cs",
+              "RelativeToolTip": "Server\\ClientSession.cs",
+              "ViewState": "AQIAAAoAAAAAAAAAAAAQwAUAAAAoAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-08-06T11:07:43.352Z",
+              "EditorCaption": ""
+            },
             {
               "$type": "Bookmark",
               "Name": "ST:2:0:{e8034f19-ab72-4f06-83fd-f6832b41aa63}"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "ReceiveBuffer.cs",
-              "DocumentMoniker": "D:\\GitHub\\Donet\\C#_Server\\Server\\ServerCore\\ReceiveBuffer.cs",
-              "RelativeDocumentMoniker": "ServerCore\\ReceiveBuffer.cs",
-              "ToolTip": "D:\\GitHub\\Donet\\C#_Server\\Server\\ServerCore\\ReceiveBuffer.cs",
-              "RelativeToolTip": "ServerCore\\ReceiveBuffer.cs",
-              "ViewState": "AQIAAAgAAAAAAAAAAAAtwBkAAAAIAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-08-03T19:43:17.701Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "Program.cs",
-              "DocumentMoniker": "D:\\GitHub\\Donet\\C#_Server\\Server\\DummyClient\\Program.cs",
-              "RelativeDocumentMoniker": "DummyClient\\Program.cs",
-              "ToolTip": "D:\\GitHub\\Donet\\C#_Server\\Server\\DummyClient\\Program.cs",
-              "RelativeToolTip": "DummyClient\\Program.cs",
-              "ViewState": "AQIAAAcAAAAAAAAAAAAzwCkAAAANAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-08-03T18:44:33.17Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "Program.cs",
-              "DocumentMoniker": "D:\\GitHub\\Donet\\C#_Server\\Server\\Server\\Program.cs",
-              "RelativeDocumentMoniker": "Server\\Program.cs",
-              "ToolTip": "D:\\GitHub\\Donet\\C#_Server\\Server\\Server\\Program.cs",
-              "RelativeToolTip": "Server\\Program.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAABEAAAATAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-08-03T18:21:19.202Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "RAB.cs",
-              "DocumentMoniker": "D:\\GitHub\\Donet\\C#_Server\\Server\\ServerCore\\RAB.cs",
-              "RelativeDocumentMoniker": "ServerCore\\RAB.cs",
-              "ToolTip": "D:\\GitHub\\Donet\\C#_Server\\Server\\ServerCore\\RAB.cs",
-              "RelativeToolTip": "ServerCore\\RAB.cs",
-              "ViewState": "AQIAAAIAAAAAAAAAAAAxwGIAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-07-31T17:31:55.758Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 10,
               "Title": "Session.cs",
               "DocumentMoniker": "D:\\GitHub\\Donet\\C#_Server\\Server\\ServerCore\\Session.cs",
               "RelativeDocumentMoniker": "ServerCore\\Session.cs",
               "ToolTip": "D:\\GitHub\\Donet\\C#_Server\\Server\\ServerCore\\Session.cs",
               "RelativeToolTip": "ServerCore\\Session.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA8AAAAwAAAA",
+              "ViewState": "AQIAAGIAAAAAAAAAAAAIwGoAAAARAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-07-31T17:32:03.472Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "Listener.cs",
-              "DocumentMoniker": "D:\\GitHub\\Donet\\C#_Server\\Server\\ServerCore\\Listener.cs",
-              "RelativeDocumentMoniker": "ServerCore\\Listener.cs",
-              "ToolTip": "D:\\GitHub\\Donet\\C#_Server\\Server\\ServerCore\\Listener.cs",
-              "RelativeToolTip": "ServerCore\\Listener.cs",
-              "ViewState": "AQIAADUAAAAAAAAAAAAAwEMAAAAAAAAA",
+              "DocumentIndex": 7,
+              "Title": "ReceiveBuffer.cs",
+              "DocumentMoniker": "D:\\GitHub\\Donet\\C#_Server\\Server\\ServerCore\\ReceiveBuffer.cs",
+              "RelativeDocumentMoniker": "ServerCore\\ReceiveBuffer.cs",
+              "ToolTip": "D:\\GitHub\\Donet\\C#_Server\\Server\\ServerCore\\ReceiveBuffer.cs",
+              "RelativeToolTip": "ServerCore\\ReceiveBuffer.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAEAAAABAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-07-31T17:32:01.687Z",
+              "WhenOpened": "2024-08-05T01:51:35.073Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "SendBuffer.cs",
+              "DocumentMoniker": "D:\\GitHub\\Donet\\C#_Server\\Server\\ServerCore\\SendBuffer.cs",
+              "RelativeDocumentMoniker": "ServerCore\\SendBuffer.cs",
+              "ToolTip": "D:\\GitHub\\Donet\\C#_Server\\Server\\ServerCore\\SendBuffer.cs",
+              "RelativeToolTip": "ServerCore\\SendBuffer.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAIAAAAXAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-08-05T01:33:48.129Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 6,
+              "Title": "Program.cs",
+              "DocumentMoniker": "D:\\GitHub\\Donet\\C#_Server\\Server\\Server\\Program.cs",
+              "RelativeDocumentMoniker": "Server\\Program.cs",
+              "ToolTip": "D:\\GitHub\\Donet\\C#_Server\\Server\\Server\\Program.cs",
+              "RelativeToolTip": "Server\\Program.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABoAAAAJAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-08-03T18:21:19.202Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
               "Title": "Connector.cs",
               "DocumentMoniker": "D:\\GitHub\\Donet\\C#_Server\\Server\\ServerCore\\Connector.cs",
               "RelativeDocumentMoniker": "ServerCore\\Connector.cs",
               "ToolTip": "D:\\GitHub\\Donet\\C#_Server\\Server\\ServerCore\\Connector.cs",
               "RelativeToolTip": "ServerCore\\Connector.cs",
-              "ViewState": "AQIAAA0AAAAAAAAAAAAQwEoAAAANAAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAwAAAAJAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-07-31T15:24:07.324Z",
+              "WhenOpened": "2024-08-05T11:02:39.163Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Program.cs",
+              "DocumentMoniker": "D:\\GitHub\\Donet\\C#_Server\\Server\\DummyClient\\Program.cs",
+              "RelativeDocumentMoniker": "DummyClient\\Program.cs",
+              "ToolTip": "D:\\GitHub\\Donet\\C#_Server\\Server\\DummyClient\\Program.cs",
+              "RelativeToolTip": "DummyClient\\Program.cs",
+              "ViewState": "AQIAABAAAAAAAAAAAAAQwAoAAAA4AAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-08-03T18:44:33.17Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "ServerSession.cs",
+              "DocumentMoniker": "D:\\GitHub\\Donet\\C#_Server\\Server\\DummyClient\\ServerSession.cs",
+              "RelativeDocumentMoniker": "DummyClient\\ServerSession.cs",
+              "ToolTip": "D:\\GitHub\\Donet\\C#_Server\\Server\\DummyClient\\ServerSession.cs",
+              "RelativeToolTip": "DummyClient\\ServerSession.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA4AAABJAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-08-05T11:16:36.865Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "RAB.cs",
+              "DocumentMoniker": "D:\\GitHub\\Donet\\C#_Server\\Server\\ServerCore\\RAB.cs",
+              "RelativeDocumentMoniker": "ServerCore\\RAB.cs",
+              "ToolTip": "D:\\GitHub\\Donet\\C#_Server\\Server\\ServerCore\\RAB.cs",
+              "RelativeToolTip": "ServerCore\\RAB.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAACEAAAAkAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-07-31T17:31:55.758Z",
               "EditorCaption": ""
             }
           ]
