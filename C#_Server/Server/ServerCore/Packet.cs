@@ -1,39 +1,37 @@
 ﻿namespace ServerCore
 {
-    internal abstract class Packet
+    public abstract class Packet
     {
-
-    }
-
-    public abstract class Packet<T> where T : Packet<T>, new()
-    {
-        private static T packet = new();
-
-        private Serializer serializer = new();
         private ushort packetID;
+        private Serializer serializer = new();
 
         public Packet()
         {
-            packetID = PacketFactory.GetID<T>(GetType().GUID);
+            packetID = PacketFactory.GetID(GetType());
         }
 
         public int Serialize(ArraySegment<byte> buffer)
         {
-            serializer.Open(buffer, SerializeMode.Read);
+            serializer.Open(buffer, SerializeMode.Serialize);
             OnSerialize(serializer);
-            serializer.WriteSize(buffer);
             serializer.WriteID(packetID, buffer);
+            serializer.WriteSize(buffer);
             return serializer.Success ? serializer.Close() : -1;
         }
 
         public bool Deserialize(ArraySegment<byte> buffer)
         {
-            serializer.Open(buffer, SerializeMode.Write);
+            serializer.Open(buffer, SerializeMode.Deserialize);
             OnSerialize(serializer);
             return serializer.Success && serializer.Close() == buffer.Count;
         }
 
+        public Packet CreatePacket()
+        {
+            return Activator.CreateInstance(GetType()) as Packet;
+        }
+
         public abstract void OnSerialize(Serializer serializer); // use serializer for easy serialize
-        public abstract void OnPacketReceived();
+        public abstract void OnReceived(Session session);
     }
 }

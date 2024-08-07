@@ -6,14 +6,16 @@ namespace ServerCore
     public abstract class Session
     {
         private Socket socket;
+        public Socket Socket => socket;
         private int connected = 0;
+        public bool Connected => connected == 1;
 
         private SocketAsyncEventArgs recvArgs = new();
         private ReceiveBuffer receiver;
         private int readPoint = 0;
 
         private SocketAsyncEventArgs sendArgs = new();
-        private Queue<byte[]> sendQueue = new();
+        private Queue<ArraySegment<byte>> sendQueue = new();
         private List<ArraySegment<byte>> pendingList = new();
         private object locker = new();
 
@@ -22,7 +24,7 @@ namespace ServerCore
         public abstract void OnSend(int transferred);
         public abstract void OnDisconnected(EndPoint endPoint);
 
-        public void Start(Socket socket, int receiveBufferSize = 16384)
+        public void Initialize(Socket socket, int receiveBufferSize = 16384, int sendCycle = 20)
         {
             if (Interlocked.Exchange(ref connected, 1) == 1)
                 return;
@@ -49,28 +51,27 @@ namespace ServerCore
         }
 
         #region Send
-        public void Send(byte[] buffer)
+        public void Send(ArraySegment<byte> buffer)
         {
+            if (!Connected)
+                return;
+
             lock (locker)
             {
                 sendQueue.Enqueue(buffer);
                 if (pendingList.Count == 0)
-                {
                     RegisterSend();
-                }
-                else
-                {
-
-                }
             }
         }
 
         private void RegisterSend()
         {
+            if (!Connected)
+                return;
+
             while (sendQueue.Count > 0)
             {
-                byte[] buffer = sendQueue.Dequeue();
-                pendingList.Add(new ArraySegment<byte>(buffer, 0, buffer.Length));
+                pendingList.Add(sendQueue.Dequeue());
             }
             sendArgs.BufferList = pendingList;
 
@@ -91,16 +92,16 @@ namespace ServerCore
                     {
                         sendArgs.BufferList = null;
                         pendingList.Clear();
+
                         OnSend(sendArgs.BytesTransferred);
 
                         if (sendQueue.Count > 0)
-                        {
                             RegisterSend();
-                        }
                     }
                     catch (Exception ex)
                     {
                         Console.WriteLine($"[ERROR] Send Failed : {ex.Message}");
+                        Disconnect();
                     }
                 }
                 else
@@ -130,12 +131,13 @@ namespace ServerCore
             {
                 try
                 {
-                    HandleReceive(args);
+                    HandleReceiveData(args);
                     RegisterReceive();
                 }
                 catch (Exception ex)
                 {
                     Console.WriteLine($"[ERROR] Receive Failed : {ex.Message}");
+                    Disconnect();
                 }
             }
             else
@@ -144,12 +146,10 @@ namespace ServerCore
             }
         }
 
-        private void HandleReceive(SocketAsyncEventArgs args)
+        private void HandleReceiveData(SocketAsyncEventArgs args)
         {
-            if (receiver.Write(args.BytesTransferred))
+            if (!receiver.Write(args.BytesTransferred))
                 Disconnect();
-
-            Console.WriteLine($"[Session] Handle Size : {args.BytesTransferred}");
 
             while (receiver.DataCount >= 2)
             {
@@ -159,7 +159,8 @@ namespace ServerCore
                 if (length <= receiver.DataCount)
                 {
                     OnReceive(new ArraySegment<byte>(data.Array, data.Offset, length));
-                    receiver.Read(length);
+                    if (!receiver.Read(length))
+                        Disconnect();
                 }
                 else
                     break;

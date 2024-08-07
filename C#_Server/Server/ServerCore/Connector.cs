@@ -52,23 +52,23 @@ namespace ServerCore
 
         private async void Verification(Socket server)
         {
-            byte[] buffer = new byte[sizeof(int) + sizeof(long)];
-            int length = await server.ReceiveAsync(buffer);
+            //byte[] buffer = new byte[sizeof(int) + sizeof(long)];
+            //int length = await server.ReceiveAsync(buffer);
 
-            int rend = BitConverter.ToInt32(buffer, 0);
-            long tick = BitConverter.ToInt64(buffer, sizeof(int));
+            //int rend = BitConverter.ToInt32(buffer, 0);
+            //long tick = BitConverter.ToInt64(buffer, sizeof(int));
 
-            int value = verify(rend, tick);
+            //int value = verify(rend, tick);
 
-            await server.SendAsync(BitConverter.GetBytes(value));
-            await server.ReceiveAsync(buffer);
+            //await server.SendAsync(BitConverter.GetBytes(value));
+            //await server.ReceiveAsync(buffer);
 
-            bool accept = BitConverter.ToBoolean(buffer, 0);
+            //bool accept = BitConverter.ToBoolean(buffer, 0);
 
-            if (accept)
+            if (true)//accept)
             {
                 Session session = factory();
-                session.Start(server);
+                session.Initialize(server);
                 callback(session);
             }
             else

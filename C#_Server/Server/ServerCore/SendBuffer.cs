@@ -14,12 +14,11 @@
         private static ThreadLocal<SendBuffer> uniqueBuffer = new ThreadLocal<SendBuffer>();
 
         private ArraySegment<byte> buffer;
-
         private int pointer = 0;
 
-        public int Space => buffer.Count - pointer;
+        public int remain => buffer.Count - pointer;
 
-        private SendBuffer(int size)
+        public SendBuffer(int size)
         {
             buffer = RAB.AcquireFromPool(size);
         }
@@ -31,7 +30,7 @@
 
         public ArraySegment<byte> Open(int size)
         {
-            if (size > Space)
+            if (size > remain)
             {
                 pointer = 0;
                 if (size > buffer.Count)

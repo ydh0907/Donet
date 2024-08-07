@@ -1,22 +1,24 @@
-﻿namespace ServerCore
+﻿using System.Text;
+
+namespace ServerCore
 {
     public enum SerializeMode
     {
-        Read,
-        Write
+        Serialize,
+        Deserialize,
     }
 
     public abstract class ISerializable
     {
-        public abstract int Serialize(ArraySegment<byte> buffer, int offset); // return write count
-        public abstract int Deserialize(ArraySegment<byte> buffer, int offset); // return read count
+        public abstract ushort Serialize(ArraySegment<byte> buffer, int offset); // return write count
+        public abstract ushort Deserialize(ArraySegment<byte> buffer, int offset); // return read count
     }
 
     public class Serializer
     {
-        private SerializeMode mode = SerializeMode.Read;
+        private SerializeMode mode = SerializeMode.Serialize;
         private ArraySegment<byte> buffer;
-        private int offset;
+        private ushort offset;
         private bool error;
         public bool Success => !error;
 
@@ -35,7 +37,7 @@
 
         public void SerializeValue<T>(ref T value) where T : ISerializable
         {
-            int size = value.Serialize(buffer, offset);
+            ushort size = value.Serialize(buffer, offset);
             offset += size;
         }
         public void SerializeValue(ref byte value)
@@ -45,18 +47,28 @@
                 buffer.Array[buffer.Offset + offset] = value;
                 ++offset;
             }
-            else error = true;
+            else
+            {
+                error = true;
+                Console.WriteLine
+                    ($"[Serializer] Convert Failed... Mode : {mode}, Type : {value.GetType().Name}, Value : {value}, Space : {buffer.Count - offset}");
+            }
         }
         public void SerializeValue(ref bool value)
         {
-            if (mode == SerializeMode.Read && Success)
+            if (mode == SerializeMode.Serialize && Success)
             {
                 bool success = BitConverter.TryWriteBytes(new Span<byte>(buffer.Array, buffer.Offset + offset, buffer.Count - offset), value);
                 if (success)
                     offset += sizeof(bool);
-                else error = true;
+                else
+                {
+                    error = true;
+                    Console.WriteLine
+                        ($"[Serializer] Convert Failed... Mode : {mode}, Type : {value.GetType().Name}, Value : {value}, Space : {buffer.Count - offset}");
+                }
             }
-            else if (mode == SerializeMode.Write && Success)
+            else if (mode == SerializeMode.Deserialize && Success)
             {
                 bool convertible = buffer.Count - offset > sizeof(bool);
                 if (convertible)
@@ -69,20 +81,26 @@
                     catch (Exception ex)
                     {
                         error = true;
+                        Console.WriteLine($"[Serializer] {ex}");
                     }
                 }
             }
         }
         public void SerializeValue(ref char value)
         {
-            if (mode == SerializeMode.Read && Success)
+            if (mode == SerializeMode.Serialize && Success)
             {
                 bool success = BitConverter.TryWriteBytes(new Span<byte>(buffer.Array, buffer.Offset + offset, buffer.Count - offset), value);
                 if (success)
                     offset += sizeof(char);
-                else error = true;
+                else
+                {
+                    error = true;
+                    Console.WriteLine
+                        ($"[Serializer] Convert Failed... Mode : {mode}, Type : {value.GetType().Name}, Value : {value}, Space : {buffer.Count - offset}");
+                }
             }
-            else if (mode == SerializeMode.Write && Success)
+            else if (mode == SerializeMode.Deserialize && Success)
             {
                 try
                 {
@@ -92,19 +110,25 @@
                 catch (Exception ex)
                 {
                     error = true;
+                    Console.WriteLine($"[Serializer] {ex}");
                 }
             }
         }
         public void SerializeValue(ref short value)
         {
-            if (mode == SerializeMode.Read && Success)
+            if (mode == SerializeMode.Serialize && Success)
             {
                 bool success = BitConverter.TryWriteBytes(new Span<byte>(buffer.Array, buffer.Offset + offset, buffer.Count - offset), value);
                 if (success)
                     offset += sizeof(short);
-                else error = true;
+                else
+                {
+                    error = true;
+                    Console.WriteLine
+                        ($"[Serializer] Convert Failed... Mode : {mode}, Type : {value.GetType().Name}, Value : {value}, Space : {buffer.Count - offset}");
+                }
             }
-            else if (mode == SerializeMode.Write && Success)
+            else if (mode == SerializeMode.Deserialize && Success)
             {
                 try
                 {
@@ -114,19 +138,25 @@
                 catch (Exception ex)
                 {
                     error = true;
+                    Console.WriteLine($"[Serializer] {ex}");
                 }
             }
         }
         public void SerializeValue(ref ushort value)
         {
-            if (mode == SerializeMode.Read && Success)
+            if (mode == SerializeMode.Serialize && Success)
             {
                 bool success = BitConverter.TryWriteBytes(new Span<byte>(buffer.Array, buffer.Offset + offset, buffer.Count - offset), value);
                 if (success)
                     offset += sizeof(ushort);
-                else error = true;
+                else
+                {
+                    error = true;
+                    Console.WriteLine
+                        ($"[Serializer] Convert Failed... Mode : {mode}, Type : {value.GetType().Name}, Value : {value}, Space : {buffer.Count - offset}");
+                }
             }
-            else if (mode == SerializeMode.Write && Success)
+            else if (mode == SerializeMode.Deserialize && Success)
             {
                 try
                 {
@@ -136,19 +166,25 @@
                 catch (Exception ex)
                 {
                     error = true;
+                    Console.WriteLine($"[Serializer] {ex}");
                 }
             }
         }
         public void SerializeValue(ref int value)
         {
-            if (mode == SerializeMode.Read && Success)
+            if (mode == SerializeMode.Serialize && Success)
             {
                 bool success = BitConverter.TryWriteBytes(new Span<byte>(buffer.Array, buffer.Offset + offset, buffer.Count - offset), value);
                 if (success)
                     offset += sizeof(int);
-                else error = true;
+                else
+                {
+                    error = true;
+                    Console.WriteLine
+                        ($"[Serializer] Convert Failed... Mode : {mode}, Type : {value.GetType().Name}, Value : {value}, Space : {buffer.Count - offset}");
+                }
             }
-            else if (mode == SerializeMode.Write && Success)
+            else if (mode == SerializeMode.Deserialize && Success)
             {
                 try
                 {
@@ -158,19 +194,25 @@
                 catch (Exception ex)
                 {
                     error = true;
+                    Console.WriteLine($"[Serializer] {ex}");
                 }
             }
         }
         public void SerializeValue(ref uint value)
         {
-            if (mode == SerializeMode.Read && Success)
+            if (mode == SerializeMode.Serialize && Success)
             {
                 bool success = BitConverter.TryWriteBytes(new Span<byte>(buffer.Array, buffer.Offset + offset, buffer.Count - offset), value);
                 if (success)
                     offset += sizeof(uint);
-                else error = true;
+                else
+                {
+                    error = true;
+                    Console.WriteLine
+                        ($"[Serializer] Convert Failed... Mode : {mode}, Type : {value.GetType().Name}, Value : {value}, Space : {buffer.Count - offset}");
+                }
             }
-            else if (mode == SerializeMode.Write && Success)
+            else if (mode == SerializeMode.Deserialize && Success)
             {
                 try
                 {
@@ -180,19 +222,25 @@
                 catch (Exception ex)
                 {
                     error = true;
+                    Console.WriteLine($"[Serializer] {ex}");
                 }
             }
         }
         public void SerializeValue(ref long value)
         {
-            if (mode == SerializeMode.Read && Success)
+            if (mode == SerializeMode.Serialize && Success)
             {
                 bool success = BitConverter.TryWriteBytes(new Span<byte>(buffer.Array, buffer.Offset + offset, buffer.Count - offset), value);
                 if (success)
                     offset += sizeof(long);
-                else error = true;
+                else
+                {
+                    error = true;
+                    Console.WriteLine
+                        ($"[Serializer] Convert Failed... Mode : {mode}, Type : {value.GetType().Name}, Value : {value}, Space : {buffer.Count - offset}");
+                }
             }
-            else if (mode == SerializeMode.Write && Success)
+            else if (mode == SerializeMode.Deserialize && Success)
             {
                 try
                 {
@@ -202,19 +250,25 @@
                 catch (Exception ex)
                 {
                     error = true;
+                    Console.WriteLine($"[Serializer] {ex}");
                 }
             }
         }
         public void SerializeValue(ref ulong value)
         {
-            if (mode == SerializeMode.Read && Success)
+            if (mode == SerializeMode.Serialize && Success)
             {
                 bool success = BitConverter.TryWriteBytes(new Span<byte>(buffer.Array, buffer.Offset + offset, buffer.Count - offset), value);
                 if (success)
                     offset += sizeof(ulong);
-                else error = true;
+                else
+                {
+                    error = true;
+                    Console.WriteLine
+                        ($"[Serializer] Convert Failed... Mode : {mode}, Type : {value.GetType().Name}, Value : {value}, Space : {buffer.Count - offset}");
+                }
             }
-            else if (mode == SerializeMode.Write && Success)
+            else if (mode == SerializeMode.Deserialize && Success)
             {
                 try
                 {
@@ -224,19 +278,25 @@
                 catch (Exception ex)
                 {
                     error = true;
+                    Console.WriteLine($"[Serializer] {ex}");
                 }
             }
         }
         public void SerializeValue(ref float value)
         {
-            if (mode == SerializeMode.Read && Success)
+            if (mode == SerializeMode.Serialize && Success)
             {
                 bool success = BitConverter.TryWriteBytes(new Span<byte>(buffer.Array, buffer.Offset + offset, buffer.Count - offset), value);
                 if (success)
                     offset += sizeof(float);
-                else error = true;
+                else
+                {
+                    error = true;
+                    Console.WriteLine
+                        ($"[Serializer] Convert Failed... Mode : {mode}, Type : {value.GetType().Name}, Value : {value}, Space : {buffer.Count - offset}");
+                }
             }
-            else if (mode == SerializeMode.Write && Success)
+            else if (mode == SerializeMode.Deserialize && Success)
             {
                 try
                 {
@@ -246,19 +306,25 @@
                 catch (Exception ex)
                 {
                     error = true;
+                    Console.WriteLine($"[Serializer] {ex}");
                 }
             }
         }
         public void SerializeValue(ref double value)
         {
-            if (mode == SerializeMode.Read && Success)
+            if (mode == SerializeMode.Serialize && Success)
             {
                 bool success = BitConverter.TryWriteBytes(new Span<byte>(buffer.Array, buffer.Offset + offset, buffer.Count - offset), value);
                 if (success)
                     offset += sizeof(double);
-                else error = true;
+                else
+                {
+                    error = true;
+                    Console.WriteLine
+                        ($"[Serializer] Convert Failed... Mode : {mode}, Type : {value.GetType().Name}, Value : {value}, Space : {buffer.Count - offset}");
+                }
             }
-            else if (mode == SerializeMode.Write && Success)
+            else if (mode == SerializeMode.Deserialize && Success)
             {
                 try
                 {
@@ -268,25 +334,59 @@
                 catch (Exception ex)
                 {
                     error = true;
+                    Console.WriteLine($"[Serializer] {ex}");
                 }
             }
         }
         public void SerializeValue(ref string value)
         {
-            ushort count = (ushort)value.Length;
-            char[] copy;
-
-            if (mode == SerializeMode.Read)
-                copy = value.ToCharArray();
-            else if (mode == SerializeMode.Write)
-                copy = new char[count];
-            else return;
-
-            SerializeValue(ref count);
-            for (int i = 0; i < count; i++)
-                SerializeValue(ref copy[i]);
-
-            value = new(copy);
+            if (!Success)
+                return;
+            try
+            {
+                if (mode == SerializeMode.Serialize)
+                {
+                    ushort size = (ushort)Encoding.Unicode.GetByteCount(value);
+                    SerializeValue(ref size);
+                    bool success = Encoding.Unicode.TryGetBytes
+                        (
+                        value,
+                        new Span<byte>(buffer.Array, buffer.Offset + offset, buffer.Count - offset),
+                        out int written
+                        );
+                    if (success)
+                        offset += (ushort)written;
+                    else
+                    {
+                        error = true;
+                        Console.WriteLine
+                            ($"[Serializer] Convert Failed... Mode : {mode}, Type : {value.GetType().Name}, Value : {value}, Space : {buffer.Count - offset}");
+                    }
+                }
+                else if (mode == SerializeMode.Deserialize)
+                {
+                    ushort size = 0;
+                    SerializeValue(ref size);
+                    if (buffer.Count - offset >= size)
+                    {
+                        value = Encoding.Unicode.GetString(buffer.Array, buffer.Offset + offset, size);
+                        offset += size;
+                    }
+                    else
+                    {
+                        error = true;
+                        Console.WriteLine
+                            ($"[Serializer] Convert Failed... Mode : {mode}, Type : {value.GetType().Name}, Value : {value}, Space : {buffer.Count - offset}");
+                    }
+                }
+                else
+                    error = true;
+            }
+            catch (Exception ex)
+            {
+                error = true;
+                Console.WriteLine($"[Serializer] {ex}");
+            }
         }
 
         public void SerializeArray<T>(T[] array) where T : ISerializable
@@ -539,12 +639,15 @@
 
         public void WriteSize(ArraySegment<byte> buffer)
         {
-
+            bool success = BitConverter.TryWriteBytes(new Span<byte>(buffer.Array, buffer.Offset, sizeof(ushort)), offset);
+            if (!success)
+                error = true;
         }
-
         public void WriteID(ushort id, ArraySegment<byte> buffer)
         {
-
+            bool success = BitConverter.TryWriteBytes(new Span<byte>(buffer.Array, buffer.Offset + sizeof(ushort), sizeof(ushort)), id);
+            if (!success)
+                error = true;
         }
     }
 }

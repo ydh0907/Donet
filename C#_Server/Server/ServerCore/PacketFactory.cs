@@ -1,26 +1,68 @@
-﻿namespace ServerCore
+﻿using System.Reflection;
+
+namespace ServerCore
 {
     public static class PacketFactory
     {
-        private static Dictionary<Guid, ushort> packetDictionary = new Dictionary<Guid, ushort>();
-        private static Dictionary<ushort, Func<Packet<T>>> packetFactory = new Dictionary<ushort, Func<Packet<T>>>();
+        private static Dictionary<string, ushort> packetDictionary = new Dictionary<string, ushort>();
+        private static Dictionary<ushort, Func<Packet>> packetFactory = new Dictionary<ushort, Func<Packet>>();
         private static ushort nextID = 0;
         private static ushort NextID => nextID++;
 
-        public static ushort GetID<T>(Guid guid) where T : Packet<T>, new()
+        private static bool initalized = false;
+
+        public static bool InitializePacket<T>() where T : Enum
         {
-            if (!packetDictionary.ContainsKey(guid))
+            if (initalized)
+                return true;
+
+            try
             {
-                ushort id = NextID;
-                packetDictionary[guid] = id;
-                packetFactory[id] = () => new T();
+                Type packetEnum = typeof(T);
+
+                string space = packetEnum.Namespace;
+                if (!string.IsNullOrEmpty(space))
+                    space = $"{space}.";
+
+                Assembly assembly = Assembly.GetAssembly(packetEnum);
+
+                foreach (T type in Enum.GetValues(typeof(T)))
+                {
+                    string typeName = $"{space}{type}";
+                    Packet packet = null;
+
+                    if (assembly != null)
+                        packet = assembly.CreateInstance(typeName) as Packet;
+
+                    ushort id = NextID;
+                    packetDictionary.Add(type.ToString(), id);
+                    packetFactory.Add(id, packet.CreatePacket);
+                }
+                initalized = true;
+                return true;
             }
-            return packetDictionary[guid];
+            catch
+            {
+                return false;
+            }
         }
 
-        public static Packet<?> GetPacket(ushort id)
+        public static ushort GetID(Type packet)
         {
-            return packetFactory[id]() as Packet<?>;
+            if (initalized)
+                return packetDictionary[packet.Name];
+            else
+                return 0;
+        }
+
+        public static Packet GetPacket(ushort id)
+        {
+            return packetFactory[id]();
+        }
+
+        public static ushort ReadPacketID(ArraySegment<byte> buffer)
+        {
+            return BitConverter.ToUInt16(new ReadOnlySpan<byte>(buffer.Array, buffer.Offset + 2, sizeof(ushort)));
         }
     }
 }

@@ -16,14 +16,17 @@ namespace ServerCore
             this.verify = verify;
             this.callback = callback;
 
-            SocketAsyncEventArgs args = new();
-            args.Completed += AcceptHandle;
-
             listener = new Socket(endPoint.AddressFamily, SocketType.Stream, ProtocolType.Tcp);
             listener.Bind(endPoint);
             listener.Listen(10);
 
-            RegisterAccept(args);
+            for (int i = 0; i < 3; i++)
+            {
+                SocketAsyncEventArgs args = new();
+                args.Completed += AcceptHandle;
+
+                RegisterAccept(args);
+            }
         }
 
         private void RegisterAccept(SocketAsyncEventArgs args)
@@ -53,28 +56,28 @@ namespace ServerCore
 
         private async void Verification(Socket client)
         {
-            int rend = Random.Shared.Next(int.MaxValue);
+            //int rend = Random.Shared.Next(int.MaxValue);
 
-            DateTime time = DateTime.Now;
-            long tick = time.Ticks;
+            //DateTime time = DateTime.Now;
+            //long tick = time.Ticks;
 
-            byte[] buffer = new byte[sizeof(int) + sizeof(long)];
-            Array.Copy(BitConverter.GetBytes(rend), 0, buffer, 0, sizeof(int));
-            Array.Copy(BitConverter.GetBytes(tick), 0, buffer, sizeof(int), sizeof(long));
+            //byte[] buffer = new byte[sizeof(int) + sizeof(long)];
+            //Array.Copy(BitConverter.GetBytes(rend), 0, buffer, 0, sizeof(int));
+            //Array.Copy(BitConverter.GetBytes(tick), 0, buffer, sizeof(int), sizeof(long));
 
-            await client.SendAsync(buffer);
-            int length = await client.ReceiveAsync(buffer);
+            //await client.SendAsync(buffer);
+            //int length = await client.ReceiveAsync(buffer);
 
-            int clientValue = BitConverter.ToInt32(buffer, 0);
-            int serverValue = verify(rend, tick);
+            //int clientValue = BitConverter.ToInt32(buffer, 0);
+            //int serverValue = verify(rend, tick);
 
-            await client.SendAsync(BitConverter.GetBytes(clientValue == serverValue));
+            //await client.SendAsync(BitConverter.GetBytes(clientValue == serverValue));
 
-            if (clientValue == serverValue)
+            if (true)//clientValue == serverValue)
             {
-                Console.WriteLine($"verify : {serverValue}");
+                //Console.WriteLine($"verify : {serverValue}");
                 Session session = factory();
-                session.Start(client);
+                session.Initialize(client);
                 callback?.Invoke(session);
             }
             else
