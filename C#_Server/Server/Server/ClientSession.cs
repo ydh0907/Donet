@@ -14,7 +14,7 @@ namespace Server
             Program.OnDisconnected(this);
         }
 
-        public override void OnPacketReceived(Type packetType)
+        public override void OnPacketReceived(Packet packet)
         {
         }
 

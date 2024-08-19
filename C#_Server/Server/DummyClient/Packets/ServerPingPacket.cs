@@ -1,4 +1,5 @@
-﻿using ServerCore;
+﻿using DummyClient;
+using ServerCore;
 
 namespace Server.Packets
 {
@@ -10,14 +11,15 @@ namespace Server.Packets
         {
             if (session.GetHashCode() != hash)
                 Console.WriteLine($"ERROR! : {session.GetHashCode()}, {hash}");
-            else
-                Console.WriteLine($"SUCCESS! : {session.GetHashCode()}");
-
-            Thread.Sleep(20);
 
             ClientPingPacket packet = new ClientPingPacket();
             packet.hash = hash;
             (session as PacketSession).SendPacket(packet);
+
+            lock (Program.locker)
+            {
+                Program.perSec++;
+            }
         }
 
         public override void OnSerialize(Serializer serializer)

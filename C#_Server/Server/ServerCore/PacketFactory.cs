@@ -1,4 +1,5 @@
 ﻿using System.Reflection;
+using System.Collections.Generic;
 
 namespace ServerCore
 {
@@ -26,17 +27,19 @@ namespace ServerCore
 
                 Assembly assembly = Assembly.GetAssembly(packetEnum);
 
-                foreach (T type in Enum.GetValues(typeof(T)))
+                foreach (T typeEnum in Enum.GetValues(typeof(T)))
                 {
-                    string typeName = $"{space}{type}";
+                    string typeName = $"{space}{typeEnum}";
                     Packet packet = null;
 
                     if (assembly != null)
                         packet = assembly.CreateInstance(typeName) as Packet;
 
                     ushort id = NextID;
-                    packetDictionary.Add(type.ToString(), id);
-                    packetFactory.Add(id, packet.CreatePacket);
+                    Type type = packet.GetType();
+
+                    packetDictionary.Add(typeEnum.ToString(), id);
+                    packetFactory.Add(id, () => Activator.CreateInstance(type) as Packet);
                 }
                 initalized = true;
                 return true;

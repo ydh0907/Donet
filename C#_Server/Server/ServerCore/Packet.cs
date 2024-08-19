@@ -12,7 +12,7 @@
 
         public int Serialize(ArraySegment<byte> buffer)
         {
-            serializer.Open(buffer, SerializeMode.Serialize);
+            serializer.Open(SerializeMode.Serialize, buffer);
             OnSerialize(serializer);
             serializer.WriteID(packetID, buffer);
             serializer.WriteSize(buffer);
@@ -21,14 +21,9 @@
 
         public bool Deserialize(ArraySegment<byte> buffer)
         {
-            serializer.Open(buffer, SerializeMode.Deserialize);
+            serializer.Open(SerializeMode.Deserialize, buffer);
             OnSerialize(serializer);
             return serializer.Success && serializer.Close() == buffer.Count;
-        }
-
-        public Packet CreatePacket()
-        {
-            return Activator.CreateInstance(GetType()) as Packet;
         }
 
         public abstract void OnSerialize(Serializer serializer); // use serializer for easy serialize

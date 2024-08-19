@@ -8,10 +8,9 @@ namespace ServerCore
         Deserialize,
     }
 
-    public abstract class ISerializable
+    public interface ISerializable
     {
-        public abstract ushort Serialize(ArraySegment<byte> buffer, int offset); // return write count
-        public abstract ushort Deserialize(ArraySegment<byte> buffer, int offset); // return read count
+        public abstract void Serialize(Serializer serializer); // return write count
     }
 
     public class Serializer
@@ -22,36 +21,56 @@ namespace ServerCore
         private bool error;
         public bool Success => !error;
 
-        internal void Open(ArraySegment<byte> buffer, SerializeMode mode)
+        public void Open(SerializeMode mode, ArraySegment<byte> buffer, ushort offset = 4)
         {
             this.mode = mode;
             this.buffer = buffer;
-            offset = 4;
+            this.offset = offset;
             error = false;
         }
 
-        internal int Close()
+        public int Close()
         {
             return offset;
         }
 
         public void SerializeValue<T>(ref T value) where T : ISerializable
         {
-            ushort size = value.Serialize(buffer, offset);
-            offset += size;
+            value.Serialize(this);
         }
         public void SerializeValue(ref byte value)
         {
-            if (offset < buffer.Count)
+            if (mode == SerializeMode.Serialize && Success)
             {
-                buffer.Array[buffer.Offset + offset] = value;
-                ++offset;
+                bool convertible = buffer.Count - offset > sizeof(byte);
+                if (convertible)
+                {
+                    buffer.Array[buffer.Offset + offset] = value;
+                    ++offset;
+                }
+                else
+                {
+                    error = true;
+                    Console.WriteLine
+                        ($"[Serializer] Convert Failed... Mode : {mode}, Type : {value.GetType().Name}, Value : {value}, Space : {buffer.Count - offset}");
+                }
             }
-            else
+            else if (mode == SerializeMode.Deserialize && Success)
             {
-                error = true;
-                Console.WriteLine
-                    ($"[Serializer] Convert Failed... Mode : {mode}, Type : {value.GetType().Name}, Value : {value}, Space : {buffer.Count - offset}");
+                bool convertible = buffer.Count - offset > sizeof(byte);
+                if (convertible)
+                {
+                    try
+                    {
+                        value = buffer.Array[buffer.Offset + offset];
+                        ++offset;
+                    }
+                    catch (Exception ex)
+                    {
+                        error = true;
+                        Console.WriteLine($"[Serializer] {ex}");
+                    }
+                }
             }
         }
         public void SerializeValue(ref bool value)

@@ -15,12 +15,12 @@
             if (packet.Deserialize(buffer))
             {
                 packet.OnReceived(this);
-                OnPacketReceived(packet.GetType());
+                OnPacketReceived(packet);
             }
             else
                 Disconnect();
         }
 
-        public abstract void OnPacketReceived(Type packetType);
+        public abstract void OnPacketReceived(Packet packet);
     }
 }

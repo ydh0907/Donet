@@ -13,7 +13,7 @@ namespace DummyClient
         {
         }
 
-        public override void OnPacketReceived(Type packetType)
+        public override void OnPacketReceived(Packet packet)
         {
         }
 

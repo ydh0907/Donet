@@ -24,7 +24,7 @@ namespace ServerCore
         public abstract void OnSend(int transferred);
         public abstract void OnDisconnected(EndPoint endPoint);
 
-        public void Initialize(Socket socket, int receiveBufferSize = 16384, int sendCycle = 20)
+        public void Initialize(Socket socket, int receiveBufferSize = 16384)
         {
             if (Interlocked.Exchange(ref connected, 1) == 1)
                 return;

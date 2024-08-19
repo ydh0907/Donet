@@ -6,19 +6,21 @@ namespace DummyClient
 {
     public class Program
     {
-        private static object locker = new();
+        public static object locker = new();
         private static int connected = 0;
         private static List<ServerSession> sessions = new List<ServerSession>();
 
+        public static int perSec = 0;
+
         public static void Main(string[] args)
         {
-            int count = 3;
+            int count = 1100;
             for (int i = 0; i < count; i++)
             {
                 Start();
             }
-            Console.WriteLine($"Connected : {connected} Clients");
             while (sessions.Count != count) { }
+            Console.WriteLine($"Connected : {connected} Clients");
 
             for (int i = 0; i < sessions.Count; i++)
             {
@@ -29,8 +31,12 @@ namespace DummyClient
 
             while (true)
             {
-                Console.ReadKey();
-                Console.WriteLine($"Connected : {connected} Clients");
+                Thread.Sleep(1000);
+                lock (locker)
+                {
+                    Console.WriteLine(perSec);
+                    perSec = 0;
+                }
             }
         }
 

@@ -1,6 +1,6 @@
 ﻿namespace ServerCore
 {
-    internal class SendBuffer
+    public class SendBuffer
     {
         public static SendBuffer UniqueBuffer
         {

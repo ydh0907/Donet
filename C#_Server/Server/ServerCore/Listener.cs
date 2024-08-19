@@ -56,26 +56,8 @@ namespace ServerCore
 
         private async void Verification(Socket client)
         {
-            //int rend = Random.Shared.Next(int.MaxValue);
-
-            //DateTime time = DateTime.Now;
-            //long tick = time.Ticks;
-
-            //byte[] buffer = new byte[sizeof(int) + sizeof(long)];
-            //Array.Copy(BitConverter.GetBytes(rend), 0, buffer, 0, sizeof(int));
-            //Array.Copy(BitConverter.GetBytes(tick), 0, buffer, sizeof(int), sizeof(long));
-
-            //await client.SendAsync(buffer);
-            //int length = await client.ReceiveAsync(buffer);
-
-            //int clientValue = BitConverter.ToInt32(buffer, 0);
-            //int serverValue = verify(rend, tick);
-
-            //await client.SendAsync(BitConverter.GetBytes(clientValue == serverValue));
-
-            if (true)//clientValue == serverValue)
+            if (true)
             {
-                //Console.WriteLine($"verify : {serverValue}");
                 Session session = factory();
                 session.Initialize(client);
                 callback?.Invoke(session);
@@ -85,11 +67,6 @@ namespace ServerCore
                 client.Shutdown(SocketShutdown.Both);
                 client.Close();
             }
-        }
-
-        public Socket Accept()
-        {
-            return listener.Accept();
         }
     }
 }
