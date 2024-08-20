@@ -1,0 +1,6 @@
+D:\GitHub\Donet\C#_Server\Server\Donet\obj\Debug\netframework4.8.1\Donet.csproj.AssemblyReference.cache
+D:\GitHub\Donet\C#_Server\Server\Donet\obj\Debug\netframework4.8.1\Donet.GeneratedMSBuildEditorConfig.editorconfig
+D:\GitHub\Donet\C#_Server\Server\Donet\obj\Debug\netframework4.8.1\Donet.AssemblyInfoInputs.cache
+D:\GitHub\Donet\C#_Server\Server\Donet\obj\Debug\netframework4.8.1\Donet.AssemblyInfo.cs
+D:\GitHub\Donet\C#_Server\Server\Donet\obj\Debug\netframework4.8.1\Donet.csproj.CoreCompileInputs.cache
+D:\GitHub\Donet\C#_Server\Server\Donet\obj\Debug\netframework4.8.1\Donet.sourcelink.json

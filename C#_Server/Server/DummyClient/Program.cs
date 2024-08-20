@@ -1,5 +1,5 @@
-﻿using Server.Packets;
-using ServerCore;
+﻿using Donet;
+using DummyClient.Packets;
 using System.Net;
 
 namespace DummyClient
@@ -8,35 +8,27 @@ namespace DummyClient
     {
         public static object locker = new();
         private static int connected = 0;
-        private static List<ServerSession> sessions = new List<ServerSession>();
+        private static ServerSession session;
 
         public static int perSec = 0;
 
         public static void Main(string[] args)
         {
-            int count = 1100;
-            for (int i = 0; i < count; i++)
-            {
-                Start();
-            }
-            while (sessions.Count != count) { }
-            Console.WriteLine($"Connected : {connected} Clients");
+            Start();
 
-            for (int i = 0; i < sessions.Count; i++)
-            {
-                ClientPingPacket packet = new ClientPingPacket();
-                packet.hash = sessions[i].GetHashCode();
-                sessions[i].SendPacket(packet);
-            }
+            while (session == null) { }
+
+            PingPacket pingPacket = new PingPacket();
+            pingPacket.hash = 100;
+            session.SendPacket(pingPacket);
 
             while (true)
             {
-                Thread.Sleep(1000);
-                lock (locker)
-                {
-                    Console.WriteLine(perSec);
-                    perSec = 0;
-                }
+                string s = Console.ReadLine();
+                SayPacket sayPacket = new SayPacket();
+                sayPacket.message = s;
+
+                session.SendPacket(sayPacket);
             }
         }
 
@@ -59,12 +51,9 @@ namespace DummyClient
 
         public static void OnConnected(Session session)
         {
-            ServerSession pSessiont = session as ServerSession;
-            lock (locker)
-            {
-                connected++;
-                sessions.Add(pSessiont);
-            }
+            Console.WriteLine("Connected!");
+            ServerSession server = session as ServerSession;
+            Program.session = server;
         }
     }
 }

@@ -4,29 +4,29 @@
     "D:\\GitHub\\Donet\\C#_Server\\Server\\Server\\Server.csproj": {}
   },
   "projects": {
-    "D:\\GitHub\\Donet\\C#_Server\\Server\\ServerCore\\ServerCore.csproj": {
+    "D:\\GitHub\\Donet\\C#_Server\\Server\\Donet\\Donet.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\GitHub\\Donet\\C#_Server\\Server\\ServerCore\\ServerCore.csproj",
-        "projectName": "ServerCore",
-        "projectPath": "D:\\GitHub\\Donet\\C#_Server\\Server\\ServerCore\\ServerCore.csproj",
+        "projectUniqueName": "D:\\GitHub\\Donet\\C#_Server\\Server\\Donet\\Donet.csproj",
+        "projectName": "Donet",
+        "projectPath": "D:\\GitHub\\Donet\\C#_Server\\Server\\Donet\\Donet.csproj",
         "packagesPath": "C:\\Users\\user\\.nuget\\packages\\",
-        "outputPath": "D:\\GitHub\\Donet\\C#_Server\\Server\\ServerCore\\obj\\",
+        "outputPath": "D:\\GitHub\\Donet\\C#_Server\\Server\\Donet\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\user\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
-          "net8.0"
+          "netstandard2.1"
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
-          "net8.0": {
-            "targetAlias": "net8.0",
+          "netstandard2.1": {
+            "targetAlias": "netstandard2.1",
             "projectReferences": {}
           }
         },
@@ -42,8 +42,8 @@
         }
       },
       "frameworks": {
-        "net8.0": {
-          "targetAlias": "net8.0",
+        "netstandard2.1": {
+          "targetAlias": "netstandard2.1",
           "imports": [
             "net461",
             "net462",
@@ -56,11 +56,11 @@
           "assetTargetFallback": true,
           "warn": true,
           "frameworkReferences": {
-            "Microsoft.NETCore.App": {
+            "NETStandard.Library": {
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.302/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.302\\RuntimeIdentifierGraph.json"
         }
       }
     },
@@ -88,8 +88,8 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "D:\\GitHub\\Donet\\C#_Server\\Server\\ServerCore\\ServerCore.csproj": {
-                "projectPath": "D:\\GitHub\\Donet\\C#_Server\\Server\\ServerCore\\ServerCore.csproj"
+              "D:\\GitHub\\Donet\\C#_Server\\Server\\Donet\\Donet.csproj": {
+                "projectPath": "D:\\GitHub\\Donet\\C#_Server\\Server\\Donet\\Donet.csproj"
               }
             }
           }

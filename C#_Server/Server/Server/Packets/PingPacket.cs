@@ -1,17 +1,14 @@
-﻿using ServerCore;
+﻿using Donet;
 
 namespace Server.Packets
 {
-    internal class ClientPingPacket : Packet
+    public class PingPacket : Packet
     {
         public int hash;
 
         public override void OnReceived(Session session)
         {
-            //ClientSession client = (ClientSession)session;
-            //ServerPingPacket packet = new ServerPingPacket();
-            //packet.hash = hash;
-            //client.SendPacket(packet);
+            Console.WriteLine("Ping : " + hash);
         }
 
         public override void OnSerialize(Serializer serializer)

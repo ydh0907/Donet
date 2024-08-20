@@ -1,8 +1,8 @@
-﻿namespace Server.Packets
+﻿namespace DummyClient.Packets
 {
     internal enum PacketTypeEnum
     {
-        ServerPingPacket,
-        ClientPingPacket,
+        PingPacket,
+        SayPacket,
     }
 }

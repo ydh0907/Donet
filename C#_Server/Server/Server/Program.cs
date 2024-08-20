@@ -1,5 +1,5 @@
-﻿using Server.Packets;
-using ServerCore;
+﻿using Donet;
+using Server.Packets;
 using System.Net;
 
 namespace Server
@@ -29,8 +29,14 @@ namespace Server
 
             while (true)
             {
-                Console.ReadKey();
-                Console.WriteLine($"Connected : {clients.Count} Clients");
+                string s = Console.ReadLine();
+                foreach (PacketSession session in clients)
+                {
+                    SayPacket sayPacket = new SayPacket();
+                    sayPacket.message = s;
+
+                    session.SendPacket(sayPacket);
+                }
             }
         }
 
