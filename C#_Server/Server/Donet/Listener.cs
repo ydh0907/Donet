@@ -61,6 +61,7 @@ namespace Donet
             {
                 Session session = factory();
                 session.Initialize(client);
+                session.Initialize(client);
                 callback?.Invoke(session);
             }
             else

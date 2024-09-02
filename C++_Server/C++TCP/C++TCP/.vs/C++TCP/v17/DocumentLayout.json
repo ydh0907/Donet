@@ -40,9 +40,10 @@
               "RelativeDocumentMoniker": "Client\\Client.cpp",
               "ToolTip": "D:\\GitHub\\Donet\\C\u002B\u002B_Server\\C\u002B\u002BTCP\\C\u002B\u002BTCP\\Client\\Client.cpp",
               "RelativeToolTip": "Client\\Client.cpp",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAQAAAAVAAAA",
+              "ViewState": "AQIAAFQAAAAAAAAAAAAAAH4AAAAMAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2024-08-12T01:38:26.972Z"
+              "WhenOpened": "2024-08-12T01:38:26.972Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -52,7 +53,7 @@
               "RelativeDocumentMoniker": "Server\\Server.cpp",
               "ToolTip": "D:\\GitHub\\Donet\\C\u002B\u002B_Server\\C\u002B\u002BTCP\\C\u002B\u002BTCP\\Server\\Server.cpp",
               "RelativeToolTip": "Server\\Server.cpp",
-              "ViewState": "AQIAABsAAAAAAAAAAAAAAD8AAAAAAAAA",
+              "ViewState": "AQIAAKsAAAAAAAAAAAAqwMMAAAACAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
               "WhenOpened": "2024-08-12T01:25:15.425Z",
               "EditorCaption": ""

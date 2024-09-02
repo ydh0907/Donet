@@ -30,13 +30,10 @@ namespace Server
             while (true)
             {
                 string s = Console.ReadLine();
-                foreach (PacketSession session in clients)
-                {
-                    SayPacket sayPacket = new SayPacket();
-                    sayPacket.message = s;
-
-                    session.SendPacket(sayPacket);
-                }
+                if (s == "S")
+                    PrintServerRpc();
+                else if (s == "C")
+                    PrintClientRpc();
             }
         }
 
@@ -50,6 +47,30 @@ namespace Server
         {
             lock (locker)
                 clients.Remove(session);
+        }
+
+        public static void Broadcast(Packet packet)
+        {
+            foreach (PacketSession session in clients)
+            {
+                session.SendPacket(packet);
+            }
+        }
+
+        public static void PrintServerRpc()
+        {
+            Print();
+        }
+
+        public static void PrintClientRpc()
+        {
+            ClientRpcPacket packet = new ClientRpcPacket();
+            Broadcast(packet);
+        }
+
+        public static void Print()
+        {
+            Console.WriteLine("나는 RPC");
         }
     }
 }

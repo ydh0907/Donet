@@ -2,7 +2,7 @@
 {
     internal enum PacketTypeEnum
     {
-        PingPacket,
-        SayPacket,
+        ServerRpcPacket,
+        ClientRpcPacket,
     }
 }

@@ -16,19 +16,16 @@ namespace DummyClient
         {
             Start();
 
-            while (session == null) { }
-
-            PingPacket pingPacket = new PingPacket();
-            pingPacket.hash = 100;
-            session.SendPacket(pingPacket);
-
             while (true)
             {
-                string s = Console.ReadLine();
-                SayPacket sayPacket = new SayPacket();
-                sayPacket.message = s;
-
-                session.SendPacket(sayPacket);
+                while (true)
+                {
+                    string s = Console.ReadLine();
+                    if (s == "S")
+                        PrintServerRpc();
+                    else if (s == "C")
+                        PrintClientRpc();
+                }
             }
         }
 
@@ -54,6 +51,23 @@ namespace DummyClient
             Console.WriteLine("Connected!");
             ServerSession server = session as ServerSession;
             Program.session = server;
+        }
+
+        public static void PrintServerRpc()
+        {
+            ServerRpcPacket packet = new ServerRpcPacket();
+            session.SendPacket(packet);
+        }
+
+        public static void PrintClientRpc()
+        {
+            ClientRpcPacket packet = new ClientRpcPacket();
+            session.SendPacket(packet);
+        }
+
+        public static void Print()
+        {
+            Console.WriteLine("나는 RPC");
         }
     }
 }

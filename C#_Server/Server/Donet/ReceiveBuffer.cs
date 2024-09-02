@@ -2,7 +2,7 @@
 
 namespace Donet
 {
-    public class ReceiveBuffer
+    internal class ReceiveBuffer
     {
         public ArraySegment<byte> buffer;
         private int write = 0;
@@ -13,7 +13,7 @@ namespace Donet
             buffer = RAB.AcquireFromPool(size);
         }
 
-        ~ReceiveBuffer()
+        public void Release()
         {
             RAB.ReleaseToPool(buffer);
         }

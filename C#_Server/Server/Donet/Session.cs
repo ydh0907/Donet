@@ -13,12 +13,12 @@ namespace Donet
         private int connected = 0;
         public bool Connected => connected == 1;
 
-        private SocketAsyncEventArgs recvArgs = new SocketAsyncEventArgs();
+        private SocketAsyncEventArgs recvArgs;
         private ReceiveBuffer receiver;
 
-        private SocketAsyncEventArgs sendArgs = new SocketAsyncEventArgs();
-        private Queue<ArraySegment<byte>> sendQueue = new Queue<ArraySegment<byte>>();
-        private List<ArraySegment<byte>> pendingList = new List<ArraySegment<byte>>();
+        private SocketAsyncEventArgs sendArgs;
+        private Queue<ArraySegment<byte>> sendQueue;
+        private List<ArraySegment<byte>> pendingList;
         private object locker = new object();
 
         public abstract void OnConnected(EndPoint endPoint);
@@ -33,10 +33,14 @@ namespace Donet
 
             this.socket = socket;
 
-            recvArgs.Completed += ReceiveHandler;
+            recvArgs = new SocketAsyncEventArgs();
             receiver = new ReceiveBuffer(receiveBufferSize);
+            recvArgs.Completed += ReceiveHandler;
             RegisterReceive();
 
+            sendArgs = new SocketAsyncEventArgs();
+            sendQueue = new Queue<ArraySegment<byte>>();
+            pendingList = new List<ArraySegment<byte>>();
             sendArgs.Completed += OnSendCompleted;
 
             OnConnected(socket.RemoteEndPoint);
@@ -50,6 +54,7 @@ namespace Donet
             OnDisconnected(socket.RemoteEndPoint);
             socket.Shutdown(SocketShutdown.Both);
             socket.Close();
+            receiver.Release();
         }
 
         #region Send

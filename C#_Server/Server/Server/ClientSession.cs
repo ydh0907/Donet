@@ -7,6 +7,7 @@ namespace Server
     {
         public override void OnConnected(EndPoint endPoint)
         {
+            Console.WriteLine(endPoint);
         }
 
         public override void OnDisconnected(EndPoint endPoint)
@@ -16,7 +17,6 @@ namespace Server
 
         public override void OnPacketReceived(Packet packet)
         {
-            Console.WriteLine(packet.GetType().Name);
         }
 
         public override void OnSend(int transferred)

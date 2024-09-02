@@ -178,7 +178,6 @@ int __cdecl main(void)
 			}
 			if (client[i].socket != INVALID_SOCKET) {
 				num_clients++;
-				break;
 			}
 		}
 
