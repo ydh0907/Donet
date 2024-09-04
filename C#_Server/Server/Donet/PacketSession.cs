@@ -6,7 +6,9 @@ namespace Donet
     {
         public void SendPacket(Packet packet)
         {
-            ArraySegment<byte> buffer = SendBuffer.UniqueBuffer.Close(packet.Serialize(SendBuffer.UniqueBuffer.Open(1024)));
+            ArraySegment<byte> buffer = SendBuffer.UniqueBuffer.Open(1024);
+            int size = packet.Serialize(buffer);
+            buffer = SendBuffer.UniqueBuffer.Close(size);
             Send(buffer);
         }
 
