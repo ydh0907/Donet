@@ -1,16 +1,19 @@
 ﻿using Donet;
 
-namespace Server.Packets
+namespace DummyClient.Packets
 {
-    internal class ServerRpcPacket : Packet
+    internal class TestPacket : Packet
     {
+        public string message;
+
         public override void OnReceived(Session session)
         {
-            Program.Print();
+            Console.WriteLine(message);
         }
 
         public override void OnSerialize(Serializer serializer)
         {
+            serializer.SerializeValue(ref message);
         }
     }
 }

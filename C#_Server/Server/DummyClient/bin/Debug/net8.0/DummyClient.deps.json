@@ -16,7 +16,10 @@
       },
       "Donet/1.0.0": {
         "runtime": {
-          "Donet.dll": {}
+          "Donet.dll": {
+            "assemblyVersion": "1.0.0",
+            "fileVersion": "1.0.0.0"
+          }
         }
       }
     }

@@ -9,9 +9,22 @@ namespace Server
         private static Listener listener = new();
         private static byte[] buffer = new byte[1024];
         private static List<PacketSession> clients = new List<PacketSession>();
-        private static object locker = new object();
+        private static ReaderWriterLock rwLock = new ReaderWriterLock();
 
         private static void Main(string[] args)
+        {
+            Initialize();
+
+            while (true)
+            {
+                string message = Console.ReadLine();
+                TestPacket packet = new TestPacket();
+                packet.message = message;
+                Broadcast(packet);
+            }
+        }
+
+        private static void Initialize()
         {
             if (!PacketFactory.InitializePacket<PacketTypeEnum>())
                 return;
@@ -22,55 +35,35 @@ namespace Server
             IPEndPoint endPoint = new IPEndPoint(addr, 7779);
 
             Func<Session> factory = () => new ClientSession();
-            Func<int, long, int> verify = (rend, tick) => (rend - (int)(tick % 10) * 907) % int.MaxValue;
 
-            listener.Listen(endPoint, factory, verify, OnConnected);
-            Console.WriteLine("Listen Start");
-
-            while (true)
-            {
-                string s = Console.ReadLine();
-                if (s == "S")
-                    PrintServerRpc();
-                else if (s == "C")
-                    PrintClientRpc();
-            }
+            listener.Listen(endPoint, factory, OnConnected);
+            Console.WriteLine("Listening...");
         }
 
         public static void OnConnected(Session session)
         {
-            lock (locker)
-                clients.Add(session as PacketSession);
+            rwLock.AcquireWriterLock(10);
+            clients.Add(session as PacketSession);
+            rwLock.ReleaseWriterLock();
         }
 
         public static void OnDisconnected(PacketSession session)
         {
-            lock (locker)
-                clients.Remove(session);
+            rwLock.AcquireWriterLock(10);
+            clients.Remove(session);
+            rwLock.ReleaseWriterLock();
         }
 
-        public static void Broadcast(Packet packet)
+        public static void Broadcast(Packet packet, PacketSession ignore = null)
         {
+            rwLock.AcquireReaderLock(10);
             foreach (PacketSession session in clients)
             {
+                if (session == ignore)
+                    continue;
                 session.SendPacket(packet);
             }
-        }
-
-        public static void PrintServerRpc()
-        {
-            Print();
-        }
-
-        public static void PrintClientRpc()
-        {
-            ClientRpcPacket packet = new ClientRpcPacket();
-            Broadcast(packet);
-        }
-
-        public static void Print()
-        {
-            Console.WriteLine("나는 RPC");
+            rwLock.ReleaseReaderLock();
         }
     }
 }

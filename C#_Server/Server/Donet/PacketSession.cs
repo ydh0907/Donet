@@ -4,6 +4,11 @@ namespace Donet
 {
     public abstract class PacketSession : Session
     {
+        public new void Send(Packet packet)
+        {
+            SendPacket(packet);
+        }
+
         public void SendPacket(Packet packet)
         {
             ArraySegment<byte> buffer = SendBuffer.UniqueBuffer.Open(1024);

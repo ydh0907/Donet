@@ -14,22 +14,18 @@ namespace DummyClient
 
         public static void Main(string[] args)
         {
-            Start();
+            Initialize();
 
             while (true)
             {
-                while (true)
-                {
-                    string s = Console.ReadLine();
-                    if (s == "S")
-                        PrintServerRpc();
-                    else if (s == "C")
-                        PrintClientRpc();
-                }
+                string message = Console.ReadLine();
+                TestPacket packet = new TestPacket();
+                packet.message = message;
+                session.SendPacket(packet);
             }
         }
 
-        public static void Start()
+        public static void Initialize()
         {
             if (!PacketFactory.InitializePacket<PacketTypeEnum>())
                 return;
@@ -40,10 +36,9 @@ namespace DummyClient
             IPEndPoint endPoint = new IPEndPoint(addr, 7779);
 
             Func<Session> factory = () => new ServerSession();
-            Func<int, long, int> verify = (rend, tick) => (rend - (int)(tick % 10) * 907) % int.MaxValue;
 
             Connector connector = new();
-            connector.Connect(endPoint, factory, verify, OnConnected);
+            connector.Connect(endPoint, factory, OnConnected);
         }
 
         public static void OnConnected(Session session)
@@ -51,23 +46,6 @@ namespace DummyClient
             Console.WriteLine("Connected!");
             ServerSession server = session as ServerSession;
             Program.session = server;
-        }
-
-        public static void PrintServerRpc()
-        {
-            ServerRpcPacket packet = new ServerRpcPacket();
-            session.SendPacket(packet);
-        }
-
-        public static void PrintClientRpc()
-        {
-            ClientRpcPacket packet = new ClientRpcPacket();
-            session.SendPacket(packet);
-        }
-
-        public static void Print()
-        {
-            Console.WriteLine("나는 RPC");
         }
     }
 }

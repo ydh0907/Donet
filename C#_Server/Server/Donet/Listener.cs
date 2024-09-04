@@ -8,13 +8,11 @@ namespace Donet
     {
         private Socket listener;
         private Func<Session> factory;
-        private Func<int, long, int> verify;
         private Action<Session> callback;
 
-        public void Listen(IPEndPoint endPoint, Func<Session> factory, Func<int, long, int> verify, Action<Session> callback)
+        public void Listen(IPEndPoint endPoint, Func<Session> factory, Action<Session> callback)
         {
             this.factory = factory;
-            this.verify = verify;
             this.callback = callback;
 
             listener = new Socket(endPoint.AddressFamily, SocketType.Stream, ProtocolType.Tcp);
@@ -60,7 +58,6 @@ namespace Donet
             if (true)
             {
                 Session session = factory();
-                session.Initialize(client);
                 session.Initialize(client);
                 callback?.Invoke(session);
             }

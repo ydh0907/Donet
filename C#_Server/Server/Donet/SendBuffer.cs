@@ -22,6 +22,7 @@ namespace Donet
         private int pointer = 0;
 
         public bool Active { get; private set; } = true;
+        public bool Opened { get; private set; } = false;
 
         public int remain => Active ? buffer.Count - pointer : -1;
 
@@ -44,7 +45,8 @@ namespace Donet
 
         public ArraySegment<byte> Open(int size)
         {
-            if (!Active) return null;
+            if (!Active || Opened) return null;
+            Opened = true;
 
             if (size > remain)
             {
@@ -62,7 +64,8 @@ namespace Donet
 
         public ArraySegment<byte> Close(int size)
         {
-            if (!Active) return null;
+            if (!Active || !Opened) return null;
+            Opened = false;
 
             ArraySegment<byte> segment = new ArraySegment<byte>(buffer.Array, buffer.Offset + pointer, size);
             pointer += size;
