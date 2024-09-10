@@ -1,0 +1,14 @@
+D:\GitHub\Donet\C#_Server\NetworkLearn\ReceiveData\bin\Debug\ReceiveData.exe.config
+D:\GitHub\Donet\C#_Server\NetworkLearn\ReceiveData\bin\Debug\ReceiveData.exe
+D:\GitHub\Donet\C#_Server\NetworkLearn\ReceiveData\bin\Debug\ReceiveData.pdb
+D:\GitHub\Donet\C#_Server\NetworkLearn\ReceiveData\bin\Debug\SendData.exe
+D:\GitHub\Donet\C#_Server\NetworkLearn\ReceiveData\bin\Debug\SendData.pdb
+D:\GitHub\Donet\C#_Server\NetworkLearn\ReceiveData\bin\Debug\SendData.exe.config
+D:\GitHub\Donet\C#_Server\NetworkLearn\ReceiveData\obj\Debug\ReceiveData.csproj.AssemblyReference.cache
+D:\GitHub\Donet\C#_Server\NetworkLearn\ReceiveData\obj\Debug\ReceiveData.Form1.resources
+D:\GitHub\Donet\C#_Server\NetworkLearn\ReceiveData\obj\Debug\ReceiveData.Properties.Resources.resources
+D:\GitHub\Donet\C#_Server\NetworkLearn\ReceiveData\obj\Debug\ReceiveData.csproj.GenerateResource.cache
+D:\GitHub\Donet\C#_Server\NetworkLearn\ReceiveData\obj\Debug\ReceiveData.csproj.CoreCompileInputs.cache
+D:\GitHub\Donet\C#_Server\NetworkLearn\ReceiveData\obj\Debug\ReceiveD.CA4311F5.Up2Date
+D:\GitHub\Donet\C#_Server\NetworkLearn\ReceiveData\obj\Debug\ReceiveData.exe
+D:\GitHub\Donet\C#_Server\NetworkLearn\ReceiveData\obj\Debug\ReceiveData.pdb
