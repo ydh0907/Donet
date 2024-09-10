@@ -36,624 +36,872 @@ namespace Donet
             return offset;
         }
 
+        private void LogError<T>(T value, int size, string cause)
+        {
+            Console.WriteLine($"[Serializer] Convert Failed... Mode : {mode}, Type : {value.GetType().Name}, Size : 1, Value : {value}, Space : {buffer.Count - offset}, Cause : {cause}");
+        }
+
         public void SerializeValue<T>(ref T value) where T : ISerializable
         {
             value.Serialize(this);
         }
         public void SerializeValue(ref byte value)
         {
-            if (mode == SerializeMode.Serialize && Success)
+            if (!Success) return;
+
+            bool convertible = buffer.Count - offset >= sizeof(byte);
+            if (Success && convertible)
             {
-                bool convertible = buffer.Count - offset > sizeof(byte);
-                if (convertible)
+                try
                 {
-                    buffer.Array[buffer.Offset + offset] = value;
+                    if (mode == SerializeMode.Serialize)
+                        value = buffer.Array[buffer.Offset + offset];
+                    else if (mode == SerializeMode.Deserialize)
+                        buffer.Array[buffer.Offset + offset] = value;
                     ++offset;
                 }
-                else
+                catch (Exception ex)
                 {
                     error = true;
-                    Console.WriteLine
-                        ($"[Serializer] Convert Failed... Mode : {mode}, Type : {value.GetType().Name}, Value : {value}, Space : {buffer.Count - offset}");
+                    LogError(value, 1, ex.Message);
                 }
             }
-            else if (mode == SerializeMode.Deserialize && Success)
+            else
             {
-                bool convertible = buffer.Count - offset > sizeof(byte);
-                if (convertible)
-                {
-                    try
-                    {
-                        value = buffer.Array[buffer.Offset + offset];
-                        ++offset;
-                    }
-                    catch (Exception ex)
-                    {
-                        error = true;
-                        Console.WriteLine($"[Serializer] {ex}");
-                    }
-                }
+                error = true;
+                LogError(value, 1, "out of range");
             }
         }
         public void SerializeValue(ref bool value)
         {
-            if (mode == SerializeMode.Serialize && Success)
+            if (!Success) return;
+
+            ushort size = sizeof(bool);
+            bool convertible = buffer.Count - offset >= size;
+            if (Success && convertible)
             {
-                bool success = BitConverter.TryWriteBytes(new Span<byte>(buffer.Array, buffer.Offset + offset, buffer.Count - offset), value);
-                if (success)
-                    offset += sizeof(bool);
-                else
+                try
+                {
+                    bool success = true;
+                    if (mode == SerializeMode.Serialize)
+                        success = BitConverter.TryWriteBytes(new Span<byte>(buffer.Array, buffer.Offset + offset, buffer.Count - offset), value);
+                    else if (mode == SerializeMode.Deserialize)
+                        value = BitConverter.ToBoolean(new ReadOnlySpan<byte>(buffer.Array, buffer.Offset + offset, buffer.Count - offset));
+                    if (!success)
+                        throw new Exception("convert failed...");
+                    offset += size;
+                }
+                catch (Exception ex)
                 {
                     error = true;
-                    Console.WriteLine
-                        ($"[Serializer] Convert Failed... Mode : {mode}, Type : {value.GetType().Name}, Value : {value}, Space : {buffer.Count - offset}");
+                    LogError(value, size, ex.Message);
                 }
             }
-            else if (mode == SerializeMode.Deserialize && Success)
+            else
             {
-                bool convertible = buffer.Count - offset > sizeof(bool);
-                if (convertible)
-                {
-                    try
-                    {
-                        value = BitConverter.ToBoolean(new ReadOnlySpan<byte>(buffer.Array, buffer.Offset + offset, buffer.Count - offset));
-                        offset += sizeof(bool);
-                    }
-                    catch (Exception ex)
-                    {
-                        error = true;
-                        Console.WriteLine($"[Serializer] {ex}");
-                    }
-                }
+                error = true;
+                LogError(value, size, "out of range");
             }
         }
         public void SerializeValue(ref char value)
         {
-            if (mode == SerializeMode.Serialize && Success)
-            {
-                bool success = BitConverter.TryWriteBytes(new Span<byte>(buffer.Array, buffer.Offset + offset, buffer.Count - offset), value);
-                if (success)
-                    offset += sizeof(char);
-                else
-                {
-                    error = true;
-                    Console.WriteLine
-                        ($"[Serializer] Convert Failed... Mode : {mode}, Type : {value.GetType().Name}, Value : {value}, Space : {buffer.Count - offset}");
-                }
-            }
-            else if (mode == SerializeMode.Deserialize && Success)
+            if (!Success) return;
+
+            ushort size = sizeof(char);
+            bool convertible = buffer.Count - offset >= size;
+            if (Success && convertible)
             {
                 try
                 {
-                    value = BitConverter.ToChar(new ReadOnlySpan<byte>(buffer.Array, buffer.Offset + offset, buffer.Count - offset));
-                    offset += sizeof(char);
+                    bool success = true;
+                    if (mode == SerializeMode.Serialize)
+                        success = BitConverter.TryWriteBytes(new Span<byte>(buffer.Array, buffer.Offset + offset, buffer.Count - offset), value);
+                    else if (mode == SerializeMode.Deserialize)
+                        value = BitConverter.ToChar(new ReadOnlySpan<byte>(buffer.Array, buffer.Offset + offset, buffer.Count - offset));
+                    if (!success)
+                        throw new Exception("convert failed...");
+                    offset += size;
                 }
                 catch (Exception ex)
                 {
                     error = true;
-                    Console.WriteLine($"[Serializer] {ex}");
+                    LogError(value, size, ex.Message);
                 }
+            }
+            else
+            {
+                error = true;
+                LogError(value, size, "out of range");
             }
         }
         public void SerializeValue(ref short value)
         {
-            if (mode == SerializeMode.Serialize && Success)
-            {
-                bool success = BitConverter.TryWriteBytes(new Span<byte>(buffer.Array, buffer.Offset + offset, buffer.Count - offset), value);
-                if (success)
-                    offset += sizeof(short);
-                else
-                {
-                    error = true;
-                    Console.WriteLine
-                        ($"[Serializer] Convert Failed... Mode : {mode}, Type : {value.GetType().Name}, Value : {value}, Space : {buffer.Count - offset}");
-                }
-            }
-            else if (mode == SerializeMode.Deserialize && Success)
+            if (!Success) return;
+
+            ushort size = sizeof(short);
+            bool convertible = buffer.Count - offset >= size;
+            if (Success && convertible)
             {
                 try
                 {
-                    value = BitConverter.ToInt16(new ReadOnlySpan<byte>(buffer.Array, buffer.Offset + offset, buffer.Count - offset));
-                    offset += sizeof(short);
+                    bool success = true;
+                    if (mode == SerializeMode.Serialize)
+                        success = BitConverter.TryWriteBytes(new Span<byte>(buffer.Array, buffer.Offset + offset, buffer.Count - offset), value);
+                    else if (mode == SerializeMode.Deserialize)
+                        value = BitConverter.ToInt16(new ReadOnlySpan<byte>(buffer.Array, buffer.Offset + offset, buffer.Count - offset));
+                    if (!success)
+                        throw new Exception("convert failed...");
+                    offset += size;
                 }
                 catch (Exception ex)
                 {
                     error = true;
-                    Console.WriteLine($"[Serializer] {ex}");
+                    LogError(value, size, ex.Message);
                 }
+            }
+            else
+            {
+                error = true;
+                LogError(value, size, "out of range");
             }
         }
         public void SerializeValue(ref ushort value)
         {
-            if (mode == SerializeMode.Serialize && Success)
-            {
-                bool success = BitConverter.TryWriteBytes(new Span<byte>(buffer.Array, buffer.Offset + offset, buffer.Count - offset), value);
-                if (success)
-                    offset += sizeof(ushort);
-                else
-                {
-                    error = true;
-                    Console.WriteLine
-                        ($"[Serializer] Convert Failed... Mode : {mode}, Type : {value.GetType().Name}, Value : {value}, Space : {buffer.Count - offset}");
-                }
-            }
-            else if (mode == SerializeMode.Deserialize && Success)
+            if (!Success) return;
+
+            ushort size = sizeof(ushort);
+            bool convertible = buffer.Count - offset >= size;
+            if (Success && convertible)
             {
                 try
                 {
-                    value = BitConverter.ToUInt16(new ReadOnlySpan<byte>(buffer.Array, buffer.Offset + offset, buffer.Count - offset));
-                    offset += sizeof(ushort);
+                    bool success = true;
+                    if (mode == SerializeMode.Serialize)
+                        success = BitConverter.TryWriteBytes(new Span<byte>(buffer.Array, buffer.Offset + offset, buffer.Count - offset), value);
+                    else if (mode == SerializeMode.Deserialize)
+                        value = BitConverter.ToUInt16(new ReadOnlySpan<byte>(buffer.Array, buffer.Offset + offset, buffer.Count - offset));
+                    if (!success)
+                        throw new Exception("convert failed...");
+                    offset += size;
                 }
                 catch (Exception ex)
                 {
                     error = true;
-                    Console.WriteLine($"[Serializer] {ex}");
+                    LogError(value, size, ex.Message);
                 }
+            }
+            else
+            {
+                error = true;
+                LogError(value, size, "out of range");
             }
         }
         public void SerializeValue(ref int value)
         {
-            if (mode == SerializeMode.Serialize && Success)
-            {
-                bool success = BitConverter.TryWriteBytes(new Span<byte>(buffer.Array, buffer.Offset + offset, buffer.Count - offset), value);
-                if (success)
-                    offset += sizeof(int);
-                else
-                {
-                    error = true;
-                    Console.WriteLine
-                        ($"[Serializer] Convert Failed... Mode : {mode}, Type : {value.GetType().Name}, Value : {value}, Space : {buffer.Count - offset}");
-                }
-            }
-            else if (mode == SerializeMode.Deserialize && Success)
+            if (!Success) return;
+
+            ushort size = sizeof(int);
+            bool convertible = buffer.Count - offset >= size;
+            if (Success && convertible)
             {
                 try
                 {
-                    value = BitConverter.ToInt32(new ReadOnlySpan<byte>(buffer.Array, buffer.Offset + offset, buffer.Count - offset));
-                    offset += sizeof(int);
+                    bool success = true;
+                    if (mode == SerializeMode.Serialize)
+                        success = BitConverter.TryWriteBytes(new Span<byte>(buffer.Array, buffer.Offset + offset, buffer.Count - offset), value);
+                    else if (mode == SerializeMode.Deserialize)
+                        value = BitConverter.ToInt32(new ReadOnlySpan<byte>(buffer.Array, buffer.Offset + offset, buffer.Count - offset));
+                    if (!success)
+                        throw new Exception("convert failed...");
+                    offset += size;
                 }
                 catch (Exception ex)
                 {
                     error = true;
-                    Console.WriteLine($"[Serializer] {ex}");
+                    LogError(value, size, ex.Message);
                 }
+            }
+            else
+            {
+                error = true;
+                LogError(value, size, "out of range");
             }
         }
         public void SerializeValue(ref uint value)
         {
-            if (mode == SerializeMode.Serialize && Success)
-            {
-                bool success = BitConverter.TryWriteBytes(new Span<byte>(buffer.Array, buffer.Offset + offset, buffer.Count - offset), value);
-                if (success)
-                    offset += sizeof(uint);
-                else
-                {
-                    error = true;
-                    Console.WriteLine
-                        ($"[Serializer] Convert Failed... Mode : {mode}, Type : {value.GetType().Name}, Value : {value}, Space : {buffer.Count - offset}");
-                }
-            }
-            else if (mode == SerializeMode.Deserialize && Success)
+            if (!Success) return;
+
+            ushort size = sizeof(uint);
+            bool convertible = buffer.Count - offset >= size;
+            if (Success && convertible)
             {
                 try
                 {
-                    value = BitConverter.ToUInt32(new ReadOnlySpan<byte>(buffer.Array, buffer.Offset + offset, buffer.Count - offset));
-                    offset += sizeof(uint);
+                    bool success = true;
+                    if (mode == SerializeMode.Serialize)
+                        success = BitConverter.TryWriteBytes(new Span<byte>(buffer.Array, buffer.Offset + offset, buffer.Count - offset), value);
+                    else if (mode == SerializeMode.Deserialize)
+                        value = BitConverter.ToUInt32(new ReadOnlySpan<byte>(buffer.Array, buffer.Offset + offset, buffer.Count - offset));
+                    if (!success)
+                        throw new Exception("convert failed...");
+                    offset += size;
                 }
                 catch (Exception ex)
                 {
                     error = true;
-                    Console.WriteLine($"[Serializer] {ex}");
+                    LogError(value, size, ex.Message);
                 }
+            }
+            else
+            {
+                error = true;
+                LogError(value, size, "out of range");
             }
         }
         public void SerializeValue(ref long value)
         {
-            if (mode == SerializeMode.Serialize && Success)
-            {
-                bool success = BitConverter.TryWriteBytes(new Span<byte>(buffer.Array, buffer.Offset + offset, buffer.Count - offset), value);
-                if (success)
-                    offset += sizeof(long);
-                else
-                {
-                    error = true;
-                    Console.WriteLine
-                        ($"[Serializer] Convert Failed... Mode : {mode}, Type : {value.GetType().Name}, Value : {value}, Space : {buffer.Count - offset}");
-                }
-            }
-            else if (mode == SerializeMode.Deserialize && Success)
+            if (!Success) return;
+
+            ushort size = sizeof(long);
+            bool convertible = buffer.Count - offset >= size;
+            if (Success && convertible)
             {
                 try
                 {
-                    value = BitConverter.ToInt64(new ReadOnlySpan<byte>(buffer.Array, buffer.Offset + offset, buffer.Count - offset));
-                    offset += sizeof(long);
+                    bool success = true;
+                    if (mode == SerializeMode.Serialize)
+                        success = BitConverter.TryWriteBytes(new Span<byte>(buffer.Array, buffer.Offset + offset, buffer.Count - offset), value);
+                    else if (mode == SerializeMode.Deserialize)
+                        value = BitConverter.ToInt64(new ReadOnlySpan<byte>(buffer.Array, buffer.Offset + offset, buffer.Count - offset));
+                    if (!success)
+                        throw new Exception("convert failed...");
+                    offset += size;
                 }
                 catch (Exception ex)
                 {
                     error = true;
-                    Console.WriteLine($"[Serializer] {ex}");
+                    LogError(value, size, ex.Message);
                 }
+            }
+            else
+            {
+                error = true;
+                LogError(value, size, "out of range");
             }
         }
         public void SerializeValue(ref ulong value)
         {
-            if (mode == SerializeMode.Serialize && Success)
-            {
-                bool success = BitConverter.TryWriteBytes(new Span<byte>(buffer.Array, buffer.Offset + offset, buffer.Count - offset), value);
-                if (success)
-                    offset += sizeof(ulong);
-                else
-                {
-                    error = true;
-                    Console.WriteLine
-                        ($"[Serializer] Convert Failed... Mode : {mode}, Type : {value.GetType().Name}, Value : {value}, Space : {buffer.Count - offset}");
-                }
-            }
-            else if (mode == SerializeMode.Deserialize && Success)
+            if (!Success) return;
+
+            ushort size = sizeof(ulong);
+            bool convertible = buffer.Count - offset >= size;
+            if (Success && convertible)
             {
                 try
                 {
-                    value = BitConverter.ToUInt64(new ReadOnlySpan<byte>(buffer.Array, buffer.Offset + offset, buffer.Count - offset));
-                    offset += sizeof(ulong);
+                    bool success = true;
+                    if (mode == SerializeMode.Serialize)
+                        success = BitConverter.TryWriteBytes(new Span<byte>(buffer.Array, buffer.Offset + offset, buffer.Count - offset), value);
+                    else if (mode == SerializeMode.Deserialize)
+                        value = BitConverter.ToUInt64(new ReadOnlySpan<byte>(buffer.Array, buffer.Offset + offset, buffer.Count - offset));
+                    if (!success)
+                        throw new Exception("convert failed...");
+                    offset += size;
                 }
                 catch (Exception ex)
                 {
                     error = true;
-                    Console.WriteLine($"[Serializer] {ex}");
+                    LogError(value, size, ex.Message);
                 }
+            }
+            else
+            {
+                error = true;
+                LogError(value, size, "out of range");
             }
         }
         public void SerializeValue(ref float value)
         {
-            if (mode == SerializeMode.Serialize && Success)
-            {
-                bool success = BitConverter.TryWriteBytes(new Span<byte>(buffer.Array, buffer.Offset + offset, buffer.Count - offset), value);
-                if (success)
-                    offset += sizeof(float);
-                else
-                {
-                    error = true;
-                    Console.WriteLine
-                        ($"[Serializer] Convert Failed... Mode : {mode}, Type : {value.GetType().Name}, Value : {value}, Space : {buffer.Count - offset}");
-                }
-            }
-            else if (mode == SerializeMode.Deserialize && Success)
+            if (!Success) return;
+
+            ushort size = sizeof(float);
+            bool convertible = buffer.Count - offset >= size;
+            if (Success && convertible)
             {
                 try
                 {
-                    value = BitConverter.ToSingle(new ReadOnlySpan<byte>(buffer.Array, buffer.Offset + offset, buffer.Count - offset));
-                    offset += sizeof(float);
+                    bool success = true;
+                    if (mode == SerializeMode.Serialize)
+                        success = BitConverter.TryWriteBytes(new Span<byte>(buffer.Array, buffer.Offset + offset, buffer.Count - offset), value);
+                    else if (mode == SerializeMode.Deserialize)
+                        value = BitConverter.ToSingle(new ReadOnlySpan<byte>(buffer.Array, buffer.Offset + offset, buffer.Count - offset));
+                    if (!success)
+                        throw new Exception("convert failed...");
+                    offset += size;
                 }
                 catch (Exception ex)
                 {
                     error = true;
-                    Console.WriteLine($"[Serializer] {ex}");
+                    LogError(value, size, ex.Message);
                 }
+            }
+            else
+            {
+                error = true;
+                LogError(value, size, "out of range");
             }
         }
         public void SerializeValue(ref double value)
         {
-            if (mode == SerializeMode.Serialize && Success)
-            {
-                bool success = BitConverter.TryWriteBytes(new Span<byte>(buffer.Array, buffer.Offset + offset, buffer.Count - offset), value);
-                if (success)
-                    offset += sizeof(double);
-                else
-                {
-                    error = true;
-                    Console.WriteLine
-                        ($"[Serializer] Convert Failed... Mode : {mode}, Type : {value.GetType().Name}, Value : {value}, Space : {buffer.Count - offset}");
-                }
-            }
-            else if (mode == SerializeMode.Deserialize && Success)
+            if (!Success) return;
+
+            ushort size = sizeof(double);
+            bool convertible = buffer.Count - offset >= size;
+            if (Success && convertible)
             {
                 try
                 {
-                    value = BitConverter.ToDouble(new ReadOnlySpan<byte>(buffer.Array, buffer.Offset + offset, buffer.Count - offset));
-                    offset += sizeof(double);
+                    bool success = true;
+                    if (mode == SerializeMode.Serialize)
+                        success = BitConverter.TryWriteBytes(new Span<byte>(buffer.Array, buffer.Offset + offset, buffer.Count - offset), value);
+                    else if (mode == SerializeMode.Deserialize)
+                        value = BitConverter.ToDouble(new ReadOnlySpan<byte>(buffer.Array, buffer.Offset + offset, buffer.Count - offset));
+                    if (!success)
+                        throw new Exception("convert failed...");
+                    offset += size;
                 }
                 catch (Exception ex)
                 {
                     error = true;
-                    Console.WriteLine($"[Serializer] {ex}");
+                    LogError(value, size, ex.Message);
                 }
+            }
+            else
+            {
+                error = true;
+                LogError(value, size, "out of range");
             }
         }
         public void SerializeValue(ref string value)
         {
-            if (!Success)
-                return;
+            if (!Success) return;
+
+            ushort size = 0;
             try
             {
-                if (mode == SerializeMode.Serialize)
+                size = (ushort)(mode == SerializeMode.Serialize ? Encoding.Unicode.GetByteCount(value) : 0);
+                SerializeValue(ref size);
+
+                bool convertible = buffer.Count - offset >= size;
+                if (convertible)
                 {
-                    ushort size = (ushort)Encoding.Unicode.GetByteCount(value);
-                    SerializeValue(ref size);
-                    int written = Encoding.Unicode.GetBytes
-                        (
-                            value,
-                            new Span<byte>(buffer.Array, buffer.Offset + offset, buffer.Count - offset)
-                        );
-                    if (written == size)
-                        offset += (ushort)written;
-                    else
+                    if (mode == SerializeMode.Serialize)
                     {
-                        error = true;
-                        Console.WriteLine
-                            ($"[Serializer] Convert Failed... Mode : {mode}, Type : {value.GetType().Name}, Value : {value}, Space : {buffer.Count - offset}");
+                        int written = Encoding.Unicode.GetBytes(value, new Span<byte>(buffer.Array, buffer.Offset + offset, buffer.Count - offset));
+                        if (written == size)
+                            offset += size;
+                        else
+                        {
+                            error = true;
+                            LogError(value, size, "convert failed...");
+                        }
                     }
-                }
-                else if (mode == SerializeMode.Deserialize)
-                {
-                    ushort size = 0;
-                    SerializeValue(ref size);
-                    if (buffer.Count - offset >= size)
+                    else if (mode == SerializeMode.Deserialize)
                     {
                         value = Encoding.Unicode.GetString(buffer.Array, buffer.Offset + offset, size);
                         offset += size;
                     }
-                    else
-                    {
-                        error = true;
-                        Console.WriteLine
-                            ($"[Serializer] Convert Failed... Mode : {mode}, Type : {value.GetType().Name}, Value : {value}, Space : {buffer.Count - offset}");
-                    }
                 }
-                else
-                    error = true;
             }
             catch (Exception ex)
             {
                 error = true;
-                Console.WriteLine($"[Serializer] {ex}");
+                LogError(value, size, ex.Message);
             }
         }
 
-        public void SerializeArray<T>(T[] array) where T : ISerializable
+        public void SerializeArray<T>(T[] array) where T : ISerializable, new()
         {
-            ushort count = (ushort)array.Length;
+            ushort count = 0;
+            if (mode == SerializeMode.Serialize)
+                count = (ushort)array.Length;
 
             SerializeValue(ref count);
+
+            if (mode == SerializeMode.Deserialize)
+                array = new T[count];
             for (int i = 0; i < count; i++)
                 SerializeValue(ref array[i]);
         }
-        public void SerializeList<T>(List<T> list) where T : ISerializable
+        public void SerializeList<T>(List<T> list) where T : ISerializable, new()
         {
-            ushort count = (ushort)list.Count;
-
-            SerializeValue(ref count);
-            for (int i = 0; i < count; i++)
+            ushort count = 0;
+            if (mode == SerializeMode.Serialize)
             {
-                T value = list[i];
-                SerializeValue(ref value);
+                count = (ushort)list.Count;
+                SerializeValue(ref count);
+                for (int i = 0; i < count; i++)
+                {
+                    var value = list[i];
+                    SerializeValue(ref value);
+                }
+            }
+            else if (mode == SerializeMode.Deserialize)
+            {
+                SerializeValue(ref count);
+                list = new List<T>(count);
+                T value = new T();
+                for (int i = 0; i < count; i++)
+                {
+                    SerializeValue(ref value);
+                    list.Add(value);
+                }
             }
         }
-        public void SerializeArray(byte[] array)
+        public void SerializeArray(ref byte[] array)
         {
-            ushort count = (ushort)array.Length;
+            ushort count = 0;
+            if (mode == SerializeMode.Serialize)
+                count = (ushort)array.Length;
 
             SerializeValue(ref count);
+            if (mode == SerializeMode.Deserialize)
+                array = new byte[count];
             for (int i = 0; i < count; i++)
                 SerializeValue(ref array[i]);
         }
-        public void SerializeList(List<byte> list)
+        public void SerializeList(ref List<byte> list)
         {
-            ushort count = (ushort)list.Count;
-
-            SerializeValue(ref count);
-            for (int i = 0; i < count; i++)
+            ushort count = 0;
+            if (mode == SerializeMode.Serialize)
             {
-                var value = list[i];
-                SerializeValue(ref value);
+                count = (ushort)list.Count;
+                SerializeValue(ref count);
+                for (int i = 0; i < count; i++)
+                {
+                    var value = list[i];
+                    SerializeValue(ref value);
+                }
+            }
+            else if (mode == SerializeMode.Deserialize)
+            {
+                SerializeValue(ref count);
+                list = new List<byte>(count);
+                byte value = default;
+                for (int i = 0; i < count; i++)
+                {
+                    SerializeValue(ref value);
+                    list.Add(value);
+                }
             }
         }
-        public void SerializeArray(bool[] array)
+        public void SerializeArray(ref bool[] array)
         {
-            ushort count = (ushort)array.Length;
+            ushort count = 0;
+            if (mode == SerializeMode.Serialize)
+                count = (ushort)array.Length;
 
             SerializeValue(ref count);
+            if (mode == SerializeMode.Deserialize)
+                array = new bool[count];
             for (int i = 0; i < count; i++)
                 SerializeValue(ref array[i]);
         }
-        public void SerializeList(List<bool> list)
+        public void SerializeList(ref List<bool> list)
         {
-            ushort count = (ushort)list.Count;
-
-            SerializeValue(ref count);
-            for (int i = 0; i < count; i++)
+            ushort count = 0;
+            if (mode == SerializeMode.Serialize)
             {
-                var value = list[i];
-                SerializeValue(ref value);
+                count = (ushort)list.Count;
+                SerializeValue(ref count);
+                for (int i = 0; i < count; i++)
+                {
+                    var value = list[i];
+                    SerializeValue(ref value);
+                }
+            }
+            else if (mode == SerializeMode.Deserialize)
+            {
+                SerializeValue(ref count);
+                list = new List<bool>(count);
+                bool value = default;
+                for (int i = 0; i < count; i++)
+                {
+                    SerializeValue(ref value);
+                    list.Add(value);
+                }
             }
         }
-        public void SerializeArray(char[] array)
+        public void SerializeArray(ref char[] array)
         {
-            ushort count = (ushort)array.Length;
+            ushort count = 0;
+
+            if (mode == SerializeMode.Serialize)
+                count = (ushort)array.Length;
 
             SerializeValue(ref count);
+
+            if (mode == SerializeMode.Deserialize)
+                array = new char[count];
             for (int i = 0; i < count; i++)
                 SerializeValue(ref array[i]);
         }
-        public void SerializeList(List<char> list)
+        public void SerializeList(ref List<char> list)
         {
-            ushort count = (ushort)list.Count;
-
-            SerializeValue(ref count);
-            for (int i = 0; i < count; i++)
+            ushort count = 0;
+            if (mode == SerializeMode.Serialize)
             {
-                var value = list[i];
-                SerializeValue(ref value);
+                count = (ushort)list.Count;
+                SerializeValue(ref count);
+                for (int i = 0; i < count; i++)
+                {
+                    var value = list[i];
+                    SerializeValue(ref value);
+                }
+            }
+            else if (mode == SerializeMode.Deserialize)
+            {
+                SerializeValue(ref count);
+                list = new List<char>(count);
+                char value = default;
+                for (int i = 0; i < count; i++)
+                {
+                    SerializeValue(ref value);
+                    list.Add(value);
+                }
             }
         }
-        public void SerializeArray(short[] array)
+        public void SerializeArray(ref short[] array)
         {
-            ushort count = (ushort)array.Length;
+            ushort count = 0;
+            if (mode == SerializeMode.Serialize)
+                count = (ushort)array.Length;
 
             SerializeValue(ref count);
+            if (mode == SerializeMode.Deserialize)
+                array = new short[count];
             for (int i = 0; i < count; i++)
                 SerializeValue(ref array[i]);
         }
-        public void SerializeList(List<short> list)
+        public void SerializeList(ref List<short> list)
         {
-            ushort count = (ushort)list.Count;
-
-            SerializeValue(ref count);
-            for (int i = 0; i < count; i++)
+            ushort count = 0;
+            if (mode == SerializeMode.Serialize)
             {
-                var value = list[i];
-                SerializeValue(ref value);
+                count = (ushort)list.Count;
+                SerializeValue(ref count);
+                for (int i = 0; i < count; i++)
+                {
+                    var value = list[i];
+                    SerializeValue(ref value);
+                }
+            }
+            else if (mode == SerializeMode.Deserialize)
+            {
+                SerializeValue(ref count);
+                list = new List<short>(count);
+                short value = default;
+                for (int i = 0; i < count; i++)
+                {
+                    SerializeValue(ref value);
+                    list.Add(value);
+                }
             }
         }
-        public void SerializeArray(ushort[] array)
+        public void SerializeArray(ref ushort[] array)
         {
-            ushort count = (ushort)array.Length;
+            ushort count = 0;
+            if (mode == SerializeMode.Serialize)
+                count = (ushort)array.Length;
 
             SerializeValue(ref count);
+            if (mode == SerializeMode.Deserialize)
+                array = new ushort[count];
             for (int i = 0; i < count; i++)
                 SerializeValue(ref array[i]);
         }
-        public void SerializeList(List<ushort> list)
+        public void SerializeList(ref List<ushort> list)
         {
-            ushort count = (ushort)list.Count;
-
-            SerializeValue(ref count);
-            for (int i = 0; i < count; i++)
+            ushort count = 0;
+            if (mode == SerializeMode.Serialize)
             {
-                var value = list[i];
-                SerializeValue(ref value);
+                count = (ushort)list.Count;
+                SerializeValue(ref count);
+                for (int i = 0; i < count; i++)
+                {
+                    var value = list[i];
+                    SerializeValue(ref value);
+                }
+            }
+            else if (mode == SerializeMode.Deserialize)
+            {
+                SerializeValue(ref count);
+                list = new List<ushort>(count);
+                ushort value = default;
+                for (int i = 0; i < count; i++)
+                {
+                    SerializeValue(ref value);
+                    list.Add(value);
+                }
             }
         }
-        public void SerializeArray(int[] array)
+        public void SerializeArray(ref int[] array)
         {
-            ushort count = (ushort)array.Length;
+            ushort count = 0;
+            if (mode == SerializeMode.Serialize)
+                count = (ushort)array.Length;
 
             SerializeValue(ref count);
+            if (mode == SerializeMode.Deserialize)
+                array = new int[count];
             for (int i = 0; i < count; i++)
                 SerializeValue(ref array[i]);
         }
-        public void SerializeList(List<int> list)
+        public void SerializeList(ref List<int> list)
         {
-            ushort count = (ushort)list.Count;
-
-            SerializeValue(ref count);
-            for (int i = 0; i < count; i++)
+            ushort count = 0;
+            if (mode == SerializeMode.Serialize)
             {
-                var value = list[i];
-                SerializeValue(ref value);
+                count = (ushort)list.Count;
+                SerializeValue(ref count);
+                for (int i = 0; i < count; i++)
+                {
+                    var value = list[i];
+                    SerializeValue(ref value);
+                }
+            }
+            else if (mode == SerializeMode.Deserialize)
+            {
+                SerializeValue(ref count);
+                list = new List<int>(count);
+                int value = default;
+                for (int i = 0; i < count; i++)
+                {
+                    SerializeValue(ref value);
+                    list.Add(value);
+                }
             }
         }
-        public void SerializeArray(uint[] array)
+        public void SerializeArray(ref uint[] array)
         {
-            ushort count = (ushort)array.Length;
+            ushort count = 0;
+            if (mode == SerializeMode.Serialize)
+                count = (ushort)array.Length;
 
             SerializeValue(ref count);
+            if (mode == SerializeMode.Deserialize)
+                array = new uint[count];
             for (int i = 0; i < count; i++)
                 SerializeValue(ref array[i]);
         }
-        public void SerializeList(List<uint> list)
+        public void SerializeList(ref List<uint> list)
         {
-            ushort count = (ushort)list.Count;
-
-            SerializeValue(ref count);
-            for (int i = 0; i < count; i++)
+            ushort count = 0;
+            if (mode == SerializeMode.Serialize)
             {
-                var value = list[i];
-                SerializeValue(ref value);
+                count = (ushort)list.Count;
+                SerializeValue(ref count);
+                for (int i = 0; i < count; i++)
+                {
+                    var value = list[i];
+                    SerializeValue(ref value);
+                }
+            }
+            else if (mode == SerializeMode.Deserialize)
+            {
+                SerializeValue(ref count);
+                list = new List<uint>(count);
+                uint value = default;
+                for (int i = 0; i < count; i++)
+                {
+                    SerializeValue(ref value);
+                    list.Add(value);
+                }
             }
         }
-        public void SerializeArray(long[] array)
+        public void SerializeArray(ref long[] array)
         {
-            ushort count = (ushort)array.Length;
+            ushort count = 0;
+            if (mode == SerializeMode.Serialize)
+                count = (ushort)array.Length;
 
             SerializeValue(ref count);
+            if (mode == SerializeMode.Deserialize)
+                array = new long[count];
             for (int i = 0; i < count; i++)
                 SerializeValue(ref array[i]);
         }
-        public void SerializeList(List<long> list)
+        public void SerializeList(ref List<long> list)
         {
-            ushort count = (ushort)list.Count;
-
-            SerializeValue(ref count);
-            for (int i = 0; i < count; i++)
+            ushort count = 0;
+            if (mode == SerializeMode.Serialize)
             {
-                var value = list[i];
-                SerializeValue(ref value);
+                count = (ushort)list.Count;
+                SerializeValue(ref count);
+                for (int i = 0; i < count; i++)
+                {
+                    var value = list[i];
+                    SerializeValue(ref value);
+                }
+            }
+            else if (mode == SerializeMode.Deserialize)
+            {
+                SerializeValue(ref count);
+                list = new List<long>(count);
+                long value = default;
+                for (int i = 0; i < count; i++)
+                {
+                    SerializeValue(ref value);
+                    list.Add(value);
+                }
             }
         }
-        public void SerializeArray(ulong[] array)
+        public void SerializeArray(ref ulong[] array)
         {
-            ushort count = (ushort)array.Length;
+            ushort count = 0;
+            if (mode == SerializeMode.Serialize)
+                count = (ushort)array.Length;
 
             SerializeValue(ref count);
+            if (mode == SerializeMode.Deserialize)
+                array = new ulong[count];
             for (int i = 0; i < count; i++)
                 SerializeValue(ref array[i]);
         }
-        public void SerializeList(List<ulong> list)
+        public void SerializeList(ref List<ulong> list)
         {
-            ushort count = (ushort)list.Count;
-
-            SerializeValue(ref count);
-            for (int i = 0; i < count; i++)
+            ushort count = 0;
+            if (mode == SerializeMode.Serialize)
             {
-                var value = list[i];
-                SerializeValue(ref value);
+                count = (ushort)list.Count;
+                SerializeValue(ref count);
+                for (int i = 0; i < count; i++)
+                {
+                    var value = list[i];
+                    SerializeValue(ref value);
+                }
+            }
+            else if (mode == SerializeMode.Deserialize)
+            {
+                SerializeValue(ref count);
+                list = new List<ulong>(count);
+                ulong value = default;
+                for (int i = 0; i < count; i++)
+                {
+                    SerializeValue(ref value);
+                    list.Add(value);
+                }
             }
         }
-        public void SerializeArray(float[] array)
+        public void SerializeArray(ref float[] array)
         {
-            ushort count = (ushort)array.Length;
+            ushort count = 0;
+            if (mode == SerializeMode.Serialize)
+                count = (ushort)array.Length;
 
             SerializeValue(ref count);
+            if (mode == SerializeMode.Deserialize)
+                array = new float[count];
             for (int i = 0; i < count; i++)
                 SerializeValue(ref array[i]);
         }
-        public void SerializeList(List<float> list)
+        public void SerializeList(ref List<float> list)
         {
-            ushort count = (ushort)list.Count;
-
-            SerializeValue(ref count);
-            for (int i = 0; i < count; i++)
+            ushort count = 0;
+            if (mode == SerializeMode.Serialize)
             {
-                var value = list[i];
-                SerializeValue(ref value);
+                count = (ushort)list.Count;
+                SerializeValue(ref count);
+                for (int i = 0; i < count; i++)
+                {
+                    var value = list[i];
+                    SerializeValue(ref value);
+                }
+            }
+            else if (mode == SerializeMode.Deserialize)
+            {
+                SerializeValue(ref count);
+                list = new List<float>(count);
+                float value = default;
+                for (int i = 0; i < count; i++)
+                {
+                    SerializeValue(ref value);
+                    list.Add(value);
+                }
             }
         }
-        public void SerializeArray(double[] array)
+        public void SerializeArray(ref double[] array)
         {
-            ushort count = (ushort)array.Length;
+            ushort count = 0;
+            if (mode == SerializeMode.Serialize)
+                count = (ushort)array.Length;
 
             SerializeValue(ref count);
+            if (mode == SerializeMode.Deserialize)
+                array = new double[count];
             for (int i = 0; i < count; i++)
                 SerializeValue(ref array[i]);
         }
-        public void SerializeList(List<double> list)
+        public void SerializeList(ref List<double> list)
         {
-            ushort count = (ushort)list.Count;
-
-            SerializeValue(ref count);
-            for (int i = 0; i < count; i++)
+            ushort count = 0;
+            if (mode == SerializeMode.Serialize)
             {
-                var value = list[i];
-                SerializeValue(ref value);
+                count = (ushort)list.Count;
+                SerializeValue(ref count);
+                for (int i = 0; i < count; i++)
+                {
+                    var value = list[i];
+                    SerializeValue(ref value);
+                }
+            }
+            else if (mode == SerializeMode.Deserialize)
+            {
+                SerializeValue(ref count);
+                list = new List<double>(count);
+                double value = default;
+                for (int i = 0; i < count; i++)
+                {
+                    SerializeValue(ref value);
+                    list.Add(value);
+                }
             }
         }
-        public void SerializeArray(string[] array)
+        public void SerializeArray(ref string[] array)
         {
-            ushort count = (ushort)array.Length;
+            ushort count = 0;
+            if (mode == SerializeMode.Serialize)
+                count = (ushort)array.Length;
 
             SerializeValue(ref count);
+            if (mode == SerializeMode.Deserialize)
+                array = new string[count];
             for (int i = 0; i < count; i++)
                 SerializeValue(ref array[i]);
         }
-        public void SerializeList(List<string> list)
+        public void SerializeList(ref List<string> list)
         {
-            ushort count = (ushort)list.Count;
-
-            SerializeValue(ref count);
-            for (int i = 0; i < count; i++)
+            ushort count = 0;
+            if (mode == SerializeMode.Serialize)
             {
-                var value = list[i];
-                SerializeValue(ref value);
+                count = (ushort)list.Count;
+                SerializeValue(ref count);
+                for (int i = 0; i < count; i++)
+                {
+                    var value = list[i];
+                    SerializeValue(ref value);
+                }
+            }
+            else if (mode == SerializeMode.Deserialize)
+            {
+                SerializeValue(ref count);
+                list = new List<string>(count);
+                string value = default;
+                for (int i = 0; i < count; i++)
+                {
+                    SerializeValue(ref value);
+                    list.Add(value);
+                }
             }
         }
 

@@ -3,9 +3,12 @@ using System.Collections.Generic;
 
 namespace Donet
 {
+    /// <summary>
+    /// Use Responsibly And Carefully
+    /// </summary>
     public class RAB
     {
-        internal static ArraySegment<byte> AcquireFromPool(int size)
+        public static ArraySegment<byte> AcquireFromPool(int size)
         {
             ArraySegment<byte> segment;
             for (int i = 0; i < pool.Count; i++)
@@ -17,7 +20,7 @@ namespace Donet
             pool.Add(new RAB(16777216 > size ? 16777216 : size));
             return pool[^1].Acquire(size);
         }
-        internal static bool ReleaseToPool(ArraySegment<byte> segment)
+        public static bool ReleaseToPool(ArraySegment<byte> segment)
         {
             for (int i = 0; i < pool.Count; i++)
             {

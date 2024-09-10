@@ -58,7 +58,7 @@ namespace Donet
         }
 
         #region Send
-        public void Send(ArraySegment<byte> buffer)
+        public virtual void Send(ArraySegment<byte> buffer)
         {
             if (!Connected)
                 return;

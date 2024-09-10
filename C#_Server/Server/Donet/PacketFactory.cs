@@ -8,14 +8,15 @@ namespace Donet
     {
         private static Dictionary<string, ushort> packetDictionary = new Dictionary<string, ushort>();
         private static Dictionary<ushort, Func<Packet>> packetFactory = new Dictionary<ushort, Func<Packet>>();
+
         private static ushort nextID = 0;
         private static ushort NextID => nextID++;
 
-        private static bool initalized = false;
+        private static bool initialized = false;
 
         public static bool InitializePacket<T>() where T : Enum
         {
-            if (initalized)
+            if (initialized)
                 return true;
 
             try
@@ -42,7 +43,7 @@ namespace Donet
                     packetDictionary.Add(typeEnum.ToString(), id);
                     packetFactory.Add(id, () => Activator.CreateInstance(type) as Packet);
                 }
-                initalized = true;
+                initialized = true;
                 return true;
             }
             catch
@@ -53,7 +54,7 @@ namespace Donet
 
         public static ushort GetID(Type packet)
         {
-            if (initalized)
+            if (initialized)
                 return packetDictionary[packet.Name];
             else
                 return 0;

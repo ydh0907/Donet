@@ -2,7 +2,6 @@
 {
     internal enum PacketTypeEnum
     {
-        ServerRpcPacket,
-        ClientRpcPacket,
+        TestPacket
     }
 }
