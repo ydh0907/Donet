@@ -14,7 +14,7 @@ namespace Donet
 
         public int Serialize(ArraySegment<byte> buffer)
         {
-            serializer.Open(SerializeMode.Serialize, buffer);
+            serializer.Open(NetworkSerializeMode.Serialize, buffer);
             OnSerialize(serializer);
             serializer.WriteID(packetID, buffer);
             serializer.WriteSize(buffer);
@@ -23,7 +23,7 @@ namespace Donet
 
         public bool Deserialize(ArraySegment<byte> buffer)
         {
-            serializer.Open(SerializeMode.Deserialize, buffer);
+            serializer.Open(NetworkSerializeMode.Deserialize, buffer);
             OnSerialize(serializer);
             return serializer.Success && serializer.Close() == buffer.Count;
         }

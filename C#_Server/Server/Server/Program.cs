@@ -1,69 +1,56 @@
 ﻿using Donet;
-using Server.Packets;
 using System.Net;
 
 namespace Server
 {
-    public class Program
+    internal class Program
     {
-        private static Listener listener = new();
-        private static byte[] buffer = new byte[1024];
-        private static List<PacketSession> clients = new List<PacketSession>();
-        private static ReaderWriterLock rwLock = new ReaderWriterLock();
+        public static List<ClientSession> clients = new List<ClientSession>();
+        public static object locker = new object();
 
-        private static void Main(string[] args)
+        static void Main(string[] args)
         {
-            Initialize();
+            if (!PacketFactory.InitializePacket<PacketEnum>())
+                return;
+
+            Listener listener = new Listener();
+
+            IPEndPoint endPoint = new IPEndPoint(IPAddress.Any, 3000);
+            Func<Session> factory = () => new ClientSession();
+
+            listener.Listen(endPoint, factory, OnClientConnected);
 
             while (true)
             {
-                string message = Console.ReadLine();
-                TestPacket packet = new TestPacket();
-                packet.message = message;
-                Broadcast(packet);
+                Console.ReadKey();
+                string message;
+                lock (locker)
+                {
+                    Console.WriteLine("Server : ");
+                    message = Console.ReadLine();
+                }
+                MessagePacket packet = new MessagePacket();
+                packet.message = $"Server : {message}";
+                foreach (ClientSession session in clients)
+                {
+                    session.SendPacket(packet);
+                }
             }
         }
 
-        private static void Initialize()
+        public static void Broadcast(Packet packet, ClientSession sender = null)
         {
-            if (!PacketFactory.InitializePacket<PacketTypeEnum>())
-                return;
-
-            string host = Dns.GetHostName();
-            IPHostEntry ipHost = Dns.GetHostEntry(host);
-            IPAddress addr = ipHost.AddressList[0];
-            IPEndPoint endPoint = new IPEndPoint(addr, 7779);
-
-            Func<Session> factory = () => new ClientSession();
-
-            listener.Listen(endPoint, factory, OnConnected);
-            Console.WriteLine("Listening...");
-        }
-
-        public static void OnConnected(Session session)
-        {
-            rwLock.AcquireWriterLock(10);
-            clients.Add(session as PacketSession);
-            rwLock.ReleaseWriterLock();
-        }
-
-        public static void OnDisconnected(PacketSession session)
-        {
-            rwLock.AcquireWriterLock(10);
-            clients.Remove(session);
-            rwLock.ReleaseWriterLock();
-        }
-
-        public static void Broadcast(Packet packet, PacketSession ignore = null)
-        {
-            rwLock.AcquireReaderLock(10);
-            foreach (PacketSession session in clients)
+            foreach (ClientSession session in clients)
             {
-                if (session == ignore)
+                if (session == sender)
                     continue;
                 session.SendPacket(packet);
             }
-            rwLock.ReleaseReaderLock();
+        }
+
+        static void OnClientConnected(Session session)
+        {
+            clients.Add(session as ClientSession);
         }
     }
 }

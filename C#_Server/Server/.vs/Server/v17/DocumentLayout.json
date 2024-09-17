@@ -1,42 +1,34 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "D:\\Github\\Donet\\C#_Server\\Server\\",
+  "WorkspaceRootPath": "D:\\GitHub\\Donet\\C#_Server\\Server\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{E7C3A9EF-F119-446C-9A38-F333D9B23C9C}|Server\\Server.csproj|d:\\github\\donet\\c#_server\\server\\server\\packets\\testpacket.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{E7C3A9EF-F119-446C-9A38-F333D9B23C9C}|Server\\Server.csproj|solutionrelative:server\\packets\\testpacket.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{2360C401-D72E-4EE2-88EA-0EA2D95DBC6D}|Client\\Client.csproj|d:\\github\\donet\\c#_server\\server\\client\\messagepacket.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2360C401-D72E-4EE2-88EA-0EA2D95DBC6D}|Client\\Client.csproj|solutionrelative:client\\messagepacket.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{5955187C-E0F2-43A0-816A-2D501EAB2597}|DummyClient\\DummyClient.csproj|d:\\github\\donet\\c#_server\\server\\dummyclient\\packets\\testpacket.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{5955187C-E0F2-43A0-816A-2D501EAB2597}|DummyClient\\DummyClient.csproj|solutionrelative:dummyclient\\packets\\testpacket.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{2360C401-D72E-4EE2-88EA-0EA2D95DBC6D}|Client\\Client.csproj|d:\\github\\donet\\c#_server\\server\\client\\packetenum.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2360C401-D72E-4EE2-88EA-0EA2D95DBC6D}|Client\\Client.csproj|solutionrelative:client\\packetenum.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{E7C3A9EF-F119-446C-9A38-F333D9B23C9C}|Server\\Server.csproj|d:\\github\\donet\\c#_server\\server\\server\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{E7C3A9EF-F119-446C-9A38-F333D9B23C9C}|Server\\Server.csproj|solutionrelative:server\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{2360C401-D72E-4EE2-88EA-0EA2D95DBC6D}|Client\\Client.csproj|d:\\github\\donet\\c#_server\\server\\client\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2360C401-D72E-4EE2-88EA-0EA2D95DBC6D}|Client\\Client.csproj|solutionrelative:client\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{7FC3F540-7552-41FA-844C-C10F09039BB9}|Donet\\Donet.csproj|d:\\github\\donet\\c#_server\\server\\donet\\serializer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{7FC3F540-7552-41FA-844C-C10F09039BB9}|Donet\\Donet.csproj|solutionrelative:donet\\serializer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{2360C401-D72E-4EE2-88EA-0EA2D95DBC6D}|Client\\Client.csproj|d:\\github\\donet\\c#_server\\server\\client\\client.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{2360C401-D72E-4EE2-88EA-0EA2D95DBC6D}|Client\\Client.csproj|solutionrelative:client\\client.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{7FC3F540-7552-41FA-844C-C10F09039BB9}|Donet\\Donet.csproj|d:\\github\\donet\\c#_server\\server\\donet\\packet.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{7FC3F540-7552-41FA-844C-C10F09039BB9}|Donet\\Donet.csproj|solutionrelative:donet\\packet.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{9183018C-0C24-4A65-88F0-DA25EE707C2F}|Server\\Server.csproj|d:\\github\\donet\\c#_server\\server\\server\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9183018C-0C24-4A65-88F0-DA25EE707C2F}|Server\\Server.csproj|solutionrelative:server\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{5955187C-E0F2-43A0-816A-2D501EAB2597}|DummyClient\\DummyClient.csproj|d:\\github\\donet\\c#_server\\server\\dummyclient\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{5955187C-E0F2-43A0-816A-2D501EAB2597}|DummyClient\\DummyClient.csproj|solutionrelative:dummyclient\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{2360C401-D72E-4EE2-88EA-0EA2D95DBC6D}|Client\\Client.csproj|d:\\github\\donet\\c#_server\\server\\client\\serversession.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2360C401-D72E-4EE2-88EA-0EA2D95DBC6D}|Client\\Client.csproj|solutionrelative:client\\serversession.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{5955187C-E0F2-43A0-816A-2D501EAB2597}|DummyClient\\DummyClient.csproj|d:\\github\\donet\\c#_server\\server\\dummyclient\\packets\\packettypeenum.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{5955187C-E0F2-43A0-816A-2D501EAB2597}|DummyClient\\DummyClient.csproj|solutionrelative:dummyclient\\packets\\packettypeenum.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{7FC3F540-7552-41FA-844C-C10F09039BB9}|Donet\\Donet.csproj|d:\\github\\donet\\c#_server\\server\\donet\\packetsession.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{7FC3F540-7552-41FA-844C-C10F09039BB9}|Donet\\Donet.csproj|solutionrelative:donet\\packetsession.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{E7C3A9EF-F119-446C-9A38-F333D9B23C9C}|Server\\Server.csproj|d:\\github\\donet\\c#_server\\server\\server\\packets\\packettypeenum.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{E7C3A9EF-F119-446C-9A38-F333D9B23C9C}|Server\\Server.csproj|solutionrelative:server\\packets\\packettypeenum.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{9183018C-0C24-4A65-88F0-DA25EE707C2F}|Server\\Server.csproj|d:\\github\\donet\\c#_server\\server\\server\\messagepacket.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9183018C-0C24-4A65-88F0-DA25EE707C2F}|Server\\Server.csproj|solutionrelative:server\\messagepacket.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -49,123 +41,127 @@
           "SelectedChildIndex": 4,
           "Children": [
             {
+              "$type": "Bookmark",
+              "Name": "ST:2:0:{e8034f19-ab72-4f06-83fd-f6832b41aa63}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{d78612c7-9962-4b83-95d9-268046dad23a}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{34e76e81-ee4a-11d0-ae2e-00a0c90fffc3}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Client",
+              "DocumentMoniker": "D:\\GitHub\\Donet\\C#_Server\\Server\\Client\\Client.csproj",
+              "RelativeDocumentMoniker": "Client\\Client.csproj",
+              "ToolTip": "D:\\GitHub\\Donet\\C#_Server\\Server\\Client\\Client.csproj",
+              "RelativeToolTip": "Client\\Client.csproj",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAkAAAANAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2024-09-12T10:46:07.844Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "MessagePacket.cs",
+              "DocumentMoniker": "D:\\GitHub\\Donet\\C#_Server\\Server\\Client\\MessagePacket.cs",
+              "RelativeDocumentMoniker": "Client\\MessagePacket.cs",
+              "ToolTip": "D:\\GitHub\\Donet\\C#_Server\\Server\\Client\\MessagePacket.cs",
+              "RelativeToolTip": "Client\\MessagePacket.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAsAAAANAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-09-12T09:57:10.74Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "PacketEnum.cs",
+              "DocumentMoniker": "D:\\GitHub\\Donet\\C#_Server\\Server\\Client\\PacketEnum.cs",
+              "RelativeDocumentMoniker": "Client\\PacketEnum.cs",
+              "ToolTip": "D:\\GitHub\\Donet\\C#_Server\\Server\\Client\\PacketEnum.cs",
+              "RelativeToolTip": "Client\\PacketEnum.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAEAAAABAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-09-12T09:57:02.49Z",
+              "EditorCaption": ""
+            },
+            {
               "$type": "Document",
               "DocumentIndex": 5,
-              "Title": "Program.cs",
-              "DocumentMoniker": "D:\\Github\\Donet\\C#_Server\\Server\\DummyClient\\Program.cs",
-              "RelativeDocumentMoniker": "DummyClient\\Program.cs",
-              "ToolTip": "D:\\Github\\Donet\\C#_Server\\Server\\DummyClient\\Program.cs",
-              "RelativeToolTip": "DummyClient\\Program.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABcAAAArAAAAAAAAAA==",
+              "Title": "ServerSession.cs",
+              "DocumentMoniker": "D:\\GitHub\\Donet\\C#_Server\\Server\\Client\\ServerSession.cs",
+              "RelativeDocumentMoniker": "Client\\ServerSession.cs",
+              "ToolTip": "D:\\GitHub\\Donet\\C#_Server\\Server\\Client\\ServerSession.cs",
+              "RelativeToolTip": "Client\\ServerSession.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAMAAAAQAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-04T11:22:52.982Z",
-              "IsPinned": true,
+              "WhenOpened": "2024-09-12T09:54:37.573Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 2,
               "Title": "Program.cs",
-              "DocumentMoniker": "D:\\Github\\Donet\\C#_Server\\Server\\Server\\Program.cs",
-              "RelativeDocumentMoniker": "Server\\Program.cs",
-              "ToolTip": "D:\\Github\\Donet\\C#_Server\\Server\\Server\\Program.cs",
-              "RelativeToolTip": "Server\\Program.cs",
-              "ViewState": "AgIAACoAAAAAAAAAAAA5wDwAAAANAAAAAAAAAA==",
+              "DocumentMoniker": "D:\\GitHub\\Donet\\C#_Server\\Server\\Client\\Program.cs",
+              "RelativeDocumentMoniker": "Client\\Program.cs",
+              "ToolTip": "D:\\GitHub\\Donet\\C#_Server\\Server\\Client\\Program.cs",
+              "RelativeToolTip": "Client\\Program.cs",
+              "ViewState": "AQIAABMAAAAAAAAAAAAQwCAAAAA7AAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-04T11:22:44.617Z",
-              "IsPinned": true,
+              "WhenOpened": "2024-09-12T09:52:40.295Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 6,
-              "Title": "PacketTypeEnum.cs",
-              "DocumentMoniker": "D:\\Github\\Donet\\C#_Server\\Server\\DummyClient\\Packets\\PacketTypeEnum.cs",
-              "RelativeDocumentMoniker": "DummyClient\\Packets\\PacketTypeEnum.cs",
-              "ToolTip": "D:\\Github\\Donet\\C#_Server\\Server\\DummyClient\\Packets\\PacketTypeEnum.cs",
-              "RelativeToolTip": "DummyClient\\Packets\\PacketTypeEnum.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAMAAAAFAAAAAAAAAA==",
+              "Title": "MessagePacket.cs",
+              "DocumentMoniker": "D:\\GitHub\\Donet\\C#_Server\\Server\\Server\\MessagePacket.cs",
+              "RelativeDocumentMoniker": "Server\\MessagePacket.cs",
+              "ToolTip": "D:\\GitHub\\Donet\\C#_Server\\Server\\Server\\MessagePacket.cs",
+              "RelativeToolTip": "Server\\MessagePacket.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAoAAAA+AAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-04T15:55:54.253Z",
+              "WhenOpened": "2024-09-12T09:43:55.678Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 4,
-              "Title": "Packet.cs",
-              "DocumentMoniker": "D:\\Github\\Donet\\C#_Server\\Server\\Donet\\Packet.cs",
-              "RelativeDocumentMoniker": "Donet\\Packet.cs",
-              "ToolTip": "D:\\Github\\Donet\\C#_Server\\Server\\Donet\\Packet.cs",
-              "RelativeToolTip": "Donet\\Packet.cs",
-              "ViewState": "AgIAAAUAAAAAAAAAAAAvwA0AAAAAAAAAAAAAAA==",
+              "Title": "Program.cs",
+              "DocumentMoniker": "D:\\GitHub\\Donet\\C#_Server\\Server\\Server\\Program.cs",
+              "RelativeDocumentMoniker": "Server\\Program.cs",
+              "ToolTip": "D:\\GitHub\\Donet\\C#_Server\\Server\\Server\\Program.cs",
+              "RelativeToolTip": "Server\\Program.cs",
+              "ViewState": "AQIAAAgAAAAAAAAAAAAswBEAAABGAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-04T14:24:55.965Z",
+              "WhenOpened": "2024-09-12T09:14:58.327Z",
               "EditorCaption": ""
-            },
+            }
+          ]
+        },
+        {
+          "DockedWidth": 204,
+          "SelectedChildIndex": -1,
+          "Children": [
             {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "TestPacket.cs",
-              "DocumentMoniker": "D:\\Github\\Donet\\C#_Server\\Server\\Server\\Packets\\TestPacket.cs",
-              "RelativeDocumentMoniker": "Server\\Packets\\TestPacket.cs",
-              "ToolTip": "D:\\Github\\Donet\\C#_Server\\Server\\Server\\Packets\\TestPacket.cs",
-              "RelativeToolTip": "Server\\Packets\\TestPacket.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABQAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-04T14:23:49.525Z",
-              "EditorCaption": ""
-            },
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
+            }
+          ]
+        },
+        {
+          "DockedWidth": 204,
+          "SelectedChildIndex": -1,
+          "Children": [
             {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "TestPacket.cs",
-              "DocumentMoniker": "D:\\Github\\Donet\\C#_Server\\Server\\DummyClient\\Packets\\TestPacket.cs",
-              "RelativeDocumentMoniker": "DummyClient\\Packets\\TestPacket.cs",
-              "ToolTip": "D:\\Github\\Donet\\C#_Server\\Server\\DummyClient\\Packets\\TestPacket.cs",
-              "RelativeToolTip": "DummyClient\\Packets\\TestPacket.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAAJAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-04T14:24:36.942Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "Serializer.cs",
-              "DocumentMoniker": "D:\\Github\\Donet\\C#_Server\\Server\\Donet\\Serializer.cs",
-              "RelativeDocumentMoniker": "Donet\\Serializer.cs",
-              "ToolTip": "D:\\Github\\Donet\\C#_Server\\Server\\Donet\\Serializer.cs",
-              "RelativeToolTip": "Donet\\Serializer.cs",
-              "ViewState": "AgIAAH4BAAAAAAAAAAAgwMUBAAAvAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-04T14:06:41.838Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "PacketSession.cs",
-              "DocumentMoniker": "D:\\Github\\Donet\\C#_Server\\Server\\Donet\\PacketSession.cs",
-              "RelativeDocumentMoniker": "Donet\\PacketSession.cs",
-              "ToolTip": "D:\\Github\\Donet\\C#_Server\\Server\\Donet\\PacketSession.cs",
-              "RelativeToolTip": "Donet\\PacketSession.cs",
-              "ViewState": "AgIAAAUAAAAAAAAAAAAIwBoAAAApAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-04T14:10:48.187Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 8,
-              "Title": "PacketTypeEnum.cs",
-              "DocumentMoniker": "D:\\Github\\Donet\\C#_Server\\Server\\Server\\Packets\\PacketTypeEnum.cs",
-              "RelativeDocumentMoniker": "Server\\Packets\\PacketTypeEnum.cs",
-              "ToolTip": "D:\\Github\\Donet\\C#_Server\\Server\\Server\\Packets\\PacketTypeEnum.cs",
-              "RelativeToolTip": "Server\\Packets\\PacketTypeEnum.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAASAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-04T15:56:10.009Z",
-              "EditorCaption": ""
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{004be353-6879-467c-9d1e-9ac23cdf6d49}"
             }
           ]
         }

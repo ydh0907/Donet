@@ -3,6 +3,8 @@ D:\GitHub\Donet\C#_Server\Server\Server\bin\Debug\net8.0\Server.deps.json
 D:\GitHub\Donet\C#_Server\Server\Server\bin\Debug\net8.0\Server.runtimeconfig.json
 D:\GitHub\Donet\C#_Server\Server\Server\bin\Debug\net8.0\Server.dll
 D:\GitHub\Donet\C#_Server\Server\Server\bin\Debug\net8.0\Server.pdb
+D:\GitHub\Donet\C#_Server\Server\Server\bin\Debug\net8.0\Donet.dll
+D:\GitHub\Donet\C#_Server\Server\Server\bin\Debug\net8.0\Donet.pdb
 D:\GitHub\Donet\C#_Server\Server\Server\obj\Debug\net8.0\Server.csproj.AssemblyReference.cache
 D:\GitHub\Donet\C#_Server\Server\Server\obj\Debug\net8.0\Server.GeneratedMSBuildEditorConfig.editorconfig
 D:\GitHub\Donet\C#_Server\Server\Server\obj\Debug\net8.0\Server.AssemblyInfoInputs.cache
@@ -15,5 +17,3 @@ D:\GitHub\Donet\C#_Server\Server\Server\obj\Debug\net8.0\refint\Server.dll
 D:\GitHub\Donet\C#_Server\Server\Server\obj\Debug\net8.0\Server.pdb
 D:\GitHub\Donet\C#_Server\Server\Server\obj\Debug\net8.0\Server.genruntimeconfig.cache
 D:\GitHub\Donet\C#_Server\Server\Server\obj\Debug\net8.0\ref\Server.dll
-D:\GitHub\Donet\C#_Server\Server\Server\bin\Debug\net8.0\Donet.dll
-D:\GitHub\Donet\C#_Server\Server\Server\bin\Debug\net8.0\Donet.pdb
