@@ -5,10 +5,6 @@ VisualStudioVersion = 17.9.34622.214
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Donet", "Donet\Donet.csproj", "{7FC3F540-7552-41FA-844C-C10F09039BB9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Server", "Server\Server.csproj", "{9183018C-0C24-4A65-88F0-DA25EE707C2F}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Client", "Client\Client.csproj", "{2360C401-D72E-4EE2-88EA-0EA2D95DBC6D}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -19,14 +15,6 @@ Global
 		{7FC3F540-7552-41FA-844C-C10F09039BB9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7FC3F540-7552-41FA-844C-C10F09039BB9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7FC3F540-7552-41FA-844C-C10F09039BB9}.Release|Any CPU.Build.0 = Release|Any CPU
-		{9183018C-0C24-4A65-88F0-DA25EE707C2F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{9183018C-0C24-4A65-88F0-DA25EE707C2F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{9183018C-0C24-4A65-88F0-DA25EE707C2F}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{9183018C-0C24-4A65-88F0-DA25EE707C2F}.Release|Any CPU.Build.0 = Release|Any CPU
-		{2360C401-D72E-4EE2-88EA-0EA2D95DBC6D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{2360C401-D72E-4EE2-88EA-0EA2D95DBC6D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{2360C401-D72E-4EE2-88EA-0EA2D95DBC6D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{2360C401-D72E-4EE2-88EA-0EA2D95DBC6D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
