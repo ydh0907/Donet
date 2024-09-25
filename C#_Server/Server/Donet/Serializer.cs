@@ -12,7 +12,7 @@ namespace Donet
 
     public interface INetworkSerializable
     {
-        public abstract void Serialize(Serializer serializer); // return write count
+        public abstract void Serialize(Serializer serializer);
     }
 
     public class Serializer

@@ -1,4 +1,5 @@
 ﻿using System;
+using Donet.Tcp;
 
 namespace Donet
 {
@@ -29,6 +30,6 @@ namespace Donet
         }
 
         public abstract void OnSerialize(Serializer serializer); // use serializer for easy serialize
-        public abstract void OnReceived(Session session);
+        public abstract void OnReceived(TcpSession session);
     }
 }
