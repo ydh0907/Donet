@@ -1,0 +1,137 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "D:\\GitHub\\Donet\\C#_ASP\\ASP_Learn\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{02F894DB-ED0E-4966-B109-DF315527C69C}|ASP_Project\\ASP_Project.csproj|d:\\github\\donet\\c#_asp\\asp_learn\\asp_project\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{02F894DB-ED0E-4966-B109-DF315527C69C}|ASP_Project\\ASP_Project.csproj|solutionrelative:asp_project\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{02F894DB-ED0E-4966-B109-DF315527C69C}|ASP_Project\\ASP_Project.csproj|d:\\github\\donet\\c#_asp\\asp_learn\\asp_project\\asp_project.http||{5703B403-55E7-4C63-8C88-A8F52C7A45C5}",
+      "RelativeMoniker": "D:0:0:{02F894DB-ED0E-4966-B109-DF315527C69C}|ASP_Project\\ASP_Project.csproj|solutionrelative:asp_project\\asp_project.http||{5703B403-55E7-4C63-8C88-A8F52C7A45C5}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{02F894DB-ED0E-4966-B109-DF315527C69C}|ASP_Project\\ASP_Project.csproj|d:\\github\\donet\\c#_asp\\asp_learn\\asp_project\\todoitemdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{02F894DB-ED0E-4966-B109-DF315527C69C}|ASP_Project\\ASP_Project.csproj|solutionrelative:asp_project\\todoitemdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{02F894DB-ED0E-4966-B109-DF315527C69C}|ASP_Project\\ASP_Project.csproj|d:\\github\\donet\\c#_asp\\asp_learn\\asp_project\\tododb.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{02F894DB-ED0E-4966-B109-DF315527C69C}|ASP_Project\\ASP_Project.csproj|solutionrelative:asp_project\\tododb.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{02F894DB-ED0E-4966-B109-DF315527C69C}|ASP_Project\\ASP_Project.csproj|d:\\github\\donet\\c#_asp\\asp_learn\\asp_project\\todo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{02F894DB-ED0E-4966-B109-DF315527C69C}|ASP_Project\\ASP_Project.csproj|solutionrelative:asp_project\\todo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 6,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:2:0:{e8034f19-ab72-4f06-83fd-f6832b41aa63}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{eefa5220-e298-11d0-8f78-00a0c9110057}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{d78612c7-9962-4b83-95d9-268046dad23a}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{34e76e81-ee4a-11d0-ae2e-00a0c90fffc3}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "TodoItemDTO.cs",
+              "DocumentMoniker": "D:\\GitHub\\Donet\\C#_ASP\\ASP_Learn\\ASP_Project\\TodoItemDTO.cs",
+              "RelativeDocumentMoniker": "ASP_Project\\TodoItemDTO.cs",
+              "ToolTip": "D:\\GitHub\\Donet\\C#_ASP\\ASP_Learn\\ASP_Project\\TodoItemDTO.cs",
+              "RelativeToolTip": "ASP_Project\\TodoItemDTO.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAkAAAAjAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-01T08:32:33.153Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "ASP_Project.http",
+              "DocumentMoniker": "D:\\GitHub\\Donet\\C#_ASP\\ASP_Learn\\ASP_Project\\ASP_Project.http",
+              "RelativeDocumentMoniker": "ASP_Project\\ASP_Project.http",
+              "ToolTip": "D:\\GitHub\\Donet\\C#_ASP\\ASP_Learn\\ASP_Project\\ASP_Project.http",
+              "RelativeToolTip": "ASP_Project\\ASP_Project.http",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAIAAAACAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003502|",
+              "WhenOpened": "2024-09-30T01:24:58.316Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Program.cs",
+              "DocumentMoniker": "D:\\GitHub\\Donet\\C#_ASP\\ASP_Learn\\ASP_Project\\Program.cs",
+              "RelativeDocumentMoniker": "ASP_Project\\Program.cs",
+              "ToolTip": "D:\\GitHub\\Donet\\C#_ASP\\ASP_Learn\\ASP_Project\\Program.cs",
+              "RelativeToolTip": "ASP_Project\\Program.cs",
+              "ViewState": "AQIAAAMAAAAAAAAAAAAAAAsAAAArAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-09-29T23:48:26.583Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "TodoDb.cs",
+              "DocumentMoniker": "D:\\GitHub\\Donet\\C#_ASP\\ASP_Learn\\ASP_Project\\TodoDb.cs",
+              "RelativeDocumentMoniker": "ASP_Project\\TodoDb.cs",
+              "ToolTip": "D:\\GitHub\\Donet\\C#_ASP\\ASP_Learn\\ASP_Project\\TodoDb.cs",
+              "RelativeToolTip": "ASP_Project\\TodoDb.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAkAAAABAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-09-29T23:54:52.176Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Todo.cs",
+              "DocumentMoniker": "D:\\GitHub\\Donet\\C#_ASP\\ASP_Learn\\ASP_Project\\Todo.cs",
+              "RelativeDocumentMoniker": "ASP_Project\\Todo.cs",
+              "ToolTip": "D:\\GitHub\\Donet\\C#_ASP\\ASP_Learn\\ASP_Project\\Todo.cs",
+              "RelativeToolTip": "ASP_Project\\Todo.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAUAAAApAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-09-29T23:54:12.741Z"
+            }
+          ]
+        },
+        {
+          "DockedWidth": 204,
+          "SelectedChildIndex": -1,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
+            }
+          ]
+        },
+        {
+          "DockedWidth": 204,
+          "SelectedChildIndex": -1,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{004be353-6879-467c-9d1e-9ac23cdf6d49}"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

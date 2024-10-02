@@ -11,6 +11,8 @@ namespace ChatClient
         TcpClient clientSocket = new TcpClient();
         NetworkStream stream = default;
         string readData = null;
+        bool isRunning = false;
+        object locker = new object();
 
         public Form1()
         {
@@ -19,7 +21,7 @@ namespace ChatClient
 
         private void Msg()
         {
-            textBox2.Text += $"{Environment.NewLine}>> {readData}";
+            textBox2.AppendText($"{Environment.NewLine}>> {readData}");
         }
 
         private void connect_Click(object sender, System.EventArgs e)
@@ -33,13 +35,37 @@ namespace ChatClient
             stream.Write(outStream, 0, outStream.Length);
             stream.Flush();
 
+            isRunning = true;
             Thread ctThread = new Thread(GetMessage);
             ctThread.Start();
         }
 
         private void GetMessage()
         {
-
+            byte[] buffer = new byte[1024];
+            string message = string.Empty;
+            try
+            {
+                while (isRunning)
+                {
+                    int numBytesRead;
+                    while (stream.DataAvailable)
+                    {
+                        numBytesRead = stream.Read(buffer, 0, buffer.Length);
+                        message = Encoding.UTF8.GetString(buffer, 0, numBytesRead);
+                        lock (locker)
+                        {
+                            readData = message;
+                            Msg();
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                isRunning = false;
+                message = ex.Message;
+            }
         }
 
         private void send_Click(object sender, System.EventArgs e)
@@ -48,6 +74,12 @@ namespace ChatClient
             stream.Write(outStream, 0, outStream.Length);
             stream.Flush();
             textBox3.Clear();
+        }
+
+        private void Form1_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            isRunning = false;
+            stream.Close();
         }
     }
 }

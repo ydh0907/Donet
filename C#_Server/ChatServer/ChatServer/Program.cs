@@ -166,7 +166,7 @@ namespace ChatServer
                         userName = data.Substring(0, idx);
                         Program.AddUser(userName);
                     }
-                    else if (idx > 1)
+                    else if (idx > 0)
                     {
                         data = data.Substring(0, data.Length - 1);
                         Console.WriteLine(userName + " : " + data);
