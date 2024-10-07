@@ -4,9 +4,16 @@ namespace Donet.Tcp
 {
     public abstract class TcpPacketSession : TcpSession
     {
+        public TcpPacketSession(int sendBufferSize = 1024)
+        {
+            this.sendBufferSize = sendBufferSize;
+        }
+
+        private readonly int sendBufferSize;
+
         public void SendPacket(Packet packet)
         {
-            ArraySegment<byte> buffer = SendBuffer.UniqueBuffer.Open(1024);
+            ArraySegment<byte> buffer = SendBuffer.UniqueBuffer.Open(sendBufferSize);
             int size = packet.Serialize(buffer);
             buffer = SendBuffer.UniqueBuffer.Close(size);
             Send(buffer);

@@ -11,16 +11,17 @@ namespace Donet.Udp
         private Socket socket;
         private EndPoint remoteEndPoint;
         private int connected = 0;
+
         public Socket Socket => socket;
         public EndPoint RemoteEndPoint => remoteEndPoint;
         public bool Connected => connected == 1;
 
-        private SocketAsyncEventArgs recvArgs;
+        private SocketAsyncEventArgs recvArgs = new SocketAsyncEventArgs();
         private ReceiveBuffer receiver;
 
-        private SocketAsyncEventArgs sendArgs;
-        private Queue<ArraySegment<byte>> sendQueue;
-        private List<ArraySegment<byte>> pendingList;
+        private SocketAsyncEventArgs sendArgs = new SocketAsyncEventArgs();
+        private Queue<ArraySegment<byte>> sendQueue = new Queue<ArraySegment<byte>>();
+        private List<ArraySegment<byte>> pendingList = new List<ArraySegment<byte>>();
         private object locker = new object();
 
         public abstract void OnConnected(EndPoint endPoint);
@@ -28,23 +29,17 @@ namespace Donet.Udp
         public abstract void OnReceive(ArraySegment<byte> buffer);
         public abstract void OnSend(int transferred);
 
-        public void Initialize(Socket socket, EndPoint remoteEndPoint, int receiveBufferSize = 16384)
+        public UdpSession(EndPoint bindingPoint, int receiveBufferSize = 16384)
         {
-            if (Interlocked.Exchange(ref connected, 1) == 1)
-                return;
+            socket = new Socket(bindingPoint.AddressFamily, SocketType.Dgram, ProtocolType.Udp);
+            socket.Bind(bindingPoint);
 
-            this.socket = socket;
-            this.remoteEndPoint = remoteEndPoint;
-
-            recvArgs = new SocketAsyncEventArgs();
             receiver = new ReceiveBuffer(receiveBufferSize);
-            recvArgs.Completed += ReceiveHandler;
-            RegisterReceive();
         }
 
-        public void SetEndPoint(EndPoint remoteEndPoint)
+        public void Connect()
         {
-            this.remoteEndPoint = remoteEndPoint;
+
         }
 
         public void Disconnect()
@@ -52,22 +47,8 @@ namespace Donet.Udp
             if (Interlocked.Exchange(ref connected, 0) == 0)
                 return;
 
+            socket.Shutdown(SocketShutdown.Both);
+            socket.Close();
         }
-
-        #region Receive
-
-        private void RegisterReceive()
-        {
-            if (Interlocked.CompareExchange(ref connected, 0, 0) == 0)
-                return;
-        }
-
-        private void ReceiveHandler(object? sender, SocketAsyncEventArgs args)
-        {
-            if (Interlocked.CompareExchange(ref connected, 0, 0) == 0)
-                return;
-        }
-
-        #endregion
     }
 }

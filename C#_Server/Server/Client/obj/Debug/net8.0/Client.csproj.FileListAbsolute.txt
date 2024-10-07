@@ -1,0 +1,15 @@
+D:\GitHub\Donet\C#_Server\Server\Client\bin\Debug\net8.0\Client.exe
+D:\GitHub\Donet\C#_Server\Server\Client\bin\Debug\net8.0\Client.deps.json
+D:\GitHub\Donet\C#_Server\Server\Client\bin\Debug\net8.0\Client.runtimeconfig.json
+D:\GitHub\Donet\C#_Server\Server\Client\bin\Debug\net8.0\Client.dll
+D:\GitHub\Donet\C#_Server\Server\Client\bin\Debug\net8.0\Client.pdb
+D:\GitHub\Donet\C#_Server\Server\Client\obj\Debug\net8.0\Client.GeneratedMSBuildEditorConfig.editorconfig
+D:\GitHub\Donet\C#_Server\Server\Client\obj\Debug\net8.0\Client.AssemblyInfoInputs.cache
+D:\GitHub\Donet\C#_Server\Server\Client\obj\Debug\net8.0\Client.AssemblyInfo.cs
+D:\GitHub\Donet\C#_Server\Server\Client\obj\Debug\net8.0\Client.csproj.CoreCompileInputs.cache
+D:\GitHub\Donet\C#_Server\Server\Client\obj\Debug\net8.0\Client.sourcelink.json
+D:\GitHub\Donet\C#_Server\Server\Client\obj\Debug\net8.0\Client.dll
+D:\GitHub\Donet\C#_Server\Server\Client\obj\Debug\net8.0\refint\Client.dll
+D:\GitHub\Donet\C#_Server\Server\Client\obj\Debug\net8.0\Client.pdb
+D:\GitHub\Donet\C#_Server\Server\Client\obj\Debug\net8.0\Client.genruntimeconfig.cache
+D:\GitHub\Donet\C#_Server\Server\Client\obj\Debug\net8.0\ref\Client.dll
