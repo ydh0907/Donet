@@ -1,0 +1,10 @@
+D:\GitHub\Donet\C#_Server\NetworkLearn\SendData\bin\Debug\SendData.exe.config
+D:\GitHub\Donet\C#_Server\NetworkLearn\SendData\bin\Debug\SendData.exe
+D:\GitHub\Donet\C#_Server\NetworkLearn\SendData\bin\Debug\SendData.pdb
+D:\GitHub\Donet\C#_Server\NetworkLearn\SendData\obj\Debug\SendData.csproj.AssemblyReference.cache
+D:\GitHub\Donet\C#_Server\NetworkLearn\SendData\obj\Debug\SendData.Form1.resources
+D:\GitHub\Donet\C#_Server\NetworkLearn\SendData\obj\Debug\SendData.Properties.Resources.resources
+D:\GitHub\Donet\C#_Server\NetworkLearn\SendData\obj\Debug\SendData.csproj.GenerateResource.cache
+D:\GitHub\Donet\C#_Server\NetworkLearn\SendData\obj\Debug\SendData.csproj.CoreCompileInputs.cache
+D:\GitHub\Donet\C#_Server\NetworkLearn\SendData\obj\Debug\SendData.exe
+D:\GitHub\Donet\C#_Server\NetworkLearn\SendData\obj\Debug\SendData.pdb
