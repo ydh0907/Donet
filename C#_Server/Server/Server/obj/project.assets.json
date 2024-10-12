@@ -13,9 +13,9 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\GitHub\\Donet\\C#_Server\\Server\\Server\\Server.csproj",
-      "projectName": "Server",
-      "projectPath": "D:\\GitHub\\Donet\\C#_Server\\Server\\Server\\Server.csproj",
+      "projectUniqueName": "D:\\GitHub\\Donet\\C#_Server\\Server\\Server\\Udp_Server.csproj",
+      "projectName": "Udp_Server",
+      "projectPath": "D:\\GitHub\\Donet\\C#_Server\\Server\\Server\\Udp_Server.csproj",
       "packagesPath": "C:\\Users\\user\\.nuget\\packages\\",
       "outputPath": "D:\\GitHub\\Donet\\C#_Server\\Server\\Server\\obj\\",
       "projectStyle": "PackageReference",

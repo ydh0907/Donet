@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "5ClrhdkBMj4=",
+  "dgSpecHash": "eHJMHFpAEXg=",
   "success": true,
-  "projectFilePath": "D:\\GitHub\\Donet\\C#_Server\\Server\\Client\\Client.csproj",
+  "projectFilePath": "D:\\GitHub\\Donet\\C#_Server\\Server\\Client\\Udp_Client.csproj",
   "expectedPackageFiles": [],
   "logs": []
 }

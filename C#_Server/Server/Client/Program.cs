@@ -22,7 +22,5 @@ namespace Client
                 Console.WriteLine(Encoding.UTF8.GetString(buffer, 0, size));
             }
         }
-
-        static async void 
     }
 }

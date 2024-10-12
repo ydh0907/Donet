@@ -6,7 +6,7 @@ namespace Donet
 {
     public static class PacketFactory
     {
-        private static Dictionary<string, ushort> packetDictionary = new Dictionary<string, ushort>();
+        private static Dictionary<Type, ushort> packetDictionary = new Dictionary<Type, ushort>();
         private static Dictionary<ushort, Func<Packet>> packetFactory = new Dictionary<ushort, Func<Packet>>();
 
         private static ushort nextID = 0;
@@ -40,8 +40,8 @@ namespace Donet
                     ushort id = NextID;
                     Type type = packet.GetType();
 
-                    packetDictionary.Add(typeEnum.ToString(), id);
-                    packetFactory.Add(id, () => Activator.CreateInstance(type) as Packet);
+                    packetDictionary.Add(type, id);
+                    packetFactory.Add(id, () => packet.GetEmpty());
                 }
                 initialized = true;
                 return true;
@@ -55,7 +55,7 @@ namespace Donet
         public static ushort GetID(Type packet)
         {
             if (initialized)
-                return packetDictionary[packet.Name];
+                return packetDictionary[packet];
             else
                 return 0;
         }

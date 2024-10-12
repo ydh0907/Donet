@@ -3,16 +3,17 @@ using System.Collections.Generic;
 using System.Net;
 using System.Net.Sockets;
 using System.Threading;
+using System.Threading.Tasks;
 
 namespace Donet.Udp
 {
-    public abstract class UdpSession
+    public abstract class UdpSession : Session
     {
         private Socket socket;
         private EndPoint remoteEndPoint;
         private int connected = 0;
 
-        public Socket Socket => socket;
+        public override Socket Socket => socket;
         public EndPoint RemoteEndPoint => remoteEndPoint;
         public bool Connected => connected == 1;
 
@@ -24,22 +25,25 @@ namespace Donet.Udp
         private List<ArraySegment<byte>> pendingList = new List<ArraySegment<byte>>();
         private object locker = new object();
 
-        public abstract void OnConnected(EndPoint endPoint);
-        public abstract void OnDisconnected(EndPoint endPoint);
-        public abstract void OnReceive(ArraySegment<byte> buffer);
-        public abstract void OnSend(int transferred);
-
-        public UdpSession(EndPoint bindingPoint, int receiveBufferSize = 16384)
+        public UdpSession(EndPoint bindingPoint = null, int receiveBufferSize = 16384)
         {
             socket = new Socket(bindingPoint.AddressFamily, SocketType.Dgram, ProtocolType.Udp);
-            socket.Bind(bindingPoint);
+            if (bindingPoint != null)
+                socket.Bind(bindingPoint);
 
             receiver = new ReceiveBuffer(receiveBufferSize);
+
+            remoteEndPoint = null;
         }
 
-        public void Connect()
+        public async Task Connect(IPEndPoint remoteEndPoint, Action<UdpSession>? callback = null)
         {
+            if (Interlocked.Exchange(ref connected, 1) == 1 && this.remoteEndPoint != null)
+                return;
 
+            this.remoteEndPoint = remoteEndPoint;
+
+            await socket.ConnectAsync(remoteEndPoint);
         }
 
         public void Disconnect()
@@ -49,6 +53,8 @@ namespace Donet.Udp
 
             socket.Shutdown(SocketShutdown.Both);
             socket.Close();
+
+            remoteEndPoint = null;
         }
     }
 }

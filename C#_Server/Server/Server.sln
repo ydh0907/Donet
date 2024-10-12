@@ -5,9 +5,9 @@ VisualStudioVersion = 17.9.34622.214
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Donet", "Donet\Donet.csproj", "{7FC3F540-7552-41FA-844C-C10F09039BB9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Server", "Server\Server.csproj", "{DE0B2AF7-EBFE-4708-82D5-BF380DA38EB8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Udp_Server", "Server\Udp_Server.csproj", "{DE0B2AF7-EBFE-4708-82D5-BF380DA38EB8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Client", "Client\Client.csproj", "{269A8E04-80B5-4A24-B783-4218723A1587}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Udp_Client", "Client\Udp_Client.csproj", "{269A8E04-80B5-4A24-B783-4218723A1587}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -14,7 +14,7 @@ namespace Donet.Tcp
         public void SendPacket(Packet packet)
         {
             ArraySegment<byte> buffer = SendBuffer.UniqueBuffer.Open(sendBufferSize);
-            int size = packet.Serialize(buffer);
+            int size = PacketSerializer.Serialize(buffer, packet);
             buffer = SendBuffer.UniqueBuffer.Close(size);
             Send(buffer);
         }
@@ -23,7 +23,7 @@ namespace Donet.Tcp
         {
             ushort id = PacketFactory.ReadPacketID(buffer);
             Packet packet = PacketFactory.GetPacket(id);
-            if (packet.Deserialize(buffer))
+            if (PacketSerializer.Deserialize(buffer, packet))
             {
                 packet.OnReceived(this);
                 OnPacketReceived(packet);
