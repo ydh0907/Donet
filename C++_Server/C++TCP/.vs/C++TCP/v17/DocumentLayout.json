@@ -1,0 +1,90 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "D:\\GitHub\\Donet\\C\u002B\u002B_Server\\C\u002B\u002BTCP\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{861A6587-9497-48D6-992D-F8F9B6BF16FA}|Client\\Client.vcxproj|D:\\GitHub\\Donet\\C\u002B\u002B_Server\\C\u002B\u002BTCP\\Client\\Client.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{861A6587-9497-48D6-992D-F8F9B6BF16FA}|Client\\Client.vcxproj|solutionrelative:Client\\Client.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{81F20D6E-AFC6-444F-97F2-6C2DF6137CA7}|Server\\Server.vcxproj|D:\\GitHub\\Donet\\C\u002B\u002B_Server\\C\u002B\u002BTCP\\Server\\Server.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{81F20D6E-AFC6-444F-97F2-6C2DF6137CA7}|Server\\Server.vcxproj|solutionrelative:Server\\Server.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 197,
+          "SelectedChildIndex": 4,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:2:0:{e8034f19-ab72-4f06-83fd-f6832b41aa63}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{eefa5220-e298-11d0-8f78-00a0c9110057}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{d78612c7-9962-4b83-95d9-268046dad23a}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{34e76e81-ee4a-11d0-ae2e-00a0c90fffc3}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Client.cpp",
+              "DocumentMoniker": "D:\\GitHub\\Donet\\C\u002B\u002B_Server\\C\u002B\u002BTCP\\Client\\Client.cpp",
+              "RelativeDocumentMoniker": "Client\\Client.cpp",
+              "ToolTip": "D:\\GitHub\\Donet\\C\u002B\u002B_Server\\C\u002B\u002BTCP\\Client\\Client.cpp",
+              "RelativeToolTip": "Client\\Client.cpp",
+              "ViewState": "AQIAADkAAAAAAAAAAAAAAH4AAAAMAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2024-08-12T01:38:26.972Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Server.cpp",
+              "DocumentMoniker": "D:\\GitHub\\Donet\\C\u002B\u002B_Server\\C\u002B\u002BTCP\\Server\\Server.cpp",
+              "RelativeDocumentMoniker": "Server\\Server.cpp",
+              "ToolTip": "D:\\GitHub\\Donet\\C\u002B\u002B_Server\\C\u002B\u002BTCP\\Server\\Server.cpp",
+              "RelativeToolTip": "Server\\Server.cpp",
+              "ViewState": "AQIAAKsAAAAAAAAAAAAqwMMAAAACAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2024-08-12T01:25:15.425Z",
+              "EditorCaption": ""
+            }
+          ]
+        },
+        {
+          "DockedWidth": 204,
+          "SelectedChildIndex": -1,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
+            }
+          ]
+        },
+        {
+          "DockedWidth": 160,
+          "SelectedChildIndex": -1,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{004be353-6879-467c-9d1e-9ac23cdf6d49}"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
