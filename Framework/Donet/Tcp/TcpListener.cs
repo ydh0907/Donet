@@ -2,15 +2,15 @@
 using System.Net;
 using System.Net.Sockets;
 
-namespace Donet.Tcp
+namespace Donet.TCP
 {
-    public class TcpListener
+    public class TCPListener
     {
         private Socket listener;
-        private Func<TcpSession> factory;
-        private Action<TcpSession> callback;
+        private Func<TCPSession> factory;
+        private Action<TCPSession> callback;
 
-        public void Listen(IPEndPoint endPoint, Func<TcpSession> factory, Action<TcpSession> callback)
+        public void Listen(IPEndPoint endPoint, Func<TCPSession> factory, Action<TCPSession> callback)
         {
             this.factory = factory;
             this.callback = callback;
@@ -55,7 +55,7 @@ namespace Donet.Tcp
 
         private void InitializeSession(Socket client)
         {
-            TcpSession session = factory();
+            TCPSession session = factory();
             session.Initialize(client);
             callback?.Invoke(session);
         }

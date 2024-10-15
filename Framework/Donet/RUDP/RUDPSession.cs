@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Donet.Udp
 {
-    public abstract class UdpSession : Session
+    public abstract class RUDPSession : Session
     {
         private Socket socket;
         private EndPoint remoteEndPoint;
@@ -25,9 +25,10 @@ namespace Donet.Udp
         private List<ArraySegment<byte>> pendingList = new List<ArraySegment<byte>>();
         private object locker = new object();
 
-        public UdpSession(EndPoint bindingPoint = null, int receiveBufferSize = 16384)
+        public RUDPSession(AddressFamily addressFamily, EndPoint bindingPoint = null, int receiveBufferSize = 16384)
         {
-            socket = new Socket(bindingPoint.AddressFamily, SocketType.Dgram, ProtocolType.Udp);
+            socket = new Socket(addressFamily, SocketType.Dgram, ProtocolType.Udp);
+
             if (bindingPoint != null)
                 socket.Bind(bindingPoint);
 
@@ -36,7 +37,7 @@ namespace Donet.Udp
             remoteEndPoint = null;
         }
 
-        public async Task Connect(IPEndPoint remoteEndPoint, Action<UdpSession>? callback = null)
+        public async Task Connect(IPEndPoint remoteEndPoint, Action<RUDPSession>? callback = null)
         {
             if (Interlocked.Exchange(ref connected, 1) == 1 && this.remoteEndPoint != null)
                 return;

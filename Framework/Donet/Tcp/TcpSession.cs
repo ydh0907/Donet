@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Net.Sockets;
 using System.Threading;
 
-namespace Donet.Tcp
+namespace Donet.TCP
 {
-    public abstract class TcpSession : Session
+    public abstract class TCPSession : Session
     {
         private Socket socket;
         public Socket Socket => socket;

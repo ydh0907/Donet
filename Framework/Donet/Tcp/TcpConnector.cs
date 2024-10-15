@@ -2,14 +2,14 @@
 using System.Net;
 using System.Net.Sockets;
 
-namespace Donet.Tcp
+namespace Donet.TCP
 {
-    public class TcpConnector
+    public class TCPConnector
     {
-        private Func<TcpSession> factory;
-        private Action<TcpSession> callback;
+        private Func<TCPSession> factory;
+        private Action<TCPSession> callback;
 
-        public void Connect(IPEndPoint endPoint, Func<TcpSession> factory, Action<TcpSession> callback)
+        public void Connect(IPEndPoint endPoint, Func<TCPSession> factory, Action<TCPSession> callback)
         {
             this.factory = factory;
             this.callback = callback;
@@ -34,7 +34,7 @@ namespace Donet.Tcp
 
         private void OnConnectCompleted(object? sender, SocketAsyncEventArgs args)
         {
-            TcpSession session = factory();
+            TCPSession session = factory();
             session.Initialize(args.ConnectSocket);
             callback?.Invoke(session);
         }

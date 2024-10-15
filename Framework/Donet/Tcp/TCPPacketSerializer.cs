@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Threading;
 
-namespace Donet
+namespace Donet.TCP
 {
-    public static class PacketSerializer
+    public static class TCPPacketSerializer
     {
         private static ThreadLocal<Serializer> serializer = new ThreadLocal<Serializer>();
         public static Serializer Serializer => serializer.Value;
