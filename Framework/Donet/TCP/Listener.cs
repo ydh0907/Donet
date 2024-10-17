@@ -4,13 +4,13 @@ using System.Net.Sockets;
 
 namespace Donet.TCP
 {
-    public class TCPListener
+    public class Listener
     {
         private Socket listener;
-        private Func<TCPSession> factory;
-        private Action<TCPSession> callback;
+        private Func<Session> factory;
+        private Action<Session> callback;
 
-        public void Listen(IPEndPoint endPoint, Func<TCPSession> factory, Action<TCPSession> callback)
+        public void Listen(IPEndPoint endPoint, Func<Session> factory, Action<Session> callback)
         {
             this.factory = factory;
             this.callback = callback;
@@ -55,7 +55,7 @@ namespace Donet.TCP
 
         private void InitializeSession(Socket client)
         {
-            TCPSession session = factory();
+            Session session = factory();
             session.Initialize(client);
             callback?.Invoke(session);
         }

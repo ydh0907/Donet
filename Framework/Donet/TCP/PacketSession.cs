@@ -2,9 +2,9 @@
 
 namespace Donet.TCP
 {
-    public abstract class TCPPacketSession : TCPSession
+    public abstract class PacketSession : Session
     {
-        public TCPPacketSession(int sendBufferSize = 1024)
+        public PacketSession(int sendBufferSize = 1024)
         {
             this.sendBufferSize = sendBufferSize;
         }
@@ -14,7 +14,7 @@ namespace Donet.TCP
         public void SendPacket(Packet packet)
         {
             ArraySegment<byte> buffer = SendBuffer.UniqueBuffer.Open(sendBufferSize);
-            int size = TCPPacketSerializer.Serialize(buffer, packet);
+            int size = PacketSerializer.Serialize(buffer, packet);
             buffer = SendBuffer.UniqueBuffer.Close(size);
             Send(buffer);
         }
@@ -23,7 +23,7 @@ namespace Donet.TCP
         {
             ushort id = PacketFactory.ReadPacketID(buffer);
             Packet packet = PacketFactory.GetPacket(id);
-            if (TCPPacketSerializer.Deserialize(buffer, packet))
+            if (PacketSerializer.Deserialize(buffer, packet))
             {
                 packet.OnReceived(this);
                 OnPacketReceived(packet);

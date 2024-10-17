@@ -3,7 +3,7 @@ using System.Threading;
 
 namespace Donet.TCP
 {
-    public static class TCPPacketSerializer
+    public static class PacketSerializer
     {
         private static ThreadLocal<Serializer> serializer = new ThreadLocal<Serializer>();
         public static Serializer Serializer => serializer.Value;

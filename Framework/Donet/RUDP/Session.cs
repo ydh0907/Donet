@@ -5,9 +5,9 @@ using System.Net.Sockets;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Donet.Udp
+namespace Donet.RUDP
 {
-    public abstract class RUDPSession : Session
+    public abstract class Session : Donet.Session
     {
         private Socket socket;
         private EndPoint remoteEndPoint;
@@ -25,7 +25,7 @@ namespace Donet.Udp
         private List<ArraySegment<byte>> pendingList = new List<ArraySegment<byte>>();
         private object locker = new object();
 
-        public RUDPSession(AddressFamily addressFamily, EndPoint bindingPoint = null, int receiveBufferSize = 16384)
+        public Session(AddressFamily addressFamily, EndPoint bindingPoint = null, int receiveBufferSize = 16384)
         {
             socket = new Socket(addressFamily, SocketType.Dgram, ProtocolType.Udp);
 
@@ -37,7 +37,7 @@ namespace Donet.Udp
             remoteEndPoint = null;
         }
 
-        public async Task Connect(IPEndPoint remoteEndPoint, Action<RUDPSession>? callback = null)
+        public async Task Connect(IPEndPoint remoteEndPoint, Action<Session>? callback = null)
         {
             if (Interlocked.Exchange(ref connected, 1) == 1 && this.remoteEndPoint != null)
                 return;

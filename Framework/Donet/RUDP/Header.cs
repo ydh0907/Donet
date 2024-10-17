@@ -1,21 +1,23 @@
 ﻿using System;
 
-namespace Donet.Udp
+namespace Donet.RUDP
 {
     /// <summary>
     /// Write or Read RUDPHeader
     /// </summary>
-    public static class RUDPHeader
+
+    public static class Header
     {
-        /*         1 2 3
+        /*header
+                   1 2 3
         +---------------+
-        |N|S|A|R|F|     |
-        |U|Y|C|E|I| crc | 1byte
-        |L|N|K|S|N|     |
+        |s|f|s|r|s|a|c|n|
+        |u|i|e|e|e|c|o|u| 1byte
+        |c|n|q|c|n|c|n|l|
         +---------------+
-        |      crc      | 
-        +---------------+ 2byte
-        |      crc      |
+        |      crc      | 1byte
+        +---------------+
+        |   check sum   | 1byte
         +---------------+
         |    payload    | ~byte
         +---------------+
@@ -49,25 +51,17 @@ namespace Donet.Udp
         crc
         packet header crc   : 3bit
         if you send nul packet, check crc and bitflag is valid
-
-        trailer
-        crc or checksum     : 2byte
-        reverse calculate?
         */
 
-        private static byte nul = 0b10000000;
-        private static byte syn = 0b01000000;
-        private static byte ack = 0b00100000;
-        private static byte res = 0b00010000;
-        private static byte fin = 0b00001000;
+
 
         /// <summary>
         /// add header and return length
         /// error return -1
         /// </summary>
-        public static int AddHeader(ArraySegment<byte> buffer)
+        public static HeaderType AddHeader(ArraySegment<byte> buffer)
         {
-            return -1;
+            return HeaderType.Success | HeaderType.Accept;
         }
 
         /// <summary>
@@ -79,24 +73,6 @@ namespace Donet.Udp
             return -1;
         }
 
-        /// <summary>
-        /// Make CRC for one byte
-        /// payload : 5bit, key : 3bit
-        /// </summary>
-        static byte ByteCRC(byte crc, byte value)
-        {
-            while (value > 7)
-            {
-                byte left = 1;
-                byte temp = value;
-                while (temp > 1)
-                {
-                    temp >>= 1;
-                    left++;
-                }
-                value ^= (byte)(crc << (left - 4));
-            }
-            return value;
-        }
+
     }
 }

@@ -5,10 +5,10 @@ using System.Threading;
 
 namespace Donet.TCP
 {
-    public abstract class TCPSession : Session
+    public abstract class Session : Donet.Session
     {
         private Socket socket;
-        public Socket Socket => socket;
+        public override Socket Socket => socket;
         private int connected = 0;
         public bool Connected => connected == 1;
 

@@ -7,7 +7,7 @@ namespace Donet
     public static class PacketFactory
     {
         private static Dictionary<Type, ushort> packetDictionary = new Dictionary<Type, ushort>();
-        private static Dictionary<ushort, Func<Packet>> packetFactory = new Dictionary<ushort, Func<Packet>>();
+        private static Dictionary<ushort, Packet> packetFactory = new Dictionary<ushort, Packet>();
 
         private static ushort nextID = 0;
         private static ushort NextID => nextID++;
@@ -41,7 +41,7 @@ namespace Donet
                     Type type = packet.GetType();
 
                     packetDictionary.Add(type, id);
-                    packetFactory.Add(id, packet.GetEmpty);
+                    packetFactory.Add(id, Activator.CreateInstance(type) as Packet);
                 }
                 initialized = true;
                 return true;
@@ -62,7 +62,7 @@ namespace Donet
 
         public static Packet GetPacket(ushort id)
         {
-            return packetFactory[id]();
+            return packetFactory[id];
         }
 
         public static ushort ReadPacketID(ArraySegment<byte> buffer)

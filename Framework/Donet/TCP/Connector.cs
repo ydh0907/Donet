@@ -4,12 +4,12 @@ using System.Net.Sockets;
 
 namespace Donet.TCP
 {
-    public class TCPConnector
+    public class Connector
     {
-        private Func<TCPSession> factory;
-        private Action<TCPSession> callback;
+        private Func<Session> factory;
+        private Action<Session> callback;
 
-        public void Connect(IPEndPoint endPoint, Func<TCPSession> factory, Action<TCPSession> callback)
+        public void Connect(IPEndPoint endPoint, Func<Session> factory, Action<Session> callback)
         {
             this.factory = factory;
             this.callback = callback;
@@ -34,7 +34,7 @@ namespace Donet.TCP
 
         private void OnConnectCompleted(object? sender, SocketAsyncEventArgs args)
         {
-            TCPSession session = factory();
+            Session session = factory();
             session.Initialize(args.ConnectSocket);
             callback?.Invoke(session);
         }
