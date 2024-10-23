@@ -1,9 +1,20 @@
 ﻿namespace Donet.RUDP
 {
-    public struct HeaderState
+    public struct HeaderState : INetworkSerializable
     {
-        private readonly HeaderType state;
+        public int header;
+        public int length;
 
-        public bool Error => state == HeaderType.Error;
+        public HeaderState(HeaderType type, int readbyte)
+        {
+            header = (int)type;
+            length = readbyte;
+        }
+
+        public void Serialize(Serializer serializer)
+        {
+            serializer.SerializeValue(ref header);
+            serializer.SerializeValue(ref length);
+        }
     }
 }

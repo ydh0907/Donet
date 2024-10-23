@@ -5,23 +5,23 @@ namespace Donet.TCP
 {
     public static class PacketSerializer
     {
-        private static ThreadLocal<Serializer> serializer = new ThreadLocal<Serializer>();
-        public static Serializer Serializer => serializer.Value;
+        private static ThreadLocal<Serializer> localSerializer = new ThreadLocal<Serializer>();
+        private static Serializer serializer => localSerializer.Value;
 
         public static int Serialize(ArraySegment<byte> buffer, Packet packet)
         {
-            Serializer.Open(NetworkSerializeMode.Serialize, buffer);
-            packet.OnSerialize(Serializer);
-            Serializer.WriteID(PacketFactory.GetID(packet.GetType()), buffer);
-            Serializer.WriteSize(buffer);
-            return Serializer.Success ? Serializer.Close() : -1;
+            serializer.Open(NetworkSerializeMode.Serialize, buffer);
+            packet.OnSerialize(serializer);
+            serializer.WriteID(PacketFactory.GetID(packet.GetType()), buffer);
+            serializer.WriteSize(buffer);
+            return serializer.Success ? serializer.Close() : -1;
         }
 
         public static bool Deserialize(ArraySegment<byte> buffer, Packet packet)
         {
-            Serializer.Open(NetworkSerializeMode.Deserialize, buffer);
-            packet.OnSerialize(Serializer);
-            return Serializer.Success && Serializer.Close() == buffer.Count;
+            serializer.Open(NetworkSerializeMode.Deserialize, buffer);
+            packet.OnSerialize(serializer);
+            return serializer.Success && serializer.Close() == buffer.Count;
         }
     }
 }

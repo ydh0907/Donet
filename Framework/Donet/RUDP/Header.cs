@@ -8,18 +8,18 @@ namespace Donet.RUDP
 
     public static class Header
     {
-        /*header
-                   1 2 3
+        /* header
+        
         +---------------+
-        |s|f|s|r|s|a|c|n|
-        |u|i|e|e|e|c|o|u| 1byte
-        |c|n|q|c|n|c|n|l|
+        |f|s|r|s|a|c|s|n|
+        |i|e|e|e|c|o|y|u| 1byte
+        |n|q|c|n|c|n|n|l|
         +---------------+
         |      crc      | 1byte
         +---------------+
         |   check sum   | 1byte
         +---------------+
-        |    payload    | ~byte
+        |  header info  | ~byte
         +---------------+
 
         nul
@@ -44,35 +44,24 @@ namespace Donet.RUDP
         fin
         2 way disconnect handshake : packet index
         |s----c| connection
-        |s -> c| send fin packet
+        |s -> c| send fin packet with packet index
         |s <- c| send ack packet with packet index
         |f    f| both side wait for packet arrive or fin
 
-        crc
-        packet header crc   : 3bit
-        if you send nul packet, check crc and bitflag is valid
         */
 
-
-
-        /// <summary>
         /// add header and return length
         /// error return -1
-        /// </summary>
-        public static HeaderType AddHeader(ArraySegment<byte> buffer)
+        public static HeaderState AddHeader(ArraySegment<byte> buffer, HeaderType type)
         {
-            return HeaderType.Success | HeaderType.Accept;
+
         }
 
-        /// <summary>
         /// read header and return length
         /// error return -1
-        /// </summary>
-        public static int ReadHeader(ArraySegment<byte> buffer)
+        public static HeaderState ReadHeader(ArraySegment<byte> buffer)
         {
-            return -1;
+
         }
-
-
     }
 }

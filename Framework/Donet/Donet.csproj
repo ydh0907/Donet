@@ -6,7 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="RUDP\Packet\" />
+    <Folder Include="RUDP\SystemPacket\" />
   </ItemGroup>
 
 </Project>

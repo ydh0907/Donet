@@ -1,11 +1,30 @@
 {
   "version": 3,
   "targets": {
-    "net8.0": {}
+    "net8.0": {
+      "Donet/1.0.0": {
+        "type": "project",
+        "framework": ".NETStandard,Version=v2.1",
+        "compile": {
+          "bin/placeholder/Donet.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Donet.dll": {}
+        }
+      }
+    }
   },
-  "libraries": {},
+  "libraries": {
+    "Donet/1.0.0": {
+      "type": "project",
+      "path": "../Donet/Donet.csproj",
+      "msbuildProject": "../Donet/Donet.csproj"
+    }
+  },
   "projectFileDependencyGroups": {
-    "net8.0": []
+    "net8.0": [
+      "Donet >= 1.0.0"
+    ]
   },
   "packageFolders": {
     "C:\\Users\\user\\.nuget\\packages\\": {}
@@ -34,7 +53,11 @@
       "frameworks": {
         "net8.0": {
           "targetAlias": "net8.0",
-          "projectReferences": {}
+          "projectReferences": {
+            "D:\\GitHub\\Donet\\Framework\\Donet\\Donet.csproj": {
+              "projectPath": "D:\\GitHub\\Donet\\Framework\\Donet\\Donet.csproj"
+            }
+          }
         }
       },
       "warningProperties": {

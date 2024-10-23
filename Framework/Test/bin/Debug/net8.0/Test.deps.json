@@ -7,14 +7,27 @@
   "targets": {
     ".NETCoreApp,Version=v8.0": {
       "Test/1.0.0": {
+        "dependencies": {
+          "Donet": "1.0.0"
+        },
         "runtime": {
           "Test.dll": {}
+        }
+      },
+      "Donet/1.0.0": {
+        "runtime": {
+          "Donet.dll": {}
         }
       }
     }
   },
   "libraries": {
     "Test/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Donet/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

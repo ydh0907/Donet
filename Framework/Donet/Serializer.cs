@@ -905,15 +905,15 @@ namespace Donet
             }
         }
 
-        public void WriteSize(ArraySegment<byte> buffer)
+        public void WriteSize(ArraySegment<byte> buffer, int offset = 0)
         {
-            bool success = BitConverter.TryWriteBytes(new Span<byte>(buffer.Array, buffer.Offset, sizeof(ushort)), offset);
+            bool success = BitConverter.TryWriteBytes(new Span<byte>(buffer.Array, buffer.Offset + offset, sizeof(ushort)), offset);
             if (!success)
                 error = true;
         }
-        public void WriteID(ushort id, ArraySegment<byte> buffer)
+        public void WriteID(ushort id, ArraySegment<byte> buffer, int offset = 2)
         {
-            bool success = BitConverter.TryWriteBytes(new Span<byte>(buffer.Array, buffer.Offset + sizeof(ushort), sizeof(ushort)), id);
+            bool success = BitConverter.TryWriteBytes(new Span<byte>(buffer.Array, buffer.Offset + offset, sizeof(ushort)), id);
             if (!success)
                 error = true;
         }
