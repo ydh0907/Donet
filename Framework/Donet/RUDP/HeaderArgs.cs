@@ -1,6 +1,7 @@
 ﻿namespace Donet.RUDP
 {
-    public struct HeaderArgs
+    public class HeaderArgs
     {
+        public int length = 0;
     }
 }

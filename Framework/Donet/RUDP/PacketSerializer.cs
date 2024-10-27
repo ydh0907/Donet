@@ -8,9 +8,13 @@ namespace Donet.RUDP
         private static ThreadLocal<Serializer> localSerializer = new ThreadLocal<Serializer>();
         private static Serializer serializer => localSerializer.Value;
 
-        public static HeaderArgs SerializePacket(ArraySegment<byte> buffer, Packet packet, HeaderType type = HeaderType.None, HeaderArgs args = default)
+        public static int SerializePacket(ArraySegment<byte> buffer, RUDPPacket packet)
         {
-            return args;
+            switch (packet.Type)
+            {
+
+            }
+            return -1;
         }
     }
 }
