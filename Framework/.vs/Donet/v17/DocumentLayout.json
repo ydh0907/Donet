@@ -7,8 +7,20 @@
       "RelativeMoniker": "D:0:0:{7FC3F540-7552-41FA-844C-C10F09039BB9}|Donet\\Donet.csproj|solutionrelative:donet\\rudp\\header.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
+      "AbsoluteMoniker": "D:0:0:{7FC3F540-7552-41FA-844C-C10F09039BB9}|Donet\\Donet.csproj|d:\\github\\donet\\framework\\donet\\rudp\\ipacket.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7FC3F540-7552-41FA-844C-C10F09039BB9}|Donet\\Donet.csproj|solutionrelative:donet\\rudp\\ipacket.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{7FC3F540-7552-41FA-844C-C10F09039BB9}|Donet\\Donet.csproj|d:\\github\\donet\\framework\\donet\\rudp\\headerstate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{7FC3F540-7552-41FA-844C-C10F09039BB9}|Donet\\Donet.csproj|solutionrelative:donet\\rudp\\headerstate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7FC3F540-7552-41FA-844C-C10F09039BB9}|Donet\\Donet.csproj|d:\\github\\donet\\framework\\donet\\rudp\\packetserializer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7FC3F540-7552-41FA-844C-C10F09039BB9}|Donet\\Donet.csproj|solutionrelative:donet\\rudp\\packetserializer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7FC3F540-7552-41FA-844C-C10F09039BB9}|Donet\\Donet.csproj|d:\\github\\donet\\framework\\donet\\tcp\\packetserializer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7FC3F540-7552-41FA-844C-C10F09039BB9}|Donet\\Donet.csproj|solutionrelative:donet\\tcp\\packetserializer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{7FC3F540-7552-41FA-844C-C10F09039BB9}|Donet\\Donet.csproj|d:\\github\\donet\\framework\\donet\\rudp\\session.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -22,8 +34,47 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 6,
+          "SelectedChildIndex": 9,
           "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "PacketSerializer.cs",
+              "DocumentMoniker": "D:\\GitHub\\Donet\\Framework\\Donet\\TCP\\PacketSerializer.cs",
+              "RelativeDocumentMoniker": "Donet\\TCP\\PacketSerializer.cs",
+              "ToolTip": "D:\\GitHub\\Donet\\Framework\\Donet\\TCP\\PacketSerializer.cs",
+              "RelativeToolTip": "Donet\\TCP\\PacketSerializer.cs",
+              "ViewState": "AQIAAAwAAAAAAAAAAAAYwBEAAAAJAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-28T16:40:52.832Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "PacketSerializer.cs",
+              "DocumentMoniker": "D:\\GitHub\\Donet\\Framework\\Donet\\RUDP\\PacketSerializer.cs",
+              "RelativeDocumentMoniker": "Donet\\RUDP\\PacketSerializer.cs",
+              "ToolTip": "D:\\GitHub\\Donet\\Framework\\Donet\\RUDP\\PacketSerializer.cs",
+              "RelativeToolTip": "Donet\\RUDP\\PacketSerializer.cs",
+              "ViewState": "AQIAAAUAAAAAAAAAAAAxwAwAAABEAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-28T16:34:55.366Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "Session.cs",
+              "DocumentMoniker": "D:\\GitHub\\Donet\\Framework\\Donet\\RUDP\\Session.cs",
+              "RelativeDocumentMoniker": "Donet\\RUDP\\Session.cs",
+              "ToolTip": "D:\\GitHub\\Donet\\Framework\\Donet\\RUDP\\Session.cs",
+              "RelativeToolTip": "Donet\\RUDP\\Session.cs",
+              "ViewState": "AQIAACgAAAAAAAAAAAAQwBEAAAAvAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-28T16:27:51.7Z",
+              "EditorCaption": ""
+            },
             {
               "$type": "Bookmark",
               "Name": "ST:2:0:{e8034f19-ab72-4f06-83fd-f6832b41aa63}"
@@ -43,27 +94,28 @@
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "HeaderState.cs",
-              "DocumentMoniker": "D:\\GitHub\\Donet\\Framework\\Donet\\RUDP\\HeaderState.cs",
-              "RelativeDocumentMoniker": "Donet\\RUDP\\HeaderState.cs",
-              "ToolTip": "D:\\GitHub\\Donet\\Framework\\Donet\\RUDP\\HeaderState.cs",
-              "RelativeToolTip": "Donet\\RUDP\\HeaderState.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA0AAAA0AAAA",
+              "Title": "IPacket.cs",
+              "DocumentMoniker": "D:\\GitHub\\Donet\\Framework\\Donet\\RUDP\\IPacket.cs",
+              "RelativeDocumentMoniker": "Donet\\RUDP\\IPacket.cs",
+              "ToolTip": "D:\\GitHub\\Donet\\Framework\\Donet\\RUDP\\IPacket.cs",
+              "RelativeToolTip": "Donet\\RUDP\\IPacket.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAIAAAAcAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-23T15:56:04.287Z",
+              "WhenOpened": "2024-10-28T16:22:51.159Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 2,
-              "Title": "Session.cs",
-              "DocumentMoniker": "D:\\GitHub\\Donet\\Framework\\Donet\\RUDP\\Session.cs",
-              "RelativeDocumentMoniker": "Donet\\RUDP\\Session.cs",
-              "ToolTip": "D:\\GitHub\\Donet\\Framework\\Donet\\RUDP\\Session.cs",
-              "RelativeToolTip": "Donet\\RUDP\\Session.cs",
-              "ViewState": "AQIAABAAAAAAAAAAAAAQwB4AAAAJAAAA",
+              "Title": "HeaderState.cs",
+              "DocumentMoniker": "D:\\GitHub\\Donet\\Framework\\Donet\\RUDP\\HeaderState.cs",
+              "RelativeDocumentMoniker": "Donet\\RUDP\\HeaderState.cs",
+              "ToolTip": "D:\\GitHub\\Donet\\Framework\\Donet\\RUDP\\HeaderState.cs",
+              "RelativeToolTip": "Donet\\RUDP\\HeaderState.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAQAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-17T15:42:11.133Z"
+              "WhenOpened": "2024-10-23T15:56:04.287Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -73,7 +125,7 @@
               "RelativeDocumentMoniker": "Donet\\RUDP\\Header.cs",
               "ToolTip": "D:\\GitHub\\Donet\\Framework\\Donet\\RUDP\\Header.cs",
               "RelativeToolTip": "Donet\\RUDP\\Header.cs",
-              "ViewState": "AQIAADIAAAAAAAAAAAAAwD4AAAAJAAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAADAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-10-15T06:27:47.492Z",
               "EditorCaption": ""

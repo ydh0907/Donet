@@ -1,14 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Net;
 using System.Net.Sockets;
 using System.Threading;
 
 namespace Donet.TCP
 {
-    public abstract class Session : Donet.Session
+    public abstract class Session
     {
         private Socket socket;
-        public override Socket Socket => socket;
+        public Socket Socket => socket;
         private int connected = 0;
         public bool Connected => connected == 1;
 
@@ -19,6 +20,11 @@ namespace Donet.TCP
         private Queue<ArraySegment<byte>> sendQueue;
         private List<ArraySegment<byte>> pendingList;
         private object locker = new object();
+
+        public abstract void OnConnected(EndPoint endPoint);
+        public abstract void OnReceive(ArraySegment<byte> buffer);
+        public abstract void OnSend(int transferred);
+        public abstract void OnDisconnected(EndPoint endPoint);
 
         public void Initialize(Socket socket, int receiveBufferSize = 16384)
         {

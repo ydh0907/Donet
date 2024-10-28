@@ -4,24 +4,24 @@ using System.Reflection;
 
 namespace Donet
 {
-    public static class PacketFactory
+    public static class PacketFactory<T>
     {
         private static Dictionary<Type, ushort> packetDictionary = new Dictionary<Type, ushort>();
-        private static Dictionary<ushort, Packet> packetFactory = new Dictionary<ushort, Packet>();
+        private static Dictionary<ushort, T> packetFactory = new Dictionary<ushort, T>();
 
         private static ushort nextID = 0;
         private static ushort NextID => nextID++;
 
         private static bool initialized = false;
 
-        public static bool InitializePacket<T>() where T : Enum
+        public static bool InitializePacket<E>() where E : Enum
         {
             if (initialized)
                 return true;
 
             try
             {
-                Type packetEnum = typeof(T);
+                Type packetEnum = typeof(E);
 
                 string space = packetEnum.Namespace;
                 if (!string.IsNullOrEmpty(space))
@@ -29,19 +29,17 @@ namespace Donet
 
                 Assembly assembly = Assembly.GetAssembly(packetEnum);
 
-                foreach (T typeEnum in Enum.GetValues(typeof(T)))
+                foreach (E typeEnum in Enum.GetValues(typeof(E)))
                 {
                     string typeName = $"{space}{typeEnum}";
-                    Packet packet = null;
 
-                    if (assembly != null)
-                        packet = assembly.CreateInstance(typeName) as Packet;
+                    T packet = (T)assembly.CreateInstance(typeName);
 
                     ushort id = NextID;
                     Type type = packet.GetType();
 
                     packetDictionary.Add(type, id);
-                    packetFactory.Add(id, Activator.CreateInstance(type) as Packet);
+                    packetFactory.Add(id, (T)Activator.CreateInstance(type));
                 }
                 initialized = true;
                 return true;
@@ -60,7 +58,7 @@ namespace Donet
                 return 0;
         }
 
-        public static Packet GetPacket(ushort id)
+        public static T GetPacket(ushort id)
         {
             return packetFactory[id];
         }

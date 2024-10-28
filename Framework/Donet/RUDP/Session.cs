@@ -10,7 +10,7 @@ namespace Donet.RUDP
     public abstract class Session
     {
         protected Socket socket;
-        private EndPoint? remoteEndPoint;
+        private IPEndPoint? remoteEndPoint;
         private int connected = 0;
 
         public Socket Socket => socket;
@@ -18,9 +18,9 @@ namespace Donet.RUDP
         public bool Connected => connected == 1;
 
         private ushort sendedIndex;
-        private Queue<Donet.Packet> sended;
+        private Queue<IPacket> sended;
 
-        public Session(AddressFamily addressFamily, EndPoint? bindingPoint = null, int receiveBufferSize = 16384)
+        public Session(AddressFamily addressFamily, IPEndPoint? bindingPoint = null, int receiveBufferSize = 16384)
         {
             socket = new Socket(addressFamily, SocketType.Dgram, ProtocolType.Udp);
 
