@@ -5,7 +5,17 @@ namespace Donet
 {
     public class SendBuffer
     {
-        public static int bufferSize = 262144;
+        private static object locker = new object();
+        private static int bufferSize = 16384;
+        public static int BufferSize
+        {
+            get => bufferSize;
+            set
+            {
+                lock (locker)
+                    bufferSize = value;
+            }
+        }
 
         public static SendBuffer UniqueBuffer
         {
