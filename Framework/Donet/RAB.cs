@@ -49,7 +49,7 @@ namespace Donet
         {
             lock (locker)
             {
-                return FindSegment(size); ;
+                return FindSegment(size);
             }
         }
         private ArraySegment<byte> FindSegment(int size)

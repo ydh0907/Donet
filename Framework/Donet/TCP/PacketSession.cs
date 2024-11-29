@@ -11,7 +11,7 @@ namespace Donet.TCP
 
         private readonly int sendBufferSize;
 
-        public void SendPacket(IPacket packet)
+        public void SendPacket(ISerializablePacket packet)
         {
             ArraySegment<byte> buffer = SendBuffer.UniqueBuffer.Open(sendBufferSize);
             int size = PacketSerializer.Serialize(buffer, packet);
@@ -21,8 +21,8 @@ namespace Donet.TCP
 
         public sealed override void OnReceive(ArraySegment<byte> buffer)
         {
-            ushort id = PacketFactory.ReadPacketID(buffer);
-            IPacket packet = PacketFactory.GetPacket(id);
+            ushort id = BitConverter.ToUInt16(buffer.Array, buffer.Offset);
+            ISerializablePacket packet = PacketFactory.GetPacket(id);
             if (PacketSerializer.Deserialize(buffer, packet))
             {
                 packet.OnReceived(this);
@@ -32,6 +32,6 @@ namespace Donet.TCP
                 Disconnect();
         }
 
-        public abstract void OnPacketReceived(IPacket packet);
+        public abstract void OnPacketReceived(ISerializablePacket packet);
     }
 }

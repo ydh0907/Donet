@@ -21,6 +21,8 @@ namespace Donet
         private ArraySegment<byte> buffer;
         private ushort offset;
         private bool error;
+
+        public ushort Offset => offset;
         public bool Success => !error;
 
         public void Open(NetworkSerializeMode mode, ArraySegment<byte> buffer, ushort offset = 4)
@@ -36,11 +38,20 @@ namespace Donet
             return offset;
         }
 
-        private void LogError<T>(T value, int size, string cause)
+        public bool SetOffset(ushort offset)
         {
-            Console.WriteLine($"[Serializer] Convert Failed... Mode : {mode}, Type : {value.GetType().Name}, Size : 1, Value : {value}, Space : {buffer.Count - offset}, Cause : {cause}");
+            if (offset >= buffer.Count)
+                return false;
+            this.offset = offset;
+            return true;
         }
 
+        private void LogError<T>(T value, int size, string cause)
+        {
+            Console.WriteLine($"[Serializer] Convert Failed... Mode : {mode}, Type : {value?.GetType().Name}, Size : 1, Value : {value}, Space : {buffer.Count - offset}, Cause : {cause}");
+        }
+
+        #region value
         public void SerializeValue<T>(ref T value) where T : INetworkSerializable
         {
             value.Serialize(this);
@@ -419,7 +430,8 @@ namespace Donet
                 LogError(value, size, ex.Message);
             }
         }
-
+        #endregion value
+        #region array
         public void SerializeArray<T>(ref T[] array) where T : INetworkSerializable, new()
         {
             ushort count = 0;
@@ -904,16 +916,18 @@ namespace Donet
                 }
             }
         }
+        #endregion
 
-        public void WriteSize(ArraySegment<byte> buffer, int offset = 0)
+        public void WriteUShort(ushort value, ArraySegment<byte> buffer, int offset = 0)
         {
-            bool success = BitConverter.TryWriteBytes(new Span<byte>(buffer.Array, buffer.Offset + offset, sizeof(ushort)), offset);
+            bool success = BitConverter.TryWriteBytes(new Span<byte>(buffer.Array, buffer.Offset + offset, sizeof(ushort)), value);
             if (!success)
                 error = true;
         }
-        public void WriteID(ushort id, ArraySegment<byte> buffer, int offset = 2)
+
+        public void WriteInt(int value, ArraySegment<byte> buffer, int offset = 0)
         {
-            bool success = BitConverter.TryWriteBytes(new Span<byte>(buffer.Array, buffer.Offset + offset, sizeof(ushort)), id);
+            bool success = BitConverter.TryWriteBytes(new Span<byte>(buffer.Array, buffer.Offset + offset, sizeof(ushort)), value);
             if (!success)
                 error = true;
         }

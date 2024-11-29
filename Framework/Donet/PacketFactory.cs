@@ -4,10 +4,10 @@ using System.Reflection;
 
 namespace Donet
 {
-    public static class PacketFactory<T>
+    public static class PacketFactory
     {
         private static Dictionary<Type, ushort> packetDictionary = new Dictionary<Type, ushort>();
-        private static Dictionary<ushort, T> packetFactory = new Dictionary<ushort, T>();
+        private static Dictionary<ushort, ISerializablePacket> packetFactory = new Dictionary<ushort, ISerializablePacket>();
 
         private static ushort nextID = 0;
         private static ushort NextID => nextID++;
@@ -33,13 +33,13 @@ namespace Donet
                 {
                     string typeName = $"{space}{typeEnum}";
 
-                    T packet = (T)assembly.CreateInstance(typeName);
+                    ISerializablePacket packet = (ISerializablePacket)assembly.CreateInstance(typeName);
 
                     ushort id = NextID;
                     Type type = packet.GetType();
 
                     packetDictionary.Add(type, id);
-                    packetFactory.Add(id, (T)Activator.CreateInstance(type));
+                    packetFactory.Add(id, (ISerializablePacket)Activator.CreateInstance(type));
                 }
                 initialized = true;
                 return true;
@@ -58,14 +58,9 @@ namespace Donet
                 return 0;
         }
 
-        public static T GetPacket(ushort id)
+        public static ISerializablePacket GetPacket(ushort id)
         {
             return packetFactory[id];
-        }
-
-        public static ushort ReadPacketID(ArraySegment<byte> buffer)
-        {
-            return BitConverter.ToUInt16(new ReadOnlySpan<byte>(buffer.Array, buffer.Offset + 2, sizeof(ushort)));
         }
     }
 }

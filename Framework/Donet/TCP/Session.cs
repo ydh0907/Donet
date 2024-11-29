@@ -6,7 +6,7 @@ using System.Threading;
 
 namespace Donet.TCP
 {
-    public abstract class Session
+    public abstract class Session : ISession
     {
         private Socket socket;
         public Socket Socket => socket;

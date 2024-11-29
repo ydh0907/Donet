@@ -8,16 +8,16 @@ namespace Donet.TCP
         private static ThreadLocal<Serializer> localSerializer = new ThreadLocal<Serializer>();
         private static Serializer serializer => localSerializer.Value;
 
-        public static int Serialize(ArraySegment<byte> buffer, IPacket packet)
+        public static int Serialize(ArraySegment<byte> buffer, ISerializablePacket packet)
         {
             serializer.Open(NetworkSerializeMode.Serialize, buffer);
             packet.OnSerialize(serializer);
-            serializer.WriteID(PacketFactory<IPacket>.GetID(packet.GetType()), buffer);
-            serializer.WriteSize(buffer);
+            serializer.WriteUShort(PacketFactory.GetID(packet.GetType()), buffer);
+            serializer.WriteUShort(serializer.Offset, buffer, sizeof(ushort));
             return serializer.Success ? serializer.Close() : -1;
         }
 
-        public static bool Deserialize(ArraySegment<byte> buffer, IPacket packet)
+        public static bool Deserialize(ArraySegment<byte> buffer, ISerializablePacket packet)
         {
             serializer.Open(NetworkSerializeMode.Deserialize, buffer);
             packet.OnSerialize(serializer);
