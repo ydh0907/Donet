@@ -72,7 +72,7 @@ void SocketServer::AcceptLoop()
 			cout << "[ACCEPT FAILED] : " << WSAGetLastError();
 			continue;
 		}
-		Session* session = new Session(this, client);
+		new Session(this, client);
 	}
 }
 

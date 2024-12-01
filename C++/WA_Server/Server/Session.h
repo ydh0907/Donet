@@ -2,6 +2,7 @@
 #include "config.h"
 
 class SocketServer;
+class Packet;
 
 class Session
 {
@@ -10,29 +11,18 @@ private:
 	SOCKET client;
 	thread sendThread;
 	thread receiveThread;
-private:
-	uint8_t* recvbuff;
-	uint8_t* sendbuff;
+	const char* recvbuff;
+	const char* sendbuff;
 public:
-	Session(SocketServer* server, SOCKET socket) {
-		this->server = server;
-		client = socket;
-		recvbuff = new uint8_t[recvBufLen];
-		sendbuff = new uint8_t[sendBufLen];
-	}
-	virtual ~Session() {
-		delete[] recvbuff;
-		delete[] sendbuff;
-		if (client != INVALID_SOCKET)
-			closesocket(client);
-	}
+	mutex sessionLock;
+public:
+	Session(SocketServer* server, SOCKET socket);
+	virtual ~Session();
 public:
 	void Initialize();
 	void Close();
+public:
+	void Send(Packet* packet);
 private:
-	void Send();
-	void RegisterReceive();
-	void HandleSend();
-	void RegisterReceive();
-	void HandleReceive();
+	void Receive();
 };

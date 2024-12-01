@@ -13,6 +13,7 @@ private:
 public:
 	bool IsListening() { return listening; }
 public:
+	mutex serverLock;
 	vector<Session*> sessions;
 public:
 	SocketServer() {
