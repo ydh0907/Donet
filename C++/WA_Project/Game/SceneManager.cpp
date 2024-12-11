@@ -29,6 +29,15 @@ void SceneManager::Render(HDC _hdc)
 	currentScene->Render(_hdc);
 }
 
+void SceneManager::Release()
+{
+	if (currentScene != nullptr)
+	{
+		currentScene->Release();
+		currentScene = nullptr;
+	}
+}
+
 void SceneManager::RegisterScene(const wstring& sceneName, std::shared_ptr<Scene> scene)
 {
 	if (sceneName.empty() || scene == nullptr)

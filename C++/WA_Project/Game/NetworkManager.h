@@ -17,12 +17,13 @@ public:
 	bool Connect();
 private:
 	WSAData data;
-	addrinfo* addr;
+	addrinfo* addr = nullptr;
 	addrinfo hints;
-	SOCKET socket;
-	Session session;
-	bool connected;
+	SOCKET socket = INVALID_SOCKET;
+	Session* session = nullptr;
+	bool connected = false;
 public:
-	Session GetSession() { return session; }
+	Session* GetSession() { return session; }
+	void SetSession(Session* session) { this->session = session; }
 	bool GetConnected() { return connected; }
 };

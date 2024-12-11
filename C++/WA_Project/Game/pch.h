@@ -1,15 +1,31 @@
 #pragma once
 
 // Network
-#pragma comment(lib, "Ws2_32.lib")
+#pragma comment (lib, "Ws2_32.lib")
 #include <WinSock2.h>
 #include <ws2tcpip.h>
+#include <thread>
+#include <mutex>
+
+#define port "19070"
+#define recvBufLen 512
+#define sendBufLen 128
+
+using std::thread;
+using std::atomic;
+using std::mutex;
+using std::lock;
+using std::this_thread::sleep_for;
+using std::chrono::milliseconds;
+
+typedef unsigned short ushort;
 
 // 각종 include
 #include<Windows.h>
 #include<tchar.h>
 #include<memory>
 #include<vector>
+#include<queue>
 #include<list>
 #include<map>
 #include<unordered_map>
@@ -34,6 +50,7 @@
 
 // 각종 using
 using std::vector;
+using std::queue;
 using std::map;
 using std::wstring;
 

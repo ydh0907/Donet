@@ -28,7 +28,7 @@ bool Core::Init(HWND _hwnd, std::wstring& message)
 	CreateGDI();
 
 	// Set Server Connection
-	NetworkManager* network = GET_SINGLE(NetworkManager);
+	NetworkManager* network = Single(NetworkManager);
 	if (!network->Initialize()) {
 		message = L"Network Initialize Failed...";
 		return false;
@@ -38,11 +38,14 @@ bool Core::Init(HWND _hwnd, std::wstring& message)
 		return false;
 	}
 
+	// Wait Auth
+	//while (!network->GetSession()->GetAuth());
+
 	// === Manager Init === 
-	GET_SINGLE(TimeManager)->Init();
-	GET_SINGLE(InputManager)->Init();
-	GET_SINGLE(ResourceManager)->Init();
-	GET_SINGLE(SceneManager)->Init();
+	Single(TimeManager)->Init();
+	Single(InputManager)->Init();
+	Single(ResourceManager)->Init();
+	Single(SceneManager)->Init();
 
 	return true;
 }
@@ -62,32 +65,34 @@ void Core::CleanUp()
 		DeleteObject(colorBrushs[i]);
 	}
 
-	GET_SINGLE(ResourceManager)->Release();
+	Single(ResourceManager)->Release();
+	Single(SceneManager)->Release();
+	Single(NetworkManager)->Close();
 }
 
 bool Core::GameLoop()
 {
 	MainUpdate();
 	MainRender();
-	GET_SINGLE(EventManager)->Update();
-	return GET_SINGLE(NetworkManager)->GetConnected();
+	Single(EventManager)->Update();
+	return Single(NetworkManager)->GetConnected();
 }
 
 void Core::MainUpdate()
 {
 	// === Manager Update === 
-	GET_SINGLE(TimeManager)->Update();
-	GET_SINGLE(InputManager)->Update();
-	GET_SINGLE(SceneManager)->Update();
-	GET_SINGLE(CollisionManager)->Update();
+	Single(TimeManager)->Update();
+	Single(InputManager)->Update();
+	Single(SceneManager)->Update();
+	Single(CollisionManager)->Update();
 }
 
 void Core::MainRender()
 {
 	// 1. clear
-	::PatBlt(hbackdc, 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, WHITENESS);
+	::PatBlt(hbackdc, 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, BLACKNESS);
 	// 2. Render
-	GET_SINGLE(SceneManager)->Render(hbackdc);
+	Single(SceneManager)->Render(hbackdc);
 	// 3. display
 	::BitBlt(hdc, 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT,
 		hbackdc, 0, 0, SRCCOPY);

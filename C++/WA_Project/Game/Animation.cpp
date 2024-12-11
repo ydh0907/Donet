@@ -23,7 +23,7 @@ void Animation::Update()
 		m_CurFrame = m_vecAnimFrame.size() - 1;
 		return;
 	}
-	m_fAccTime += fDT;
+	m_fAccTime += dt;
 	// 누적한 시간이 내가 이 프레임에 진행한 시간을 넘어섰냐?
 	if (m_fAccTime >= m_vecAnimFrame[m_CurFrame].fDuration)
 	{

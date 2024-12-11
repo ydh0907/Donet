@@ -1,12 +1,15 @@
 #pragma once
+
 class Scene;
+
 class SceneManager
 {
 	DECLARE_SINGLE(SceneManager);
 public:
-	void Init(); // start
+	void Init();
 	void Update();
 	void Render(HDC _hdc);
+	void Release();
 public:
 	void RegisterScene(const wstring& sceneName,
 		std::shared_ptr<Scene> scene);
@@ -17,10 +20,6 @@ public:
 		return currentScene;
 	}
 private:
-	// 씬들을 map으로 관리
 	map<wstring, std::shared_ptr<Scene>> sceneMap;
-	//Scene* m_pCurrentScene;
-	// 현재 씬
 	std::shared_ptr<Scene> currentScene;
 };
-

@@ -50,6 +50,18 @@
     <Filter Include="Engine\Core\Network">
       <UniqueIdentifier>{62574de1-6fee-439f-b5d7-51b99e9d9584}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Engine\Game\Packet">
+      <UniqueIdentifier>{52b2fd01-83ee-4385-99e0-031c96052b6b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Game\Component\InitializeScene">
+      <UniqueIdentifier>{19494902-4b42-429c-9dbd-6015de27536a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Game\Object\InitializeScene">
+      <UniqueIdentifier>{380fb597-cb0b-4aaa-8da4-6db04beb3b8d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Game\Component\Network">
+      <UniqueIdentifier>{ea89bb40-8b79-4c46-8cfd-37864f70fbc7}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="targetver.h">
@@ -136,6 +148,30 @@
     <ClInclude Include="Session.h">
       <Filter>Engine\Core\Network</Filter>
     </ClInclude>
+    <ClInclude Include="PacketFactory.h">
+      <Filter>Engine\Core\Network</Filter>
+    </ClInclude>
+    <ClInclude Include="PacketUtility.h">
+      <Filter>Engine\Core\Network</Filter>
+    </ClInclude>
+    <ClInclude Include="Packet.h">
+      <Filter>Engine\Core\Network</Filter>
+    </ClInclude>
+    <ClInclude Include="InitPacket.h">
+      <Filter>Engine\Game\Packet</Filter>
+    </ClInclude>
+    <ClInclude Include="Packets.h">
+      <Filter>Engine\Core\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="Button.h">
+      <Filter>Engine\Game\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="ImageButton.h">
+      <Filter>Engine\Game\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="MatchingPacket.h">
+      <Filter>Engine\Game\Packet</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ResourceManager.cpp">
@@ -201,6 +237,24 @@
     <ClCompile Include="Session.cpp">
       <Filter>Engine\Core\Network</Filter>
     </ClCompile>
+    <ClCompile Include="PacketFactory.cpp">
+      <Filter>Engine\Core\Network</Filter>
+    </ClCompile>
+    <ClCompile Include="InitPacket.cpp">
+      <Filter>Engine\Game\Packet</Filter>
+    </ClCompile>
+    <ClCompile Include="Button.cpp">
+      <Filter>Engine\Game\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="Vector2.cpp">
+      <Filter>Engine\Core\Header</Filter>
+    </ClCompile>
+    <ClCompile Include="ImageButton.cpp">
+      <Filter>Engine\Game\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="MatchingPacket.cpp">
+      <Filter>Engine\Game\Packet</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Game.rc">
@@ -217,5 +271,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram.cd" />
+    <None Include="ClassDiagram1.cd" />
   </ItemGroup>
 </Project>

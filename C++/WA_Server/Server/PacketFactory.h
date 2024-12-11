@@ -1,16 +1,15 @@
 #pragma once
 #include "config.h"
-#include "Packet.h"
+
+class Packet;
 
 static class PacketFactory
 {
 private:
-	static vector<uint16_t, void*> factory;
+	static vector<std::pair<ushort, Packet*>> factory;
 public:
-	template <class p>
-	static void RegisterPacket(uint16_t id) {
-		factory.push_back(id, []() {}));
-		if (std::is_base_of(Packet, p)) {
-		}
-	}
+	static void Initialize();
+	static void Clear();
+	static Packet* CreatePacket(ushort id);
+	static ushort GetMaxID();
 };

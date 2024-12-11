@@ -25,7 +25,7 @@ void Texture::Load(const wstring& _path)
 	m_hBit = (HBITMAP)::LoadImage(nullptr, _path.c_str(), IMAGE_BITMAP,
 		0,0, LR_CREATEDIBSECTION | LR_LOADFROMFILE);
 	assert(m_hBit); // nullptr이면 assert가 걸립니다.
-	m_hDC = ::CreateCompatibleDC(GET_SINGLE(Core)->GetMainDC());
+	m_hDC = ::CreateCompatibleDC(Single(Core)->GetMainDC());
 	::SelectObject(m_hDC, m_hBit);
 	::GetObject(m_hBit, sizeof(BITMAP), &m_bitInfo);
 	int a = 0;

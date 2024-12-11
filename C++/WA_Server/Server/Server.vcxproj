@@ -93,7 +93,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <PrecompiledHeader>Create</PrecompiledHeader>
+      <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>config.h</PrecompiledHeaderFile>
       <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
@@ -127,7 +127,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <PrecompiledHeader>Create</PrecompiledHeader>
+      <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>config.h</PrecompiledHeaderFile>
       <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
@@ -139,18 +139,37 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="GameSession.cpp" />
+    <ClCompile Include="GameEndPacket.cpp" />
+    <ClCompile Include="GameManager.cpp" />
+    <ClCompile Include="GameRoom.cpp" />
+    <ClCompile Include="GameStartPacket.cpp" />
+    <ClCompile Include="InitPacket.cpp" />
+    <ClCompile Include="MatchingPacket.cpp" />
+    <ClCompile Include="NetworkObject.cpp" />
+    <ClCompile Include="PacketFactory.cpp" />
     <ClCompile Include="SocketServer.cpp" />
     <ClCompile Include="Server.cpp" />
     <ClCompile Include="Session.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="config.h" />
-    <ClInclude Include="GameSession.h" />
+    <ClInclude Include="GameEndPacket.h" />
+    <ClInclude Include="GameManager.h" />
+    <ClInclude Include="GameRoom.h" />
+    <ClInclude Include="GameStartPacket.h" />
+    <ClInclude Include="InitPacket.h" />
+    <ClInclude Include="MatchingPacket.h" />
+    <ClInclude Include="netobject.h" />
+    <ClInclude Include="NetworkObject.h" />
     <ClInclude Include="Packet.h" />
     <ClInclude Include="PacketFactory.h" />
+    <ClInclude Include="Packets.h" />
+    <ClInclude Include="PacketUtility.h" />
     <ClInclude Include="SocketServer.h" />
     <ClInclude Include="Session.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ClassDiagram.cd" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

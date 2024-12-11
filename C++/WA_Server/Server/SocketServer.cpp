@@ -1,6 +1,9 @@
 #include "config.h"
 #include "SocketServer.h"
 #include "Session.h"
+#include "InitPacket.h"
+
+SocketServer* SocketServer::instance = nullptr;
 
 bool SocketServer::Initialize()
 {
@@ -62,6 +65,7 @@ int SocketServer::Listen()
 void SocketServer::StartAccept()
 {
 	acceptThread = thread(&SocketServer::AcceptLoop, this);
+	acceptThread.detach();
 }
 
 void SocketServer::AcceptLoop()

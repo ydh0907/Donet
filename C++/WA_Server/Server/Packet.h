@@ -1,11 +1,19 @@
 #pragma once
-#pragma pack(1)
 #include "config.h"
+#include "SocketServer.h"
+
+class Session;
 
 class Packet
 {
 public:
+	virtual ~Packet() {
+
+	}
+public:
+	virtual ushort GetPacketID() abstract;
 	virtual Packet* CreatePacket() abstract;
-	virtual int Serialize(const char* buf, int offset, int size) abstract;
-	virtual int Deserialize(const char* buf, int offset, int size) abstract;
+	virtual int Serialize(char* buf, int offset, int size) abstract;
+	virtual int Deserialize(char* buf, int offset, int size) abstract;
+	virtual void OnReceived(Session* session) abstract;
 };

@@ -9,19 +9,25 @@ private:
 	addrinfo* addr = nullptr;
 	SOCKET listener = INVALID_SOCKET;
 	thread acceptThread;
-	bool listening = false;
+	atomic<bool> listening = false;
 public:
-	bool IsListening() { return listening; }
+	bool IsListening() { return listening.load(); }
 public:
 	mutex serverLock;
 	vector<Session*> sessions;
+private:
+	static SocketServer* instance;
+public:
+	static SocketServer* Get() { return instance; }
 public:
 	SocketServer() {
 		SetWSA();
+		instance = this;
 	}
 	~SocketServer() {
+		instance = nullptr;
 		for (Session* session : sessions)
-			delete session;
+			session->Close();
 		sessions.clear();
 		WSACleanup();
 	}

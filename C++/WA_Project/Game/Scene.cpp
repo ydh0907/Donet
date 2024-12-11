@@ -63,5 +63,5 @@ void Scene::Release()
 		}
 		m_vecObj[i].clear();
 	}
-	GET_SINGLE(CollisionManager)->CheckReset();
+	Single(CollisionManager)->CheckReset();
 }

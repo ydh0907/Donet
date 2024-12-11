@@ -1,8 +1,12 @@
+#include "pch.h"
 #include "NetworkManager.h"
+#include "PacketFactory.h"
 
 bool NetworkManager::Initialize()
 {
+	PacketFactory::Initialize();
 	if (SetWSA() && SetAddr() && SetSocket()) {
+		connected = true;
 		return true;
 	}
 	Close();
@@ -13,6 +17,10 @@ void NetworkManager::Close()
 {
 	connected = false;
 
+	if (session != nullptr) {
+		session->Close();
+		session = nullptr;
+	}
 	if (socket != INVALID_SOCKET) {
 		int result = closesocket(socket);
 		if (result != 0)
@@ -22,6 +30,7 @@ void NetworkManager::Close()
 		freeaddrinfo(addr);
 	}
 
+	PacketFactory::Clear();
 	WSACleanup();
 }
 
@@ -62,12 +71,13 @@ bool NetworkManager::SetSocket()
 bool NetworkManager::Connect()
 {
 	int result = connect(socket, addr->ai_addr, addr->ai_addrlen);
-	if (result != 0) {
+	if (result == SOCKET_ERROR) {
+		cout << "[NETOWRK] : Connect Failed-" << WSAGetLastError() << endl;
 		Close();
 		return false;
 	}
 
-	session = Session();
+	session = new Session(this, socket);
 
 	return true;
 }

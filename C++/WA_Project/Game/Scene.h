@@ -19,6 +19,12 @@ public:
 	{
 		m_vecObj[(UINT)_type].push_back(_obj);
 	}
+	template<class T>
+	void AddObject(LAYER _type)
+	{
+		Object* _obj = new T;
+		m_vecObj[(UINT)_type].push_back(_obj);
+	}
 	const vector<Object*>& GetLayerObjects(LAYER _type)
 	{
 		return m_vecObj[(UINT)_type];

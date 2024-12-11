@@ -21,7 +21,7 @@ int BaseWindow::Run(HINSTANCE _hInst, LPWSTR _lpCmdline, int _CmdShow)
 	this->showWindow(_CmdShow);
 	this->updateWindow();
 	std::wstring message;
-	if (!GET_SINGLE(Core)->Init(m_hWnd, message)) {
+	if (!Single(Core)->Init(m_hWnd, message)) {
 		MessageBox(m_hWnd, message.c_str(), L"Error", MB_OK);
 		return -1;
 	}
@@ -65,7 +65,7 @@ ATOM BaseWindow::MyRegisterClass()
 	wcex.hCursor = LoadCursor(nullptr, IDC_ARROW);
 	wcex.hbrBackground = (HBRUSH)GetStockObject(BLACK_BRUSH);
 	wcex.lpszMenuName = nullptr;
-	wcex.lpszClassName = L"heedohee";
+	wcex.lpszClassName = L"Galaga";
 	wcex.hIconSm = LoadIcon(wcex.hInstance, MAKEINTRESOURCE(IDI_SMALL));
 
 	return RegisterClassExW(&wcex);
@@ -80,9 +80,9 @@ void BaseWindow::createWindow()
 	int Winposy = ResolutionY / 2 - SCREEN_HEIGHT / 2;
 
 	m_hWnd = CreateWindowW(
-		L"heedohee", // 윈도우 클래스 식별자
-		L"Game",   // 제목
-		WS_OVERLAPPEDWINDOW, // 윈도우 어떤 스타일로 만들것인가
+		L"Galaga", // 윈도우 클래스 식별자
+		L"Gulaga",   // 제목
+		WS_OVERLAPPED | WS_SYSMENU, // 윈도우 어떤 스타일로 만들것인가
 		Winposx,  // ★ 띄울 위치의 LEFT
 		Winposy,             // ★ 띄울 위치의 TOP
 		SCREEN_WIDTH,             // ★ 해상도X
@@ -125,14 +125,11 @@ int BaseWindow::MessageLoop()
 			TranslateMessage(&msg);
 			DispatchMessage(&msg);
 		}
-		else
-		{
-			if (!GET_SINGLE(Core)->GameLoop()) {
-				MessageBox(m_hWnd, L"Disconnected!", L"Error", MB_OK);
-				break;
-			}
+		if (!Single(Core)->GameLoop()) {
+			MessageBox(m_hWnd, L"Disconnected!", L"Error", MB_OK);
+			break;
 		}
 	}
-	GET_SINGLE(Core)->CleanUp();
+	Single(Core)->CleanUp();
 	return (int)msg.wParam;
 }
