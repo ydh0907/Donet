@@ -42,7 +42,7 @@ namespace Donet
         private RAB(int size)
         {
             buffer = new byte[size];
-            segments = new List<ArraySegment<byte>>(128);
+            segments = new List<ArraySegment<byte>>(256);
         }
 
         private ArraySegment<byte> Acquire(int size)

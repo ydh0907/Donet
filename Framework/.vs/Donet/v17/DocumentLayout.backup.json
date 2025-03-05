@@ -3,10 +3,6 @@
   "WorkspaceRootPath": "D:\\GitHub\\Donet\\Framework\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{7FC3F540-7552-41FA-844C-C10F09039BB9}|Donet\\Donet.csproj|d:\\github\\donet\\framework\\donet\\donet.csproj||{04B8AB82-A572-4FEF-95CE-5222444B6B64}|",
-      "RelativeMoniker": "D:0:0:{7FC3F540-7552-41FA-844C-C10F09039BB9}|Donet\\Donet.csproj|solutionrelative:donet\\donet.csproj||{04B8AB82-A572-4FEF-95CE-5222444B6B64}|"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{7FC3F540-7552-41FA-844C-C10F09039BB9}|Donet\\Donet.csproj|d:\\github\\donet\\framework\\donet\\iconnector.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{7FC3F540-7552-41FA-844C-C10F09039BB9}|Donet\\Donet.csproj|solutionrelative:donet\\iconnector.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -67,31 +63,19 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "Donet",
-              "DocumentMoniker": "D:\\GitHub\\Donet\\Framework\\Donet\\Donet.csproj",
-              "RelativeDocumentMoniker": "Donet\\Donet.csproj",
-              "ToolTip": "D:\\GitHub\\Donet\\Framework\\Donet\\Donet.csproj",
-              "RelativeToolTip": "Donet\\Donet.csproj",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
-              "WhenOpened": "2024-12-23T11:29:05.504Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
               "Title": "IConnector.cs",
               "DocumentMoniker": "D:\\GitHub\\Donet\\Framework\\Donet\\IConnector.cs",
               "RelativeDocumentMoniker": "Donet\\IConnector.cs",
               "ToolTip": "D:\\GitHub\\Donet\\Framework\\Donet\\IConnector.cs",
               "RelativeToolTip": "Donet\\IConnector.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAACHAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-12-23T11:21:53.333Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 1,
               "Title": "IListener.cs",
               "DocumentMoniker": "D:\\GitHub\\Donet\\Framework\\Donet\\IListener.cs",
               "RelativeDocumentMoniker": "Donet\\IListener.cs",
@@ -104,7 +88,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 4,
               "Title": "PacketFactory.cs",
               "DocumentMoniker": "D:\\GitHub\\Donet\\Framework\\Donet\\PacketFactory.cs",
               "RelativeDocumentMoniker": "Donet\\PacketFactory.cs",
@@ -117,7 +101,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 3,
               "Title": "ISession.cs",
               "DocumentMoniker": "D:\\GitHub\\Donet\\Framework\\Donet\\ISession.cs",
               "RelativeDocumentMoniker": "Donet\\ISession.cs",
@@ -130,7 +114,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 5,
               "Title": "RAB.cs",
               "DocumentMoniker": "D:\\GitHub\\Donet\\Framework\\Donet\\RAB.cs",
               "RelativeDocumentMoniker": "Donet\\RAB.cs",
@@ -143,7 +127,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 6,
               "Title": "ISerializablePacket.cs",
               "DocumentMoniker": "D:\\GitHub\\Donet\\Framework\\Donet\\ISerializablePacket.cs",
               "RelativeDocumentMoniker": "Donet\\ISerializablePacket.cs",
@@ -156,7 +140,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 2,
               "Title": "Serializer.cs",
               "DocumentMoniker": "D:\\GitHub\\Donet\\Framework\\Donet\\Serializer.cs",
               "RelativeDocumentMoniker": "Donet\\Serializer.cs",
