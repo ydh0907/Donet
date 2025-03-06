@@ -14,7 +14,7 @@ namespace Donet
 
     public interface INetworkSerializable
     {
-        public abstract void Serialize(Serializer serializer);
+        public abstract bool Serialize(Serializer serializer);
     }
 
     public static class LocalSerializer
@@ -36,12 +36,10 @@ namespace Donet
             this.buffer = buffer;
             this.offset = offset;
         }
-
         public int Close()
         {
             return offset;
         }
-
         public bool SetOffset(ushort offset)
         {
             if (offset >= buffer.Count)
@@ -49,31 +47,75 @@ namespace Donet
             this.offset = offset;
             return true;
         }
-
         private void LogError<T>(T value, int size, string cause)
         {
             Console.WriteLine($"[Serializer] Convert Failed... Mode : {mode}, Type : {value?.GetType().Name}, Size : {size}, Value : {value}, Space : {buffer.Count - offset}, Cause : {cause}");
         }
 
-        #region value
-        public void SerializeValue(ref INetworkSerializable value)
-        {
-            if (value == null)
-            {
-                LogError(value, -1, "value is null...");
-                return;
-            }
 
-            value.Serialize(this);
+        #region serializable
+        public bool SerializeSerializable<T>(ref T value) where T : INetworkSerializable
+        {
+            try
+            {
+                return value.Serialize(this);
+            }
+            catch (Exception ex)
+            {
+                LogError(value, -1, ex.Message);
+                return false;
+            }
         }
-        unsafe public void SerializeValue<T>(ref T value) where T : unmanaged
+        public bool SerializeSerializable<T>(ref T[] array) where T : INetworkSerializable
+        {
+            ushort count = 0;
+            if (mode == NetworkSerializeMode.Serialize)
+                count = (ushort)array.Length;
+            bool result = SerializeValue(ref count);
+
+            if (mode == NetworkSerializeMode.Deserialize)
+                array = new T[count];
+            for (int i = 0; i < count && result; i++)
+                result = SerializeSerializable(ref array[i]);
+            return result;
+        }
+        public bool SerializeSerializable<T>(ref List<T> list) where T : INetworkSerializable, new()
+        {
+            ushort count = 0;
+            if (mode == NetworkSerializeMode.Serialize)
+            {
+                count = (ushort)list.Count;
+                bool result = SerializeValue(ref count);
+                for (int i = 0; i < count && result; i++)
+                {
+                    T value = list[i];
+                    result = SerializeSerializable<T>(ref value);
+                }
+                return result;
+            }
+            else // Deserialize Mode
+            {
+                bool result = SerializeValue(ref count);
+                list = new List<T>(count);
+                for (int i = 0; i < count && result; i++)
+                {
+                    T value = new T();
+                    result = SerializeSerializable<T>(ref value);
+                    list[i] = value;
+                }
+                return result;
+            }
+        }
+        #endregion
+        #region value
+        unsafe public bool SerializeValue<T>(ref T value) where T : unmanaged
         {
             ushort size = (ushort)sizeof(T);
 
             if (buffer.Count - offset < size)
             {
                 LogError(value, size, "out of range...");
-                return;
+                return false;
             }
 
             try
@@ -83,63 +125,27 @@ namespace Donet
                 else if (mode == NetworkSerializeMode.Deserialize)
                     value = MemoryMarshal.Read<T>(new Span<byte>(buffer.Array, buffer.Offset + offset, size));
                 offset += size;
+                return true;
             }
             catch (Exception ex)
             {
                 LogError(value, size, ex.Message);
+                return false;
             }
         }
-        public void SerializeValue(ref string value)
-        {
-            if (value == null)
-                value = string.Empty;
-
-            ushort size = 0;
-            try
-            {
-                if (mode == NetworkSerializeMode.Serialize)
-                    size = (ushort)Encoding.Unicode.GetByteCount(value);
-                SerializeValue(ref size);
-
-                if (buffer.Count - offset < size)
-                {
-                    LogError(value, size, "out of range...");
-                    return;
-                }
-
-                if (mode == NetworkSerializeMode.Serialize)
-                {
-                    int written = Encoding.Unicode.GetBytes(value, new Span<byte>(buffer.Array, buffer.Offset + offset, buffer.Count - offset));
-                    if (written == size)
-                        offset += size;
-                    else
-                        LogError(value, size, "convert failed...");
-                }
-                else if (mode == NetworkSerializeMode.Deserialize)
-                {
-                    value = Encoding.Unicode.GetString(buffer.Array, buffer.Offset + offset, size);
-                    offset += size;
-                }
-            }
-            catch (Exception ex)
-            {
-                LogError(value, size, ex.Message);
-            }
-        }
-        #endregion value
-        #region array
-        public void SerializeArray<T>(ref T[] array) where T : unmanaged
+        public bool SerializeArray<T>(ref T[] array) where T : unmanaged
         {
             ushort count = 0;
             if (mode == NetworkSerializeMode.Serialize)
                 count = (ushort)array.Length;
 
-            SerializeValue(ref count);
+            bool result = SerializeValue(ref count);
 
             if (mode == NetworkSerializeMode.Deserialize)
                 array = new T[count];
-            for (int i = 0; i < count; i++)
-                SerializeValue(ref array[i]);
+            for (int i = 0; i < count && result; i++)
+                result = SerializeValue(ref array[i]);
+            return result;
         }
         public void SerializeList<T>(ref List<T> list) where T : unmanaged
         {
@@ -166,19 +172,63 @@ namespace Donet
                 }
             }
         }
-        public void SerializeArray(ref string[] array)
+        #endregion value
+        #region string
+        public bool SerializeValue(ref string value)
+        {
+            if (value == null)
+                value = string.Empty;
+
+            ushort size = 0;
+            try
+            {
+                if (mode == NetworkSerializeMode.Serialize)
+                    size = (ushort)Encoding.Unicode.GetByteCount(value);
+                SerializeValue(ref size);
+
+                if (buffer.Count - offset < size)
+                {
+                    LogError(value, size, "out of range...");
+                    return false;
+                }
+
+                if (mode == NetworkSerializeMode.Serialize)
+                {
+                    int written = Encoding.Unicode.GetBytes(value, new Span<byte>(buffer.Array, buffer.Offset + offset, size));
+                    if (written != size)
+                    {
+                        LogError(value, size, "convert failed...");
+                        return false;
+                    }
+                }
+                else if (mode == NetworkSerializeMode.Deserialize)
+                {
+                    value = Encoding.Unicode.GetString(buffer.Array, buffer.Offset + offset, size);
+                }
+                offset += size;
+                return true;
+            }
+            catch (Exception ex)
+            {
+                LogError(value, size, ex.Message);
+                return false;
+            }
+        }
+        public bool SerializeArray(ref string[] array)
         {
             ushort count = 0;
             if (mode == NetworkSerializeMode.Serialize)
                 count = (ushort)array.Length;
 
-            SerializeValue(ref count);
+            bool result = SerializeValue(ref count);
+
             if (mode == NetworkSerializeMode.Deserialize)
                 array = new string[count];
-            for (int i = 0; i < count; i++)
-                SerializeValue(ref array[i]);
+            for (int i = 0; i < count && result; i++)
+                result = SerializeValue(ref array[i]);
+            return result;
         }
-        public void SerializeList(ref List<string> list)
+        public void SerializeArray(ref List<string> list)
         {
             ushort count = 0;
             if (mode == NetworkSerializeMode.Serialize)
