@@ -284,9 +284,33 @@ namespace Donet
         }
         #endregion
 
-        public static bool WriteUShort(ushort value, ArraySegment<byte> buffer, int offset = 0)
+        public static int WriteUShort(ushort value, ArraySegment<byte> buffer, int offset = 0)
         {
-            return BitConverter.TryWriteBytes(new Span<byte>(buffer.Array, buffer.Offset + offset, sizeof(ushort)), value);
+            try
+            {
+                MemoryMarshal.Write(new Span<byte>(buffer.Array, buffer.Offset + offset, sizeof(ushort)), ref value);
+                return sizeof(ushort);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return -1;
+            }
+        }
+
+        public static int ReadUShort(out ushort value, ArraySegment<byte> buffer, int offset = 0)
+        {
+            try
+            {
+                value = MemoryMarshal.Read<ushort>(new Span<byte>(buffer.Array, buffer.Offset + offset, sizeof(ushort)));
+                return sizeof(ushort);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                value = 0;
+                return -1;
+            }
         }
     }
 }
