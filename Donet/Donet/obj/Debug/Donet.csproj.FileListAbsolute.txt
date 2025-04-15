@@ -1,0 +1,10 @@
+D:\GitHub\Donet\Donet\Build\Donet\Debug\Donet.deps.json
+D:\GitHub\Donet\Donet\Build\Donet\Debug\Donet.dll
+D:\GitHub\Donet\Donet\Build\Donet\Debug\Donet.pdb
+D:\GitHub\Donet\Donet\Donet\obj\Debug\Donet.GeneratedMSBuildEditorConfig.editorconfig
+D:\GitHub\Donet\Donet\Donet\obj\Debug\Donet.AssemblyInfoInputs.cache
+D:\GitHub\Donet\Donet\Donet\obj\Debug\Donet.AssemblyInfo.cs
+D:\GitHub\Donet\Donet\Donet\obj\Debug\Donet.csproj.CoreCompileInputs.cache
+D:\GitHub\Donet\Donet\Donet\obj\Debug\Donet.sourcelink.json
+D:\GitHub\Donet\Donet\Donet\obj\Debug\Donet.dll
+D:\GitHub\Donet\Donet\Donet\obj\Debug\Donet.pdb

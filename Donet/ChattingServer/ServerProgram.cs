@@ -9,10 +9,10 @@ namespace ChattingServer
             Logger.Initialize();
             MemoryPool.Initialize();
 
-
+            Logger.Log(LogLevel.Notify, "Utils Loaded");
 
             MemoryPool.Dispose();
-            Logger.Initialize();
+            Logger.Dispose();
         }
     }
 }

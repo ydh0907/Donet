@@ -1,0 +1,17 @@
+D:\GitHub\Donet\Donet\Build\Server\Debug\ChattingServer.exe
+D:\GitHub\Donet\Donet\Build\Server\Debug\ChattingServer.deps.json
+D:\GitHub\Donet\Donet\Build\Server\Debug\ChattingServer.runtimeconfig.json
+D:\GitHub\Donet\Donet\Build\Server\Debug\ChattingServer.dll
+D:\GitHub\Donet\Donet\Build\Server\Debug\ChattingServer.pdb
+D:\GitHub\Donet\Donet\ChattingServer\obj\Debug\ChattingServer.csproj.AssemblyReference.cache
+D:\GitHub\Donet\Donet\ChattingServer\obj\Debug\ChattingServer.GeneratedMSBuildEditorConfig.editorconfig
+D:\GitHub\Donet\Donet\ChattingServer\obj\Debug\ChattingServer.AssemblyInfoInputs.cache
+D:\GitHub\Donet\Donet\ChattingServer\obj\Debug\ChattingServer.AssemblyInfo.cs
+D:\GitHub\Donet\Donet\ChattingServer\obj\Debug\ChattingServer.csproj.CoreCompileInputs.cache
+D:\GitHub\Donet\Donet\ChattingServer\obj\Debug\ChattingServer.sourcelink.json
+D:\GitHub\Donet\Donet\ChattingServer\obj\Debug\Chatting.6ADAD46F.Up2Date
+D:\GitHub\Donet\Donet\ChattingServer\obj\Debug\ChattingServer.dll
+D:\GitHub\Donet\Donet\ChattingServer\obj\Debug\refint\ChattingServer.dll
+D:\GitHub\Donet\Donet\ChattingServer\obj\Debug\ChattingServer.pdb
+D:\GitHub\Donet\Donet\ChattingServer\obj\Debug\ChattingServer.genruntimeconfig.cache
+D:\GitHub\Donet\Donet\ChattingServer\obj\Debug\ref\ChattingServer.dll

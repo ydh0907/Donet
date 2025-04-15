@@ -1,13 +1,10 @@
-﻿namespace Donet.Utils
-{
-    public struct PacketHeader : INetworkSerializable
-    {
-        public ushort size;
-        public ushort type;
+﻿using Donet.Sessions;
 
-        public bool Serialize(Serializer serializer)
-        {
-            return serializer.Serialize(ref size) && serializer.Serialize(ref type);
-        }
+namespace Donet.Utils
+{
+    public interface IPacket : INetworkSerializable
+    {
+        public IPacket CreateInstance();
+        public void OnReceived(Session session);
     }
 }

@@ -1,0 +1,17 @@
+D:\GitHub\Donet\Donet\Build\Client\Debug\net8.0\ChattingClient.exe
+D:\GitHub\Donet\Donet\Build\Client\Debug\net8.0\ChattingClient.deps.json
+D:\GitHub\Donet\Donet\Build\Client\Debug\net8.0\ChattingClient.runtimeconfig.json
+D:\GitHub\Donet\Donet\Build\Client\Debug\net8.0\ChattingClient.dll
+D:\GitHub\Donet\Donet\Build\Client\Debug\net8.0\ChattingClient.pdb
+D:\GitHub\Donet\Donet\ChattingClient\obj\Debug\net8.0\ChattingClient.csproj.AssemblyReference.cache
+D:\GitHub\Donet\Donet\ChattingClient\obj\Debug\net8.0\ChattingClient.GeneratedMSBuildEditorConfig.editorconfig
+D:\GitHub\Donet\Donet\ChattingClient\obj\Debug\net8.0\ChattingClient.AssemblyInfoInputs.cache
+D:\GitHub\Donet\Donet\ChattingClient\obj\Debug\net8.0\ChattingClient.AssemblyInfo.cs
+D:\GitHub\Donet\Donet\ChattingClient\obj\Debug\net8.0\ChattingClient.csproj.CoreCompileInputs.cache
+D:\GitHub\Donet\Donet\ChattingClient\obj\Debug\net8.0\ChattingClient.sourcelink.json
+D:\GitHub\Donet\Donet\ChattingClient\obj\Debug\net8.0\Chatting.EBC37D54.Up2Date
+D:\GitHub\Donet\Donet\ChattingClient\obj\Debug\net8.0\ChattingClient.dll
+D:\GitHub\Donet\Donet\ChattingClient\obj\Debug\net8.0\refint\ChattingClient.dll
+D:\GitHub\Donet\Donet\ChattingClient\obj\Debug\net8.0\ChattingClient.pdb
+D:\GitHub\Donet\Donet\ChattingClient\obj\Debug\net8.0\ChattingClient.genruntimeconfig.cache
+D:\GitHub\Donet\Donet\ChattingClient\obj\Debug\net8.0\ref\ChattingClient.dll

@@ -1,17 +1,27 @@
-﻿using System;
-using System.Net.Sockets;
+﻿using System.Net.Sockets;
+using System.Threading.Tasks;
 
-namespace Donet.Session
+using Donet.Utils;
+
+namespace Donet.Sessions
 {
-    public delegate void PacketHandler(ReadOnlyMemory<byte> rawPacket);
+    public delegate void ReceiveHandle(PacketHeader header, IPacket packet);
 
     public class PacketReceiver
     {
-        private PacketHandler handler;
+        private Socket socket = null;
+        private ReceiveHandle handler = null;
 
-        public void Initialize(Socket socket, PacketHandler handler)
+        public void Initialize(Socket socket, ReceiveHandle handler)
         {
+            this.socket = socket;
             this.handler = handler;
+        }
+
+        public async ValueTask Dispose()
+        {
+            socket = null;
+            handler = null;
         }
     }
 }

@@ -5,11 +5,11 @@ namespace Donet.Utils
 {
     public class MemorySegment
     {
-        public readonly ReadOnlyMemory<byte> segment;
+        public readonly ArraySegment<byte> segment;
 
         public MemorySegment(byte[] buffer, int offset, int count)
         {
-            segment = new ReadOnlyMemory<byte>(buffer, offset, count);
+            segment = new ArraySegment<byte>(buffer, offset, count);
         }
     }
 
