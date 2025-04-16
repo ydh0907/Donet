@@ -1,0 +1,6 @@
+[Notify] [2025.4.16-20.28.40] [Client] connected to server.
+[Warning] [2025.4.16-20.28.43] [Session] packet sending failed please check connection
+[Notify] [2025.4.16-20.28.43] [Client] disconnected from server.
+[Warning] [2025.4.16-20.28.43] [Session] packet sending failed please check connection
+[Warning] [2025.4.16-20.28.43] ReceivePool Memory Segment Count Not Matched!
+[Warning] [2025.4.16-20.28.43] [Session] packet receiving failed please check connection

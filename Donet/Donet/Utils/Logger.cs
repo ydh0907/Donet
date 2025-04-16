@@ -26,14 +26,25 @@ namespace Donet.Utils
             instance = new Atomic<Logger>(new Logger());
             using var local = instance.Lock();
             local.Value.Create();
+
+            AppDomain.CurrentDomain.ProcessExit += HandleExit;
         }
 
         public static void Dispose()
         {
+            AppDomain.CurrentDomain.ProcessExit -= HandleExit;
+
             using var local = instance.Lock();
             local.Value.Delete();
             local.Set(null);
             instance = null;
+        }
+
+        private static void HandleExit(object sender, EventArgs evt)
+        {
+            Log(LogLevel.Error, "[Server] unexpected termination has been detected.");
+            using var local = instance.Lock();
+            local.Value.Save();
         }
 
         private string path = null;
@@ -61,7 +72,9 @@ namespace Donet.Utils
             int byteCount = Encoding.UTF8.GetByteCount(log);
             if (byteCount > logBuf.Length - pointer)
                 Save();
-
+#if DEBUG
+            Console.Write(log);
+#endif
             pointer += Encoding.UTF8.GetBytes(log, new Span<byte>(logBuf, pointer, byteCount));
         }
 

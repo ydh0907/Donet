@@ -1,4 +1,4 @@
-﻿namespace Donet.Utils
+﻿namespace Donet.Sessions
 {
     public class PacketSecurity
     {

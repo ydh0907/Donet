@@ -17,13 +17,6 @@ namespace Donet.Utils
         public void Serialize(Serializer serializer);
     }
 
-    public static class LocalSerializer
-    {
-        private static readonly ThreadLocal<Serializer> serializer = new ThreadLocal<Serializer>(() => new Serializer());
-        public static Serializer Serializer => serializer.Value;
-        public static void Dispose() => serializer.Dispose();
-    }
-
     public sealed class Serializer
     {
         private NetworkSerializeMode mode;
@@ -31,19 +24,19 @@ namespace Donet.Utils
         private ushort offset;
         private static readonly Encoding encoding = Encoding.Unicode;
 
+
         public void Open(NetworkSerializeMode mode, ArraySegment<byte> buffer, ushort offset = 0)
         {
             this.mode = mode;
             this.buffer = buffer;
             this.offset = offset;
         }
-        public int Close() => offset;
-        public bool SetOffset(ushort offset)
+        public ushort GetOffset() => offset;
+        public void SetOffset(ushort offset)
         {
             if (offset >= buffer.Count)
-                return false;
+                throw new ArgumentOutOfRangeException(nameof(offset));
             this.offset = offset;
-            return true;
         }
 
         #region serializable

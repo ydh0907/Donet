@@ -11,12 +11,12 @@ namespace Donet.Utils
         public Atomic() => value = default;
         public Atomic(T value) => this.value = value;
 
-        public Locker<T> Lock(int timeout = 1048576) => new Locker<T>(this, timeout);
+        public Locker<T> Lock(uint timeout = 134217728) => new Locker<T>(this, timeout);
     }
 
     public struct Locker<T> : IDisposable
     {
-        public static ulong lockCount = 0;
+        public static int thread = -1;
 
         private readonly Atomic<T> locker;
 
@@ -24,27 +24,34 @@ namespace Donet.Utils
 
         public void Set(T value) => locker.value = value;
 
-        public Locker(Atomic<T> locker, int timeout = 1048576)
+        public Locker(Atomic<T> locker, uint timeout = 134217728)
         {
             this.locker = locker;
 
-            int count = 0;
-            while (Interlocked.CompareExchange(ref locker.locked, 1, 0) != 0)
+            uint count = 0;
+            if (thread == Thread.CurrentThread.ManagedThreadId)
             {
-                if (++count >= timeout)
-                    throw new TimeoutException("deadlock detected while acquiring the lock.");
-                if (count % 4096 == 0)
-                    Thread.SpinWait(1);
+                Interlocked.Increment(ref locker.locked);
             }
+            else
+                while (Interlocked.CompareExchange(ref locker.locked, 1, 0) != 0)
+                {
+                    if (++count >= timeout)
+                        throw new TimeoutException("deadlock detected while acquiring the lock.");
+                    if (count % 4096 == 0)
+                        Thread.SpinWait(1);
+                }
 
             Thread.MemoryBarrier();
-            lockCount++;
+            thread = Thread.CurrentThread.ManagedThreadId;
         }
 
         public void Dispose()
         {
+            if (locker.locked == 1)
+                thread = -1;
             Thread.MemoryBarrier();
-            Interlocked.Exchange(ref locker.locked, 0);
+            Interlocked.Decrement(ref locker.locked);
         }
     }
 }

@@ -1,0 +1,4 @@
+[Notify] [2025.4.16-20.0.9] [Client] connected to server.
+[Error] [2025.4.16-20.0.11] The given key 'ChattingClient.ClientChatPacket' was not present in the dictionary.
+[Notify] [2025.4.16-20.0.11] [Client] disconnected from server.
+[Warning] [2025.4.16-20.0.11] ReceivePool Memory Segment Count Not Matched!

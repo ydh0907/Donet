@@ -1,0 +1,31 @@
+[Notify] [2025.4.16-20.22.55] [Server] utils loaded
+[Notify] [2025.4.16-20.22.55] [Server] server opened on 9977
+[Notify] [2025.4.16-20.23.1] [Enter] 1 : 127.0.0.1:50281
+[Warning] [2025.4.16-20.23.42] [Session] packet receiving failed please check connection
+[Notify] [2025.4.16-20.23.42] [Exit] 1 : 127.0.0.1:50281
+[Warning] [2025.4.16-20.23.42] [Session] packet sending failed please check connection
+[Notify] [2025.4.16-20.23.51] [Enter] 2 : 127.0.0.1:50288
+[Warning] [2025.4.16-20.24.28] [Session] packet receiving failed please check connection
+[Notify] [2025.4.16-20.24.28] [Exit] 2 : 127.0.0.1:50288
+[Warning] [2025.4.16-20.24.28] [Session] packet sending failed please check connection
+[Notify] [2025.4.16-20.25.51] [Enter] 3 : 127.0.0.1:50298
+[Warning] [2025.4.16-20.25.59] [Session] packet receiving failed please check connection
+[Notify] [2025.4.16-20.25.59] [Exit] 3 : 127.0.0.1:50298
+[Warning] [2025.4.16-20.25.59] [Session] packet sending failed please check connection
+[Notify] [2025.4.16-20.26.40] [Enter] 4 : 127.0.0.1:50301
+[Warning] [2025.4.16-20.26.41] [Session] packet receiving failed please check connection
+[Notify] [2025.4.16-20.26.41] [Exit] 4 : 127.0.0.1:50301
+[Warning] [2025.4.16-20.26.41] [Session] packet sending failed please check connection
+[Notify] [2025.4.16-20.27.17] [Enter] 5 : 127.0.0.1:50304
+[Warning] [2025.4.16-20.27.18] [Session] packet receiving failed please check connection
+[Notify] [2025.4.16-20.27.18] [Exit] 5 : 127.0.0.1:50304
+[Warning] [2025.4.16-20.27.18] [Session] packet sending failed please check connection
+[Notify] [2025.4.16-20.28.40] [Enter] 6 : 127.0.0.1:50314
+[Warning] [2025.4.16-20.28.43] [Session] packet receiving failed please check connection
+[Notify] [2025.4.16-20.28.43] [Exit] 6 : 127.0.0.1:50314
+[Warning] [2025.4.16-20.28.43] [Session] packet sending failed please check connection
+[Notify] [2025.4.16-20.29.18] [Enter] 7 : 127.0.0.1:50322
+[Warning] [2025.4.16-20.29.29] [Session] packet receiving failed please check connection
+[Notify] [2025.4.16-20.29.29] [Exit] 7 : 127.0.0.1:50322
+[Warning] [2025.4.16-20.29.29] [Session] packet sending failed please check connection
+[Error] [2025.4.16-20.30.51] [Server] unexpected termination has been detected.

@@ -3,24 +3,32 @@
   "WorkspaceRootPath": "D:\\GitHub\\Donet\\Donet\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{201EEB76-BAE0-4336-A5F4-E0C588144AED}|Donet\\Donet.csproj|d:\\github\\donet\\donet\\donet\\session\\packetsender.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{201EEB76-BAE0-4336-A5F4-E0C588144AED}|Donet\\Donet.csproj|solutionrelative:donet\\session\\packetsender.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{201EEB76-BAE0-4336-A5F4-E0C588144AED}|Donet\\Donet.csproj|d:\\github\\donet\\donet\\donet\\sessions\\sessionsender.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{201EEB76-BAE0-4336-A5F4-E0C588144AED}|Donet\\Donet.csproj|solutionrelative:donet\\sessions\\sessionsender.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{201EEB76-BAE0-4336-A5F4-E0C588144AED}|Donet\\Donet.csproj|d:\\github\\donet\\donet\\donet\\session\\session.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{201EEB76-BAE0-4336-A5F4-E0C588144AED}|Donet\\Donet.csproj|solutionrelative:donet\\session\\session.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{201EEB76-BAE0-4336-A5F4-E0C588144AED}|Donet\\Donet.csproj|d:\\github\\donet\\donet\\donet\\sessions\\sessionreceiver.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{201EEB76-BAE0-4336-A5F4-E0C588144AED}|Donet\\Donet.csproj|solutionrelative:donet\\sessions\\sessionreceiver.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{201EEB76-BAE0-4336-A5F4-E0C588144AED}|Donet\\Donet.csproj|d:\\github\\donet\\donet\\donet\\utils\\packetheader.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{201EEB76-BAE0-4336-A5F4-E0C588144AED}|Donet\\Donet.csproj|solutionrelative:donet\\utils\\packetheader.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{4DEDA71D-FD97-4D34-9365-916ADDF32306}|ChattingClient\\ChattingClient.csproj|d:\\github\\donet\\donet\\chattingclient\\clientchatpacket.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4DEDA71D-FD97-4D34-9365-916ADDF32306}|ChattingClient\\ChattingClient.csproj|solutionrelative:chattingclient\\clientchatpacket.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{201EEB76-BAE0-4336-A5F4-E0C588144AED}|Donet\\Donet.csproj|d:\\github\\donet\\donet\\donet\\utils\\packetfactory.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{201EEB76-BAE0-4336-A5F4-E0C588144AED}|Donet\\Donet.csproj|solutionrelative:donet\\utils\\packetfactory.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{4DEDA71D-FD97-4D34-9365-916ADDF32306}|ChattingClient\\ChattingClient.csproj|d:\\github\\donet\\donet\\chattingclient\\clientprogram.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4DEDA71D-FD97-4D34-9365-916ADDF32306}|ChattingClient\\ChattingClient.csproj|solutionrelative:chattingclient\\clientprogram.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{201EEB76-BAE0-4336-A5F4-E0C588144AED}|Donet\\Donet.csproj|d:\\github\\donet\\donet\\donet\\session\\packetreceiver.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{201EEB76-BAE0-4336-A5F4-E0C588144AED}|Donet\\Donet.csproj|solutionrelative:donet\\session\\packetreceiver.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{A0BBE176-4353-4FD8-9898-0DD6DD9AD7F1}|ChattingServer\\ChattingServer.csproj|d:\\github\\donet\\donet\\chattingserver\\serverprogram.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A0BBE176-4353-4FD8-9898-0DD6DD9AD7F1}|ChattingServer\\ChattingServer.csproj|solutionrelative:chattingserver\\serverprogram.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{201EEB76-BAE0-4336-A5F4-E0C588144AED}|Donet\\Donet.csproj|d:\\github\\donet\\donet\\donet\\sessions\\packetfactory.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{201EEB76-BAE0-4336-A5F4-E0C588144AED}|Donet\\Donet.csproj|solutionrelative:donet\\sessions\\packetfactory.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A0BBE176-4353-4FD8-9898-0DD6DD9AD7F1}|ChattingServer\\ChattingServer.csproj|d:\\github\\donet\\donet\\chattingserver\\serverchatpacket.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A0BBE176-4353-4FD8-9898-0DD6DD9AD7F1}|ChattingServer\\ChattingServer.csproj|solutionrelative:chattingserver\\serverchatpacket.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -30,73 +38,8 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 3,
+          "SelectedChildIndex": 6,
           "Children": [
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "PacketFactory.cs",
-              "DocumentMoniker": "D:\\GitHub\\Donet\\Donet\\Donet\\Utils\\PacketFactory.cs",
-              "RelativeDocumentMoniker": "Donet\\Utils\\PacketFactory.cs",
-              "ToolTip": "D:\\GitHub\\Donet\\Donet\\Donet\\Utils\\PacketFactory.cs",
-              "RelativeToolTip": "Donet\\Utils\\PacketFactory.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-15T15:41:17.384Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "PacketHeader.cs",
-              "DocumentMoniker": "D:\\GitHub\\Donet\\Donet\\Donet\\Utils\\PacketHeader.cs",
-              "RelativeDocumentMoniker": "Donet\\Utils\\PacketHeader.cs",
-              "ToolTip": "D:\\GitHub\\Donet\\Donet\\Donet\\Utils\\PacketHeader.cs",
-              "RelativeToolTip": "Donet\\Utils\\PacketHeader.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAMAAAABAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-15T15:39:10.869Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "Session.cs",
-              "DocumentMoniker": "D:\\GitHub\\Donet\\Donet\\Donet\\Session\\Session.cs",
-              "RelativeDocumentMoniker": "Donet\\Session\\Session.cs",
-              "ToolTip": "D:\\GitHub\\Donet\\Donet\\Donet\\Session\\Session.cs",
-              "RelativeToolTip": "Donet\\Session\\Session.cs",
-              "ViewState": "AgIAACEAAAAAAAAAAAAqwCsAAAANAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-14T11:06:40.289Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "PacketSender.cs",
-              "DocumentMoniker": "D:\\GitHub\\Donet\\Donet\\Donet\\Session\\PacketSender.cs",
-              "RelativeDocumentMoniker": "Donet\\Session\\PacketSender.cs",
-              "ToolTip": "D:\\GitHub\\Donet\\Donet\\Donet\\Session\\PacketSender.cs",
-              "RelativeToolTip": "Donet\\Session\\PacketSender.cs",
-              "ViewState": "AgIAACoAAAAAAAAAAAAqwDoAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-14T11:22:28.93Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "PacketReceiver.cs",
-              "DocumentMoniker": "D:\\GitHub\\Donet\\Donet\\Donet\\Session\\PacketReceiver.cs",
-              "RelativeDocumentMoniker": "Donet\\Session\\PacketReceiver.cs",
-              "ToolTip": "D:\\GitHub\\Donet\\Donet\\Donet\\Session\\PacketReceiver.cs",
-              "RelativeToolTip": "Donet\\Session\\PacketReceiver.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAAYAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-14T11:22:39.421Z",
-              "EditorCaption": ""
-            },
             {
               "$type": "Bookmark",
               "Name": "ST:2:0:{e8034f19-ab72-4f06-83fd-f6832b41aa63}"
@@ -116,6 +59,97 @@
             {
               "$type": "Bookmark",
               "Name": "ST:1:0:{e8034f19-ab72-4f06-83fd-f6832b41aa63}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "SessionReceiver.cs",
+              "DocumentMoniker": "D:\\GitHub\\Donet\\Donet\\Donet\\Sessions\\SessionReceiver.cs",
+              "RelativeDocumentMoniker": "Donet\\Sessions\\SessionReceiver.cs",
+              "ToolTip": "D:\\GitHub\\Donet\\Donet\\Donet\\Sessions\\SessionReceiver.cs",
+              "RelativeToolTip": "Donet\\Sessions\\SessionReceiver.cs",
+              "ViewState": "AgIAACsAAAAAAAAAAAAewEEAAAAsAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-16T11:21:50.627Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "SessionSender.cs",
+              "DocumentMoniker": "D:\\GitHub\\Donet\\Donet\\Donet\\Sessions\\SessionSender.cs",
+              "RelativeDocumentMoniker": "Donet\\Sessions\\SessionSender.cs",
+              "ToolTip": "D:\\GitHub\\Donet\\Donet\\Donet\\Sessions\\SessionSender.cs",
+              "RelativeToolTip": "Donet\\Sessions\\SessionSender.cs",
+              "ViewState": "AgIAAEQAAAAAAAAAAAApwEgAAAAoAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-16T11:21:14.495Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "PacketFactory.cs",
+              "DocumentMoniker": "D:\\GitHub\\Donet\\Donet\\Donet\\Sessions\\PacketFactory.cs",
+              "RelativeDocumentMoniker": "Donet\\Sessions\\PacketFactory.cs",
+              "ToolTip": "D:\\GitHub\\Donet\\Donet\\Donet\\Sessions\\PacketFactory.cs",
+              "RelativeToolTip": "Donet\\Sessions\\PacketFactory.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACAAAAApAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-16T11:20:23.122Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "ServerProgram.cs",
+              "DocumentMoniker": "D:\\GitHub\\Donet\\Donet\\ChattingServer\\ServerProgram.cs",
+              "RelativeDocumentMoniker": "ChattingServer\\ServerProgram.cs",
+              "ToolTip": "D:\\GitHub\\Donet\\Donet\\ChattingServer\\ServerProgram.cs",
+              "RelativeToolTip": "ChattingServer\\ServerProgram.cs",
+              "ViewState": "AgIAACQAAAAAAAAAAAAjwC8AAAAQAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-16T11:19:58.79Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "ServerChatPacket.cs",
+              "DocumentMoniker": "D:\\GitHub\\Donet\\Donet\\ChattingServer\\ServerChatPacket.cs",
+              "RelativeDocumentMoniker": "ChattingServer\\ServerChatPacket.cs",
+              "ToolTip": "D:\\GitHub\\Donet\\Donet\\ChattingServer\\ServerChatPacket.cs",
+              "RelativeToolTip": "ChattingServer\\ServerChatPacket.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-16T11:19:58.313Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "ClientProgram.cs",
+              "DocumentMoniker": "D:\\GitHub\\Donet\\Donet\\ChattingClient\\ClientProgram.cs",
+              "RelativeDocumentMoniker": "ChattingClient\\ClientProgram.cs",
+              "ToolTip": "D:\\GitHub\\Donet\\Donet\\ChattingClient\\ClientProgram.cs",
+              "RelativeToolTip": "ChattingClient\\ClientProgram.cs",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAAABEAAAAgAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-16T11:19:57.574Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "ClientChatPacket.cs",
+              "DocumentMoniker": "D:\\GitHub\\Donet\\Donet\\ChattingClient\\ClientChatPacket.cs",
+              "RelativeDocumentMoniker": "ChattingClient\\ClientChatPacket.cs",
+              "ToolTip": "D:\\GitHub\\Donet\\Donet\\ChattingClient\\ClientChatPacket.cs",
+              "RelativeToolTip": "ChattingClient\\ClientChatPacket.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-16T11:19:57.058Z",
+              "EditorCaption": ""
             }
           ]
         },

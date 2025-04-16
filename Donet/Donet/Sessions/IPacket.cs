@@ -1,6 +1,6 @@
-﻿using Donet.Sessions;
+﻿using Donet.Utils;
 
-namespace Donet.Utils
+namespace Donet.Sessions
 {
     public interface IPacket : INetworkSerializable
     {
