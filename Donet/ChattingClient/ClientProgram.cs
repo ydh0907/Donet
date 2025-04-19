@@ -12,11 +12,28 @@ namespace ChattingClient
         static void Main(string[] args)
         {
             Logger.Initialize();
-            MemoryPool.sendBufferSize = 1 << 18;
-            MemoryPool.receiveBufferSize = 1 << 20;
             MemoryPool.Initialize();
             PacketFactory.Initialize(new ClientChatPacket());
 
+            List<Task> clients = new List<Task>();
+
+            for (int i = 0; i < 100; i++)
+            {
+                Task t = Task.Run(StartClient);
+                clients.Add(t);
+            }
+
+            Task.WaitAll(clients.ToArray());
+
+            PacketFactory.Dispose();
+            MemoryPool.Dispose();
+            Logger.Dispose();
+
+            Console.ReadKey();
+        }
+
+        private static void StartClient()
+        {
             IPEndPoint endPoint = new IPEndPoint(IPAddress.Parse("127.0.0.1"), 9977);
             Socket socket = Connector.Connect(endPoint);
 
@@ -32,18 +49,14 @@ namespace ChattingClient
 
             while (active)
             {
-                string message = Console.ReadLine();
-                if (!string.IsNullOrEmpty(message))
-                {
-                    ClientChatPacket packet = new ClientChatPacket();
-                    packet.message = message;
-                    session.Send(packet);
-                }
+                Thread.Sleep(20);
+                string message = Random.Shared.Next().ToString();
+                if (!active)
+                    break;
+                ClientChatPacket packet = new ClientChatPacket();
+                packet.message = message;
+                session.Send(packet);
             }
-
-            PacketFactory.Dispose();
-            MemoryPool.Dispose();
-            Logger.Dispose();
         }
     }
 }

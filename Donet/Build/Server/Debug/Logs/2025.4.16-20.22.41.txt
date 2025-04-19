@@ -1,7 +1,0 @@
-[Notify] [2025.4.16-20.22.35] [Server] utils loaded
-[Notify] [2025.4.16-20.22.35] [Server] server opened on 9977
-[Notify] [2025.4.16-20.22.35] [Enter] 1 : 127.0.0.1:50272
-[Warning] [2025.4.16-20.22.40] [Session] packet receiving failed please check connection
-[Notify] [2025.4.16-20.22.40] [Exit] 1 : 127.0.0.1:50272
-[Warning] [2025.4.16-20.22.40] [Session] packet sending failed please check connection
-[Error] [2025.4.16-20.22.41] [Server] unexpected termination has been detected.

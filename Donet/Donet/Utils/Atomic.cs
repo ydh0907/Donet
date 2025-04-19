@@ -12,6 +12,7 @@ namespace Donet.Utils
         public Atomic(T value) => this.value = value;
 
         public Locker<T> Lock(uint timeout = 134217728) => new Locker<T>(this, timeout);
+        public Locker<T> Locker => new Locker<T>(this, 134217728);
     }
 
     public struct Locker<T> : IDisposable

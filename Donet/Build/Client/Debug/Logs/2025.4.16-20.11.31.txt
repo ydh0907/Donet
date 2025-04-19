@@ -1,4 +1,0 @@
-[Notify] [2025.4.16-20.11.18] [Client] connected to server.
-[Error] [2025.4.16-20.11.21] The given key 'ChattingClient.ClientChatPacket' was not present in the dictionary.
-[Notify] [2025.4.16-20.11.21] [Client] disconnected from server.
-[Error] [2025.4.16-20.11.31] [Server] unexpected termination has been detected.

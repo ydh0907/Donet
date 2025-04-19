@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Net.Sockets;
-using System.Threading.Tasks;
 
 using Donet.Utils;
 
@@ -10,9 +9,12 @@ namespace Donet.Sessions
 
     public class SessionReceiver
     {
+        public Atomic<ulong> receiveCount = new Atomic<ulong>(0);
+
         private Socket socket = null;
         private Session session = null;
-        private ReceiveHandle handler = null;
+
+        private ReceiveHandle handler => session.received;
 
         private MemorySegment memory = null;
         private int left = 0;
@@ -20,11 +22,15 @@ namespace Donet.Sessions
 
         private Serializer serializer = new Serializer();
 
-        public void Initialize(Socket socket, Session session, ReceiveHandle handler)
+        private Atomic<bool> receiving = new Atomic<bool>(false);
+
+        public void Initialize(Socket socket, Session session)
         {
+            using (var local = receiving.Locker)
+                local.Set(false);
+
             this.socket = socket;
             this.session = session;
-            this.handler = handler;
 
             memory = MemoryPool.DequeueReceiveMemory();
             left = 0;
@@ -35,42 +41,66 @@ namespace Donet.Sessions
 
         public void Dispose()
         {
+            while (true)
+                using (var local = receiving.Locker)
+                    if (!local.Value)
+                        break;
+
             socket = null;
             session = null;
-            handler = null;
 
             left = 0;
             right = 0;
             MemoryPool.EnqueueReceiveMemory(memory);
+            memory = null;
         }
 
-        private void Receive()
+        private async void Receive()
         {
-            SocketAsyncEventArgs args = new SocketAsyncEventArgs();
-            args.Completed += HandleReceive;
-            args.SetBuffer(memory.segment.Array, memory.segment.Offset + right, memory.segment.Count - right);
-            bool pending = socket.ReceiveAsync(args);
-            if (!pending)
-                HandleReceive(socket, args);
+            try
+            {
+                using (var local = receiving.Locker)
+                    local.Set(true);
+
+                SocketAsyncEventArgs args = new SocketAsyncEventArgs();
+                args.Completed += HandleReceiveCompleted;
+                args.SetBuffer(new ArraySegment<byte>(memory.segment.Array, memory.segment.Offset + right, memory.segment.Count - right));
+
+                bool pending = socket.ReceiveAsync(args);
+                if (!pending)
+                    HandleReceiveCompleted(socket, args);
+            }
+            catch (Exception ex)
+            {
+                HandleError(LogLevel.Warning, ex.Message);
+            }
         }
 
-        private void HandleReceive(object sender, SocketAsyncEventArgs args)
+        private void HandleReceiveCompleted(object sender, SocketAsyncEventArgs args)
         {
             if (args.SocketError != SocketError.Success || args.BytesTransferred == 0)
             {
-                Logger.Log(LogLevel.Warning, "[Session] packet receiving failed please check connection");
-
-                if (session != null)
-                    using (var active = session.Active.Lock())
-                        if (active.Value)
-                            session.Close();
+                HandleError(LogLevel.Warning, $"[Session {args.SocketError}] packet receiving failed please check session");
                 return;
             }
 
-            right += args.BytesTransferred;
-            if (right >= memory.segment.Count)
-                ClearMemory();
-            DeserializePacket();
+            try
+            {
+                right += args.BytesTransferred;
+                if (right == memory.segment.Count)
+                    ClearMemory();
+
+                DeserializePacket();
+            }
+            catch (Exception ex)
+            {
+                HandleError(LogLevel.Warning, ex.Message);
+                return;
+            }
+
+            using (var local = receiving.Locker)
+                local.Set(false);
+
             Receive();
         }
 
@@ -88,48 +118,54 @@ namespace Donet.Sessions
 
         private void DeserializePacket()
         {
-            try
+            int raw = right - left;
+            while (raw >= 4)
             {
-                int raw = right - left;
-                while (raw >= 4)
+                var seg = memory.segment;
+                serializer.Open(
+                    NetworkSerializeMode.Deserialize,
+                    new ArraySegment<byte>(seg.Array, seg.Offset + left, raw)
+                );
+
+                ushort size = 0;
+                serializer.Serialize(ref size);
+
+                if (size == 0)
+                    throw new Exception("packet size is zero.");
+
+                if (size <= raw)
                 {
-                    var seg = memory.segment;
-                    serializer.Open(
-                        NetworkSerializeMode.Deserialize,
-                        new ArraySegment<byte>(seg.Array, seg.Offset + left, raw)
-                    );
+                    ushort id = 0;
+                    serializer.Serialize(ref id);
 
-                    ushort size = 0;
-                    serializer.Serialize(ref size);
-                    if (size <= raw)
-                    {
-                        ushort id = 0;
-                        serializer.Serialize(ref id);
-                        left += 4;
-                        size -= 4;
+                    IPacket packet = PacketFactory.GetPacket(id);
+                    serializer.SerializeObject(ref packet);
 
-                        IPacket packet = PacketFactory.GetPacket(id);
-                        serializer.Open(
-                            NetworkSerializeMode.Deserialize,
-                            new ArraySegment<byte>(seg.Array, seg.Offset + left, size)
-                        );
-                        serializer.SerializeObject(ref packet);
+                    packet.OnReceived(session);
+                    left += size;
+                    raw -= size;
 
-                        packet.OnReceived(session);
-                        left += size;
+                    handler?.Invoke(id, packet);
 
-                        Task.Run(() => handler?.Invoke(id, packet));
-                    }
+                    using (var local = receiveCount.Locker)
+                        local.Set(local.Value + 1);
                 }
+                else
+                    break;
             }
-            catch (Exception ex)
-            {
-                Logger.Log(LogLevel.Error, ex.Message);
+        }
 
-                using (var active = session.Active.Lock())
-                    if (active.Value)
-                        session.Close();
-            }
+        private void HandleError(LogLevel level, string message)
+        {
+            if (session == null)
+                return;
+
+            using (var local = receiving.Locker)
+                local.Set(false);
+
+            Logger.Log(level, message);
+
+            session?.Close();
         }
     }
 }

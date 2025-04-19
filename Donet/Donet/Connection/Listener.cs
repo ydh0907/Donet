@@ -25,6 +25,7 @@ namespace Donet.Connection
 
             SocketAsyncEventArgs args = new SocketAsyncEventArgs();
             args.Completed += HandleAccept;
+
             Accept(args);
         }
 

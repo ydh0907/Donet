@@ -1,2 +1,0 @@
-[Notify] [2025.4.16-20.22.35] [Client] connected to server.
-[Error] [2025.4.16-20.22.40] [Server] unexpected termination has been detected.

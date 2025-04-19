@@ -14,7 +14,7 @@ namespace ChattingClient
 
         public void OnReceived(Session session)
         {
-            Console.WriteLine(message);
+            //Console.WriteLine(message);
         }
 
         public void Serialize(Serializer serializer)

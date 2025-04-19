@@ -42,7 +42,7 @@ namespace Donet.Utils
 
         private static void HandleExit(object sender, EventArgs evt)
         {
-            Log(LogLevel.Error, "[Server] unexpected termination has been detected.");
+            Log(LogLevel.Error, "[Logger] unexpected termination has been detected.");
             using var local = instance.Lock();
             local.Value.Save();
         }

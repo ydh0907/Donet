@@ -1,4 +1,0 @@
-[Notify] [2025.4.16-20.25.51] [Client] connected to server.
-[Warning] [2025.4.16-20.25.52] [Session] packet sending failed please check connection
-[Notify] [2025.4.16-20.25.52] [Client] disconnected from server.
-[Error] [2025.4.16-20.25.59] [Server] unexpected termination has been detected.

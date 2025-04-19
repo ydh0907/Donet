@@ -14,8 +14,9 @@ namespace ChattingServer
 
         public void OnReceived(Session session)
         {
-            Logger.Log(LogLevel.Notify, $"[Client {session.Id}:{session.Socket.RemoteEndPoint}] {message}");
-            ServerProgram.Broadcast(this);
+            //message = $"[Client {session.Id}:{session.Socket.RemoteEndPoint}] {message}";
+            //Logger.Log(LogLevel.Notify, message);
+            //ServerProgram.Broadcast(this);
         }
 
         public void Serialize(Serializer serializer)

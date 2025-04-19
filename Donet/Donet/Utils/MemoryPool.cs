@@ -1,5 +1,8 @@
 ﻿using System;
 using System.Collections.Concurrent;
+using System.Text;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace Donet.Utils
 {
@@ -15,10 +18,10 @@ namespace Donet.Utils
 
     public static class MemoryPool
     {
-        public static ushort sendSize = 1 << 8;
-        public static ushort receiveSize = 1 << 13;
-        public static int sendBufferSize = 1 << 25;
-        public static int receiveBufferSize = 1 << 26;
+        public static ushort sendSize = 1 << 12;
+        public static ushort receiveSize = 1 << 15;
+        public static int sendBufferSize = 1 << 22;
+        public static int receiveBufferSize = 1 << 25;
 
         private static byte[] sendBuffer = null;
         private static byte[] receiveBuffer = null;
@@ -26,25 +29,37 @@ namespace Donet.Utils
         private static ConcurrentQueue<MemorySegment> sendPool = null;
         private static ConcurrentQueue<MemorySegment> receivePool = null;
 
-        public static void EnqueueSendMemory(MemorySegment segment) => sendPool.Enqueue(segment);
+        public static void EnqueueSendMemory(MemorySegment segment)
+        {
+            sendPool.Enqueue(segment);
+        }
         public static MemorySegment DequeueSendMemory()
         {
             MemorySegment memory;
             if (sendPool.Count > 0)
                 while (!sendPool.TryDequeue(out memory)) ;
             else
+            {
                 memory = new MemorySegment(new byte[sendSize], 0, sendSize);
+                Logger.Log(LogLevel.Warning, "[Memory] not enough send pooling.");
+            }
             return memory;
         }
 
-        public static void EnqueueReceiveMemory(MemorySegment segment) => receivePool.Enqueue(segment);
+        public static void EnqueueReceiveMemory(MemorySegment segment)
+        {
+            receivePool.Enqueue(segment);
+        }
         public static MemorySegment DequeueReceiveMemory()
         {
             MemorySegment memory;
             if (receivePool.Count > 0)
                 while (!receivePool.TryDequeue(out memory)) ;
             else
+            {
                 memory = new MemorySegment(new byte[receiveSize], 0, receiveSize);
+                Logger.Log(LogLevel.Warning, "[Memory] not enough receive pooling.");
+            }
             return memory;
         }
 
@@ -58,6 +73,21 @@ namespace Donet.Utils
 
             AddSendPool();
             AddReceivePool();
+
+            // Task.Run(MemoryUsage);
+        }
+
+        private static void MemoryUsage()
+        {
+            while (sendPool != null && receivePool != null)
+            {
+                Thread.Sleep(10000);
+                StringBuilder sb = new StringBuilder();
+                sb.AppendLine($"[Memory Usage]");
+                sb.AppendLine($"[Send    Pool] max: {sendBufferSize / sendSize}, remain: {sendPool.Count}");
+                sb.Append($"[Receive Pool] max: {receiveBufferSize / receiveSize}, remain: {receivePool.Count}");
+                Logger.Log(LogLevel.Notify, sb.ToString());
+            }
         }
 
         private static void AddReceivePool()
@@ -65,7 +95,8 @@ namespace Donet.Utils
             int receiveSegCnt = receiveBufferSize / receiveSize;
             for (int i = 0; i < receiveSegCnt; i++)
             {
-                receivePool.Enqueue(new MemorySegment(receiveBuffer, i * receiveSize, receiveSize));
+                MemorySegment segment = new MemorySegment(receiveBuffer, i * receiveSize, receiveSize);
+                receivePool.Enqueue(segment);
             }
         }
 
@@ -74,7 +105,8 @@ namespace Donet.Utils
             int sendSegCnt = sendBufferSize / sendSize;
             for (int i = 0; i < sendSegCnt; i++)
             {
-                sendPool.Enqueue(new MemorySegment(sendBuffer, i * sendSize, sendSize));
+                MemorySegment segment = new MemorySegment(sendBuffer, i * sendSize, sendSize);
+                sendPool.Enqueue(segment);
             }
         }
 
@@ -82,13 +114,13 @@ namespace Donet.Utils
         {
             int sendSegCnt = sendBufferSize / sendSize;
             if (sendPool.Count < sendSegCnt)
-                Logger.Log(LogLevel.Warning, "SendPool Memory Segment Count Not Matched!");
+                Logger.Log(LogLevel.Warning, "send pool memory segment count not matched!");
             sendPool.Clear();
             sendPool = null;
 
             int receiveSegCnt = receiveBufferSize / receiveSize;
             if (receivePool.Count < receiveSegCnt)
-                Logger.Log(LogLevel.Warning, "ReceivePool Memory Segment Count Not Matched!");
+                Logger.Log(LogLevel.Warning, "receive pool memory segment count not matched!");
             receivePool.Clear();
             receivePool = null;
         }
