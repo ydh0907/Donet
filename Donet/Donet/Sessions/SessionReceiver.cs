@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Net.Sockets;
+using System.Threading;
 
 using Donet.Utils;
 
@@ -7,7 +8,7 @@ namespace Donet.Sessions
 {
     public delegate void ReceiveHandle(ushort id, IPacket packet);
 
-    public class SessionReceiver
+    public class SessionReceiver : IDisposable
     {
         public Atomic<ulong> receiveCount = new Atomic<ulong>(0);
 
@@ -16,6 +17,7 @@ namespace Donet.Sessions
 
         private ReceiveHandle handler => session.received;
 
+        private SocketAsyncEventArgs receiveArgs = null;
         private MemorySegment memory = null;
         private int left = 0;
         private int right = 0;
@@ -32,6 +34,8 @@ namespace Donet.Sessions
             this.socket = socket;
             this.session = session;
 
+            receiveArgs = new SocketAsyncEventArgs();
+            receiveArgs.Completed += HandleReceiveCompleted;
             memory = MemoryPool.DequeueReceiveMemory();
             left = 0;
             right = 0;
@@ -41,34 +45,38 @@ namespace Donet.Sessions
 
         public void Dispose()
         {
-            while (true)
+            bool active = true;
+            SpinWait wait = new SpinWait();
+            while (active)
                 using (var local = receiving.Locker)
-                    if (!local.Value)
-                        break;
+                {
+                    active = local.Value;
+                    wait.SpinOnce();
+                }
 
             socket = null;
             session = null;
 
+            receiveArgs.Dispose();
+            receiveArgs = null;
             left = 0;
             right = 0;
             MemoryPool.EnqueueReceiveMemory(memory);
             memory = null;
         }
 
-        private async void Receive()
+        private void Receive()
         {
             try
             {
                 using (var local = receiving.Locker)
                     local.Set(true);
 
-                SocketAsyncEventArgs args = new SocketAsyncEventArgs();
-                args.Completed += HandleReceiveCompleted;
-                args.SetBuffer(new ArraySegment<byte>(memory.segment.Array, memory.segment.Offset + right, memory.segment.Count - right));
+                receiveArgs.SetBuffer(new ArraySegment<byte>(memory.segment.Array, memory.segment.Offset + right, memory.segment.Count - right));
 
-                bool pending = socket.ReceiveAsync(args);
+                bool pending = socket.ReceiveAsync(receiveArgs);
                 if (!pending)
-                    HandleReceiveCompleted(socket, args);
+                    HandleReceiveCompleted(socket, receiveArgs);
             }
             catch (Exception ex)
             {

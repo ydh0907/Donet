@@ -48,7 +48,7 @@ namespace Donet.Sessions
 
         public void Send(IPacket packet)
         {
-            sender.Send(packet);
+            sender?.Send(packet);
         }
 
         public void Close()
@@ -77,9 +77,9 @@ namespace Donet.Sessions
             socket = null;
 
             using (var local = closing.Lock())
-                local.Set(true);
+                local.Set(false);
             using (var local = active.Lock())
-                local.Set(true);
+                local.Set(false);
         }
     }
 }

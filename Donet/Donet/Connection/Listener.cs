@@ -1,4 +1,5 @@
-﻿using System.Net;
+﻿using System;
+using System.Net;
 using System.Net.Sockets;
 
 using Donet.Utils;
@@ -11,11 +12,14 @@ namespace Donet.Connection
     {
         private readonly Socket socket;
         private readonly AcceptHandle handler;
+        private readonly SocketAsyncEventArgs listenArgs;
 
         public Listener(Socket socket, AcceptHandle handler)
         {
             this.socket = socket;
             this.handler = handler;
+            this.listenArgs = new SocketAsyncEventArgs();
+            listenArgs.Completed += HandleAccept;
         }
 
         public void Listen(int backlog, IPEndPoint endPoint)
@@ -23,17 +27,26 @@ namespace Donet.Connection
             socket.Bind(endPoint);
             socket.Listen(backlog);
 
-            SocketAsyncEventArgs args = new SocketAsyncEventArgs();
-            args.Completed += HandleAccept;
-
-            Accept(args);
+            Logger.Log(LogLevel.Notify, "[Listener] listener opened.");
+            Accept(listenArgs);
         }
 
         private void Accept(SocketAsyncEventArgs args)
         {
-            bool pending = socket.AcceptAsync(args);
-            if (!pending)
-                HandleAccept(socket, args);
+            try
+            {
+                bool pending = socket.AcceptAsync(args);
+                if (!pending)
+                    HandleAccept(socket, args);
+            }
+            catch (ObjectDisposedException ex)
+            {
+                Logger.Log(LogLevel.Notify, "[Listener] listener closed.");
+            }
+            catch (Exception ex)
+            {
+                Logger.Log(LogLevel.Error, $"[Listener] listen failed. {ex.Message}");
+            }
         }
 
         private void HandleAccept(object sender, SocketAsyncEventArgs args)
@@ -43,8 +56,7 @@ namespace Donet.Connection
             else
                 Logger.Log(LogLevel.Warning, "[Listener] Accept failed please check connector.");
 
-            args = new SocketAsyncEventArgs();
-            args.Completed += HandleAccept;
+            args.AcceptSocket = null;
             Accept(args);
         }
     }

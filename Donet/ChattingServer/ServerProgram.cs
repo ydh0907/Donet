@@ -21,7 +21,8 @@ namespace ChattingServer
             PacketFactory.Initialize(new ServerChatPacket());
 
             Task.Run(StartDebugTimer);
-            StartServer();
+            for (int i = 0; i < 3; i++)
+                StartListener(9977 + i);
             ConsoleOperAsync();
 
             PacketFactory.Dispose();
@@ -36,7 +37,7 @@ namespace ChattingServer
         {
             while (true)
             {
-                Thread.Sleep(1000);
+                Thread.Sleep(3000);
                 ulong sum = 0;
                 using (var local = sessions.Lock())
                     foreach (var session in local.Value)
@@ -44,7 +45,7 @@ namespace ChattingServer
                         using (var count = session.receiveCount.Lock())
                             sum += count.Value;
                     }
-                Logger.Log(LogLevel.Notify, $"[Server] {sum - lastReceiveCount} packets per sec. total {sum} packet received.");
+                Logger.Log(LogLevel.Notify, $"[Server] {(sum - lastReceiveCount) / 3} packets per sec. total {sum} packet received.");
                 lastReceiveCount = sum;
             }
         }
@@ -61,11 +62,18 @@ namespace ChattingServer
 
         public static void Broadcast(IPacket packet)
         {
-            using (var local = sessions.Lock())
+            try
+            {
+                using var local = sessions.Lock();
                 foreach (var session in local.Value)
                 {
                     session.Send(packet);
                 }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
         }
 
         private static void ConsoleOperAsync()
@@ -100,17 +108,17 @@ namespace ChattingServer
             }
         }
 
-        private static void StartServer()
+        private static void StartListener(int port)
         {
             Socket socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
             listener = new Listener(socket, HandleAccept);
-            IPEndPoint endPoint = new IPEndPoint(IPAddress.Loopback, 9977);
+            IPEndPoint endPoint = new IPEndPoint(IPAddress.Any, port);
             listener.Listen(4096, endPoint);
 
-            Logger.Log(LogLevel.Notify, "[Server] server opened on 9977");
+            Logger.Log(LogLevel.Notify, "[Server] listener opened on 9977");
         }
 
-        private static async void HandleAccept(Socket socket)
+        private static void HandleAccept(Socket socket)
         {
             ulong next = 0;
             using (var local = id.Lock())
@@ -119,15 +127,11 @@ namespace ChattingServer
                 next = local.Value;
             }
             Session session = new Session();
-            await Task.Run(() => session.Initialize(next, socket, HandleDisconnect));
+            session.Initialize(next, socket, HandleDisconnect);
             using (var local = sessions.Lock())
                 local.Value.Add(session);
 
-            //ServerChatPacket packet = new ServerChatPacket();
-            //packet.message = $"[Enter] {session.Id} : {session.Socket.RemoteEndPoint}";
-            //Broadcast(packet);
-
-            //Logger.Log(LogLevel.Notify, packet.message);
+            Logger.Log(LogLevel.Notify, $"[Enter] {session.Id} : {session.Socket.RemoteEndPoint}");
         }
 
         private static void HandleDisconnect(Session session)

@@ -4,19 +4,45 @@ namespace Test
 {
     internal class TestProgram
     {
+        static Atomic<int> race = new Atomic<int>();
+
         public static void Main()
         {
-            byte[] buffer = new byte[1024];
-            string message = "dohee";
-            Serializer serializer = new Serializer();
-            serializer.Open(NetworkSerializeMode.Serialize, new ArraySegment<byte>(buffer, 0, buffer.Length));
-            serializer.Serialize(ref message);
+            Task p = Task.Run(Plus);
+            Task m = Task.Run(Minus);
 
-            serializer.Open(NetworkSerializeMode.Deserialize, buffer);
-            string received = "";
-            serializer.Serialize(ref received);
+            Task.WaitAll(p, m);
 
-            Console.WriteLine(received);
+            using var local = race.Lock();
+            Console.WriteLine(local.Value);
+        }
+
+        public static void Plus()
+        {
+            for (int i = 0; i < 1000000; i++)
+            {
+                using (var local = race.Lock())
+                {
+                    using (var local2 = race.Lock())
+                    {
+                        local2.Set(local2.Value + 1);
+                    }
+                }
+            }
+        }
+
+        public static void Minus()
+        {
+            for (int i = 0; i < 1000000; i++)
+            {
+                using (var local = race.Lock())
+                {
+                    using (var local2 = race.Lock())
+                    {
+                        local2.Set(local2.Value - 1);
+                    }
+                }
+            }
         }
     }
 }

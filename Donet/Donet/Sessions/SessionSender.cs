@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Collections.Concurrent;
-using System.Collections.Generic;
 using System.Net.Sockets;
-using System.Threading.Tasks;
+using System.Threading;
 
 using Donet.Utils;
 
@@ -10,16 +9,16 @@ namespace Donet.Sessions
 {
     public delegate void SendHandle(int byteTransferred);
 
-    public class SessionSender
+    public class SessionSender : IDisposable
     {
         private Socket socket = null;
         private Session session = null;
 
         private SendHandle handler => session.sended;
 
-        private ConcurrentQueue<IPacket> pendingQueue = new ConcurrentQueue<IPacket>();
-        private List<IPacket> sendingQueue = new List<IPacket>();
-        private MemorySegment memory;
+        private SocketAsyncEventArgs sendArgs = null;
+        private ConcurrentQueue<IPacket> packetQueue = new ConcurrentQueue<IPacket>();
+        private MemorySegment memory = null;
 
         private Serializer serializer = new Serializer();
 
@@ -33,52 +32,55 @@ namespace Donet.Sessions
             this.socket = socket;
             this.session = session;
 
-            pendingQueue.Clear();
-            sendingQueue.Clear();
+            sendArgs = new SocketAsyncEventArgs();
+            sendArgs.Completed += HandleSendCompleted;
+            packetQueue.Clear();
             memory = MemoryPool.DequeueSendMemory();
         }
 
         public void Dispose()
         {
-            while (true)
+            bool active = true;
+            SpinWait wait = new SpinWait();
+            while (active)
                 using (var local = sending.Locker)
-                    if (!local.Value)
-                        break;
+                {
+                    active = local.Value;
+                    wait.SpinOnce();
+                }
 
             socket = null;
             session = null;
 
-            pendingQueue.Clear();
-            sendingQueue.Clear();
+            sendArgs.Dispose();
+            sendArgs = null;
+            packetQueue.Clear();
             MemoryPool.EnqueueSendMemory(memory);
         }
 
         public void Send(IPacket packet)
         {
-            pendingQueue.Enqueue(packet);
+            packetQueue.Enqueue(packet);
+
             using (var local = sending.Locker)
             {
                 if (!local.Value)
                 {
                     local.Set(true);
-                    Task.Run(Flash);
                 }
+                else return;
             }
+
+            Flash();
         }
 
         private void Flash()
         {
-            while (pendingQueue.Count > 0)
-                if (pendingQueue.TryDequeue(out IPacket packet))
-                    sendingQueue.Add(packet);
-
             try
             {
                 ushort offset = 0;
-                while (sendingQueue.Count > 0)
+                while (packetQueue.TryDequeue(out IPacket packet))
                 {
-                    IPacket packet = sendingQueue[0];
-                    sendingQueue.RemoveAt(0);
                     try
                     {
                         ushort packetId = PacketFactory.GetPacketId(packet);
@@ -93,17 +95,23 @@ namespace Donet.Sessions
                     }
                     catch
                     {
-                        sendingQueue.Insert(0, packet);
+                        packetQueue.Enqueue(packet);
                         break;
                     }
                 }
 
-                SocketAsyncEventArgs args = new SocketAsyncEventArgs();
-                args.Completed += HandleSendCompleted;
-                args.SetBuffer(memory.segment.Slice(0, offset));
-                bool pending = socket.SendAsync(args);
-                if (!pending)
-                    HandleSendCompleted(socket, args);
+                if (offset > 0)
+                {
+                    sendArgs.SetBuffer(memory.segment.Slice(0, offset));
+                    bool pending = socket.SendAsync(sendArgs);
+                    if (!pending)
+                        HandleSendCompleted(socket, sendArgs);
+                }
+                else
+                {
+                    using (var local = sending.Locker)
+                        local.Set(false);
+                }
             }
             catch (Exception ex)
             {
@@ -121,8 +129,8 @@ namespace Donet.Sessions
 
             try
             {
-                if (pendingQueue.Count > 0)
-                    Task.Run(Flash);
+                if (!packetQueue.IsEmpty)
+                    Flash();
                 else
                     using (var local = sending.Locker)
                         local.Set(false);

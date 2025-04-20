@@ -17,7 +17,7 @@ namespace ChattingClient
 
             List<Task> clients = new List<Task>();
 
-            for (int i = 0; i < 100; i++)
+            for (int i = 0; i < 1000; i++)
             {
                 Task t = Task.Run(StartClient);
                 clients.Add(t);
@@ -34,7 +34,7 @@ namespace ChattingClient
 
         private static void StartClient()
         {
-            IPEndPoint endPoint = new IPEndPoint(IPAddress.Parse("127.0.0.1"), 9977);
+            IPEndPoint endPoint = new IPEndPoint(IPAddress.Parse("172.31.1.212"), Random.Shared.Next() % 3 + 9977);
             Socket socket = Connector.Connect(endPoint);
 
             Logger.Log(LogLevel.Notify, "[Client] connected to server.");
@@ -49,7 +49,7 @@ namespace ChattingClient
 
             while (active)
             {
-                Thread.Sleep(20);
+                Thread.Sleep(30);
                 string message = Random.Shared.Next().ToString();
                 if (!active)
                     break;
