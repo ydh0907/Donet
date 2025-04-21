@@ -11,18 +11,20 @@ namespace Donet.Connection
     public class Listener
     {
         private readonly Socket socket;
+        private readonly IPEndPoint endPoint;
         private readonly AcceptHandle handler;
         private readonly SocketAsyncEventArgs listenArgs;
 
-        public Listener(Socket socket, AcceptHandle handler)
+        public Listener(Socket socket, IPEndPoint endPoint, AcceptHandle handler)
         {
             this.socket = socket;
+            this.endPoint = endPoint;
             this.handler = handler;
             this.listenArgs = new SocketAsyncEventArgs();
             listenArgs.Completed += HandleAccept;
         }
 
-        public void Listen(int backlog, IPEndPoint endPoint)
+        public void Listen(int backlog)
         {
             socket.Bind(endPoint);
             socket.Listen(backlog);

@@ -6,42 +6,40 @@ namespace Test
     {
         static Atomic<int> race = new Atomic<int>();
 
-        public static void Main()
+        interface ITest
         {
-            Task p = Task.Run(Plus);
-            Task m = Task.Run(Minus);
-
-            Task.WaitAll(p, m);
-
-            using var local = race.Lock();
-            Console.WriteLine(local.Value);
+            public int Get();
+            public void Set(int value);
         }
 
-        public static void Plus()
+        struct Test : ITest
         {
-            for (int i = 0; i < 1000000; i++)
+            public int value;
+
+            public int Get()
             {
-                using (var local = race.Lock())
-                {
-                    using (var local2 = race.Lock())
-                    {
-                        local2.Set(local2.Value + 1);
-                    }
-                }
+                return value;
+            }
+
+            public void Set(int value)
+            {
+                this.value = value;
             }
         }
 
-        public static void Minus()
+        public static void Main()
         {
-            for (int i = 0; i < 1000000; i++)
+            List<ITest> list = new List<ITest>();
+            Test test = new Test();
+            list.Add(test);
+            test.Set(1);
+            list.Add(test);
+            test.Set(2);
+            list.Add(test);
+
+            foreach (Test t in list)
             {
-                using (var local = race.Lock())
-                {
-                    using (var local2 = race.Lock())
-                    {
-                        local2.Set(local2.Value - 1);
-                    }
-                }
+                Console.WriteLine(t.Get());
             }
         }
     }
