@@ -10,8 +10,6 @@ namespace Donet.Sessions
 
     public class SessionReceiver : IDisposable
     {
-        public Atomic<ulong> receiveCount = new Atomic<ulong>(0);
-
         private Socket socket = null;
         private Session session = null;
 
@@ -157,9 +155,6 @@ namespace Donet.Sessions
                     raw -= size;
 
                     handler?.Invoke(id, packet);
-
-                    using (var local = receiveCount.Locker)
-                        local.Set(local.Value + 1);
                 }
                 else
                     break;

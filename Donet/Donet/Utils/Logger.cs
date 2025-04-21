@@ -17,6 +17,9 @@ namespace Donet.Utils
 
         public static void Log(LogLevel level, string message)
         {
+            if (instance == null)
+                return;
+
             using var local = instance.Lock();
             local.Value.LocalLog(level, message);
         }
@@ -32,6 +35,9 @@ namespace Donet.Utils
 
         public static void Dispose()
         {
+            if (instance == null)
+                return;
+
             AppDomain.CurrentDomain.ProcessExit -= HandleExit;
 
             using var local = instance.Lock();
@@ -53,7 +59,7 @@ namespace Donet.Utils
 
         public void Create()
         {
-            path = Environment.CurrentDirectory + "\\Logs";
+            path = Path.Combine(Environment.CurrentDirectory, "Logs");
             logBuf = new byte[16777216];
             pointer = 0;
         }
@@ -70,6 +76,13 @@ namespace Donet.Utils
         {
             string log = MakeMessage(level, message);
             int byteCount = Encoding.UTF8.GetByteCount(log);
+
+            if (byteCount > logBuf.Length)
+            {
+                LocalLog(LogLevel.Warning, "log message is too large and has been skipped.");
+                return;
+            }
+
             if (byteCount > logBuf.Length - pointer)
                 Save();
 #if DEBUG
@@ -95,39 +108,24 @@ namespace Donet.Utils
 
         private string MakePath()
         {
-            StringBuilder sb = new StringBuilder();
-            sb.Append(path);
-            sb.Append('\\');
-            AddDate(sb);
-            sb.Append(".txt");
-            return sb.ToString();
+            DateTime now = DateTime.Now;
+            string timestamp = now.ToString("yyyy.MM.dd-HH.mm.ss");
+            long ticks = now.Ticks;
+
+            string filename = $"{timestamp}_{ticks}.txt";
+            return Path.Combine(path, filename);
         }
 
         private string MakeMessage(LogLevel level, string message)
         {
             StringBuilder sb = new StringBuilder();
             sb.Append($"[{level}] [");
-            AddDate(sb);
+            sb.Append(DateTime.Now.ToString("yyyy.MM.dd-HH.mm.ss"));
             sb.Append("] ");
             sb.Append(message);
             sb.AppendLine();
 
             return sb.ToString();
-        }
-
-        private void AddDate(StringBuilder sb)
-        {
-            sb.Append(DateTime.Now.Year.ToString());
-            sb.Append('.');
-            sb.Append(DateTime.Now.Month.ToString());
-            sb.Append('.');
-            sb.Append(DateTime.Now.Day.ToString());
-            sb.Append('-');
-            sb.Append(DateTime.Now.Hour.ToString());
-            sb.Append('.');
-            sb.Append(DateTime.Now.Minute.ToString());
-            sb.Append('.');
-            sb.Append(DateTime.Now.Second.ToString());
         }
     }
 }

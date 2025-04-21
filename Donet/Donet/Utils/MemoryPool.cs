@@ -58,7 +58,7 @@ namespace Donet.Utils
             else
             {
                 memory = new MemorySegment(new byte[receiveSize], 0, receiveSize);
-                Logger.Log(LogLevel.Warning, "[Memory] not enough receive pooling.");
+                Logger.Log(LogLevel.Notify, "[Memory] not enough receive pooling.");
             }
             return memory;
         }

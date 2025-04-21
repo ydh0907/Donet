@@ -33,6 +33,11 @@ namespace Donet.Connection
             Accept(listenArgs);
         }
 
+        public void Close()
+        {
+            socket.Close();
+        }
+
         private void Accept(SocketAsyncEventArgs args)
         {
             try
@@ -47,16 +52,20 @@ namespace Donet.Connection
             }
             catch (Exception ex)
             {
-                Logger.Log(LogLevel.Error, $"[Listener] listen failed. {ex.Message}");
+                Logger.Log(LogLevel.Error, $"[Listener] listen failed. {ex}");
             }
         }
 
         private void HandleAccept(object sender, SocketAsyncEventArgs args)
         {
-            if (args.SocketError == SocketError.Success)
-                handler?.Invoke(args.AcceptSocket);
+            if (args.SocketError == SocketError.Success && args.AcceptSocket != null)
+            {
+                Socket client = args.AcceptSocket;
+                client.NoDelay = true;
+                handler?.Invoke(client);
+            }
             else
-                Logger.Log(LogLevel.Warning, "[Listener] Accept failed please check connector.");
+                Logger.Log(LogLevel.Warning, $"[Listener] accept failed. error {args.SocketError}");
 
             args.AcceptSocket = null;
             Accept(args);
