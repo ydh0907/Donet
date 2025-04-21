@@ -13,7 +13,7 @@ namespace Donet.Utils
 
     public class Logger
     {
-        private static Atomic<Logger> instance = null;
+        private static volatile Atomic<Logger> instance = null;
 
         public static void Log(LogLevel level, string message)
         {

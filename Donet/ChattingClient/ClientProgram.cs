@@ -11,18 +11,20 @@ namespace ChattingClient
     {
         static void Main(string[] args)
         {
+            ThreadPool.SetMaxThreads(10000, 10000);
+            ThreadPool.SetMinThreads(10000, 10000);
+
             Logger.Initialize();
             MemoryPool.Initialize();
             PacketFactory.Initialize(new ClientChatPacket());
 
             List<Task> clients = new List<Task>();
-
-            for (int i = 0; i < 1000; i++)
+            for (int i = 0; i < 1; i++)
             {
                 Task t = Task.Run(StartClient);
                 clients.Add(t);
             }
-
+            Console.WriteLine("Client Setup.");
             Task.WaitAll(clients.ToArray());
 
             PacketFactory.Dispose();
@@ -34,22 +36,22 @@ namespace ChattingClient
 
         private static void StartClient()
         {
-            IPEndPoint endPoint = new IPEndPoint(IPAddress.Parse("172.31.1.212"), Random.Shared.Next() % 3 + 9977);
+            IPEndPoint endPoint = new IPEndPoint(IPAddress.Parse("172.31.1.212"), Random.Shared.Next() % 4 + 9977);
             Socket socket = Connector.Connect(endPoint);
-
-            Logger.Log(LogLevel.Notify, "[Client] connected to server.");
 
             bool active = true;
             Session session = new Session();
-            session.Initialize(0, socket, (session) =>
+            session.Initialize(0, socket);
+            session.closed += (session) =>
             {
                 active = false;
-                Logger.Log(LogLevel.Notify, "[Client] disconnected from server.");
-            });
+            };
+
+            Console.WriteLine("Connected");
 
             while (active)
             {
-                Thread.Sleep(30);
+                Thread.Sleep(50);
                 string message = Random.Shared.Next().ToString();
                 if (!active)
                     break;

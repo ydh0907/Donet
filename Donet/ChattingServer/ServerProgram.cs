@@ -16,12 +16,15 @@ namespace ChattingServer
 
         static void Main(string[] args)
         {
+            ThreadPool.SetMaxThreads(8192 << 1, 8192 << 1);
+            ThreadPool.SetMinThreads(8192, 8192);
+
             Logger.Initialize();
             MemoryPool.Initialize();
             PacketFactory.Initialize(new ServerChatPacket());
 
             Task.Run(StartDebugTimer);
-            for (int i = 0; i < 3; i++)
+            for (int i = 0; i < 4; i++)
                 StartListener(9977 + i);
             ConsoleOperAsync();
 
@@ -32,21 +35,29 @@ namespace ChattingServer
             Console.ReadKey();
         }
 
-        private static ulong lastReceiveCount = 0;
+        public static ulong total = 0;
         private static void StartDebugTimer()
         {
             while (true)
             {
-                Thread.Sleep(3000);
                 ulong sum = 0;
+                Thread.Sleep(3000);
                 using (var local = sessions.Lock())
+                {
                     foreach (var session in local.Value)
                     {
-                        using (var count = session.receiveCount.Lock())
-                            sum += count.Value;
+                        using var count = session.receiveCount.Lock();
+                        using var activeL = session.Active.Lock();
+                        using var closeingL = session.Closing.Lock();
+
+                        if (activeL.Value && !closeingL.Value)
+                            sum += count.Value - session.lastReceiveCount;
+                        session.lastReceiveCount = count.Value;
                     }
-                Logger.Log(LogLevel.Notify, $"[Server] {(sum - lastReceiveCount) / 3} packets per sec. total {sum} packet received.");
-                lastReceiveCount = sum;
+                    Logger.Log(LogLevel.Notify, $"[Server] {local.Value.Count} session actived.");
+                }
+                total += sum;
+                Logger.Log(LogLevel.Notify, $"[Server] {sum / 3}p/s. total {total} packet received.");
             }
         }
 
@@ -93,6 +104,14 @@ namespace ChattingServer
                             break;
                         case "user":
                         case "User":
+                            string id = Console.ReadLine();
+                            using (var local = sessions.Lock())
+                                foreach (var session in local.Value)
+                                {
+                                    if (session.Id == ulong.Parse(id))
+                                        Logger.Log(LogLevel.Notify, $"{session.Id} : {session.Socket.RemoteEndPoint}");
+                                }
+                            break;
                         case "users":
                         case "Users":
                             using (var local = sessions.Lock())
@@ -115,7 +134,7 @@ namespace ChattingServer
             IPEndPoint endPoint = new IPEndPoint(IPAddress.Any, port);
             listener.Listen(4096, endPoint);
 
-            Logger.Log(LogLevel.Notify, "[Server] listener opened on 9977");
+            Logger.Log(LogLevel.Notify, $"[Server] listener opened on {port}");
         }
 
         private static void HandleAccept(Socket socket)
@@ -127,11 +146,12 @@ namespace ChattingServer
                 next = local.Value;
             }
             Session session = new Session();
-            session.Initialize(next, socket, HandleDisconnect);
+            session.Initialize(next, socket);
+            session.closed += HandleDisconnect;
             using (var local = sessions.Lock())
                 local.Value.Add(session);
 
-            Logger.Log(LogLevel.Notify, $"[Enter] {session.Id} : {session.Socket.RemoteEndPoint}");
+            // Logger.Log(LogLevel.Notify, $"[Enter] {session.Id} : {session.Socket.RemoteEndPoint}");
         }
 
         private static void HandleDisconnect(Session session)
@@ -139,11 +159,7 @@ namespace ChattingServer
             using (var local = sessions.Lock())
                 local.Value.Remove(session);
 
-            ServerChatPacket packet = new ServerChatPacket();
-            packet.message = $"[Exit] {session.Id} : {session.Socket.RemoteEndPoint}";
-            Broadcast(packet);
-
-            Logger.Log(LogLevel.Notify, packet.message);
+            // Logger.Log(LogLevel.Notify, $"[Exit] {session.Id} : {session.Socket.RemoteEndPoint})");
         }
     }
 }

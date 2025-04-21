@@ -20,14 +20,14 @@ namespace Donet.Utils
     {
         public static ushort sendSize = 1 << 12;
         public static ushort receiveSize = 1 << 15;
-        public static int sendBufferSize = 1 << 22;
-        public static int receiveBufferSize = 1 << 25;
+        public static int sendBufferSize = 1 << 25;
+        public static int receiveBufferSize = 1 << 28;
 
-        private static byte[] sendBuffer = null;
-        private static byte[] receiveBuffer = null;
+        private static volatile byte[] sendBuffer = null;
+        private static volatile byte[] receiveBuffer = null;
 
-        private static ConcurrentQueue<MemorySegment> sendPool = null;
-        private static ConcurrentQueue<MemorySegment> receivePool = null;
+        private static volatile ConcurrentQueue<MemorySegment> sendPool = null;
+        private static volatile ConcurrentQueue<MemorySegment> receivePool = null;
 
         public static void EnqueueSendMemory(MemorySegment segment)
         {
@@ -74,7 +74,7 @@ namespace Donet.Utils
             AddSendPool();
             AddReceivePool();
 
-            // Task.Run(MemoryUsage);
+            Task.Run(MemoryUsage);
         }
 
         private static void MemoryUsage()

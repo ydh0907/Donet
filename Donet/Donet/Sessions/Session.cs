@@ -9,6 +9,7 @@ namespace Donet.Sessions
     public class Session
     {
         public Atomic<ulong> receiveCount => receiver.receiveCount;
+        public ulong lastReceiveCount = 0;
 
         private ulong id = 0;
         private Socket socket = null;
@@ -27,9 +28,9 @@ namespace Donet.Sessions
 
         public SendHandle sended = null;
         public ReceiveHandle received = null;
-        public SessionClose sessionClosed = null;
+        public SessionClose closed = null;
 
-        public void Initialize(ulong id, Socket socket, SessionClose sessionClosed = null)
+        public void Initialize(ulong id, Socket socket)
         {
             using (var local = active.Lock())
                 local.Set(true);
@@ -42,17 +43,22 @@ namespace Donet.Sessions
 
             receiver = new SessionReceiver();
             receiver.Initialize(socket, this);
-
-            this.sessionClosed = sessionClosed;
         }
 
         public void Send(IPacket packet)
         {
-            sender?.Send(packet);
+            using var activeLocal = active.Lock();
+            using var closingLocal = closing.Lock();
+            if (activeLocal.Value && !closingLocal.Value)
+                sender.Send(packet);
         }
 
         public void Close()
         {
+            using (var local = active.Lock())
+                if (!local.Value)
+                    return;
+
             using (var local = closing.Lock())
             {
                 if (local.Value)
@@ -70,7 +76,7 @@ namespace Donet.Sessions
             sender = null;
             receiver = null;
 
-            sessionClosed?.Invoke(this);
+            closed?.Invoke(this);
 
             id = 0;
             socket.Close();

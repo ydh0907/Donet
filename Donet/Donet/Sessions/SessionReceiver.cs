@@ -88,7 +88,10 @@ namespace Donet.Sessions
         {
             if (args.SocketError != SocketError.Success || args.BytesTransferred == 0)
             {
-                HandleError(LogLevel.Warning, $"[Session {args.SocketError}] packet receiving failed please check session");
+                if (args.SocketError == SocketError.ConnectionReset)
+                    HandleError(LogLevel.Notify, $"[Session {args.SocketError}] socket connection reset by remote.");
+                else
+                    HandleError(LogLevel.Warning, $"[Session {args.SocketError}] packet receiving failed please check session.");
                 return;
             }
 
