@@ -1,4 +1,5 @@
-﻿using System.Net.Sockets;
+﻿using System;
+using System.Net.Sockets;
 
 using Donet.Utils;
 
@@ -6,6 +7,7 @@ namespace Donet.Sessions
 {
     public delegate void SessionClose(Session session);
 
+    [Serializable]
     public class Session
     {
         private ulong id = 0;
@@ -14,7 +16,7 @@ namespace Donet.Sessions
         private Atomic<bool> active = new Atomic<bool>(false);
         private Atomic<bool> closing = new Atomic<bool>(false);
 
-        public ulong Id => id;
+        public ulong Id { get => id; set => id = value; }
         public Socket Socket => socket;
 
         public Atomic<bool> Active => active;

@@ -17,6 +17,7 @@ namespace Donet.Utils
         public void Serialize(Serializer serializer);
     }
 
+    [Serializable]
     public sealed class Serializer
     {
         private NetworkSerializeMode mode;

@@ -3,6 +3,7 @@ using System.Threading;
 
 namespace Donet.Utils
 {
+    [Serializable]
     public class Atomic<T>
     {
         internal T value;
