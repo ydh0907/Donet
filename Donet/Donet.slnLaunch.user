@@ -3,11 +3,11 @@
     "Name": "새 프로필",
     "Projects": [
       {
-        "Path": "ChattingServer\\ChattingServer.csproj",
+        "Path": "TestServer\\TestServer.csproj",
         "Action": "Start"
       },
       {
-        "Path": "ChattingClient\\ChattingClient.csproj",
+        "Path": "TestClient\\TestClient.csproj",
         "Action": "Start"
       }
     ]

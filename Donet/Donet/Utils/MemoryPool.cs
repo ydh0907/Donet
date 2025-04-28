@@ -40,7 +40,9 @@ namespace Donet.Utils
                 while (!sendPool.TryDequeue(out memory)) ;
             else
             {
-                memory = new MemorySegment(new byte[sendSize], 0, sendSize);
+                AddSendPool();
+                sendBufferSize += sendBufferSize;
+                memory = DequeueSendMemory();
                 Logger.Log(LogLevel.Warning, "[Memory] not enough send pooling.");
             }
             return memory;
@@ -57,8 +59,10 @@ namespace Donet.Utils
                 while (!receivePool.TryDequeue(out memory)) ;
             else
             {
-                memory = new MemorySegment(new byte[receiveSize], 0, receiveSize);
-                Logger.Log(LogLevel.Notify, "[Memory] not enough receive pooling.");
+                AddReceivePool();
+                receiveBufferSize += receiveBufferSize;
+                memory = DequeueReceiveMemory();
+                Logger.Log(LogLevel.Warning, "[Memory] not enough receive pooling.");
             }
             return memory;
         }

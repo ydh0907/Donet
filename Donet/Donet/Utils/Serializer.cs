@@ -25,7 +25,6 @@ namespace Donet.Utils
         private ushort offset;
         private static readonly Encoding encoding = Encoding.Unicode;
 
-
         public void Open(NetworkSerializeMode mode, ArraySegment<byte> buffer, ushort offset = 0)
         {
             this.mode = mode;

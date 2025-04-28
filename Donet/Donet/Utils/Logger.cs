@@ -11,87 +11,62 @@ namespace Donet.Utils
         Error
     }
 
-    public class Logger
+    public static class Logger
     {
-        private static volatile Atomic<Logger> instance = null;
+        private static object locker = new object();
 
-        public static void Log(LogLevel level, string message)
+        private static void HandleExit(object sender, EventArgs evt)
         {
-            if (instance == null)
-                return;
-
-            using var local = instance.Lock();
-            local.Value.LocalLog(level, message);
+            Log(LogLevel.Error, "[Logger] unexpected termination has been detected.");
+            Save();
         }
+
+        private static string path = null;
+        private static byte[] logBuf = null;
+        private static int pointer = 0;
 
         public static void Initialize()
         {
-            instance = new Atomic<Logger>(new Logger());
-            using var local = instance.Lock();
-            local.Value.Create();
+            path = Path.Combine(Environment.CurrentDirectory, "Logs");
+            logBuf = new byte[16777216];
+            pointer = 0;
 
             AppDomain.CurrentDomain.ProcessExit += HandleExit;
         }
 
         public static void Dispose()
         {
-            if (instance == null)
-                return;
-
             AppDomain.CurrentDomain.ProcessExit -= HandleExit;
 
-            using var local = instance.Lock();
-            local.Value.Delete();
-            local.Set(null);
-            instance = null;
-        }
-
-        private static void HandleExit(object sender, EventArgs evt)
-        {
-            Log(LogLevel.Error, "[Logger] unexpected termination has been detected.");
-            using var local = instance.Lock();
-            local.Value.Save();
-        }
-
-        private string path = null;
-        private byte[] logBuf = null;
-        private int pointer = 0;
-
-        public void Create()
-        {
-            path = Path.Combine(Environment.CurrentDirectory, "Logs");
-            logBuf = new byte[16777216];
-            pointer = 0;
-        }
-
-        public void Delete()
-        {
             Save();
             path = null;
             logBuf = null;
             pointer = 0;
         }
 
-        public void LocalLog(LogLevel level, string message)
+        public static void Log(LogLevel level, string message)
         {
-            string log = MakeMessage(level, message);
-            int byteCount = Encoding.UTF8.GetByteCount(log);
-
-            if (byteCount > logBuf.Length)
+            lock (locker)
             {
-                LocalLog(LogLevel.Warning, "log message is too large and has been skipped.");
-                return;
-            }
+                string log = MakeMessage(level, message);
+                int byteCount = Encoding.UTF8.GetByteCount(log);
 
-            if (byteCount > logBuf.Length - pointer)
-                Save();
+                if (byteCount > logBuf.Length)
+                {
+                    Log(LogLevel.Warning, "log message is too large and has been skipped.");
+                    return;
+                }
+
+                if (byteCount > logBuf.Length - pointer)
+                    Save();
 #if DEBUG
-            Console.Write(log);
+                Console.Write(log);
 #endif
-            pointer += Encoding.UTF8.GetBytes(log, new Span<byte>(logBuf, pointer, byteCount));
+                pointer += Encoding.UTF8.GetBytes(log, new Span<byte>(logBuf, pointer, byteCount));
+            }
         }
 
-        public void Save()
+        public static void Save()
         {
             if (logBuf == null || logBuf.Length == 0) return;
 
@@ -106,7 +81,7 @@ namespace Donet.Utils
             pointer = 0;
         }
 
-        private string MakePath()
+        private static string MakePath()
         {
             DateTime now = DateTime.Now;
             string timestamp = now.ToString("yyyy.MM.dd-HH.mm.ss");
@@ -116,7 +91,7 @@ namespace Donet.Utils
             return Path.Combine(path, filename);
         }
 
-        private string MakeMessage(LogLevel level, string message)
+        private static string MakeMessage(LogLevel level, string message)
         {
             StringBuilder sb = new StringBuilder();
             sb.Append($"[{level}] [");

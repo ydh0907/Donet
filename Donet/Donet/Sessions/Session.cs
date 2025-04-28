@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Net.Sockets;
-
-using Donet.Utils;
+using System.Threading;
 
 namespace Donet.Sessions
 {
@@ -10,17 +9,12 @@ namespace Donet.Sessions
     [Serializable]
     public class Session
     {
-        private ulong id = 0;
+        public int id = 0;
         private Socket socket = null;
 
-        private Atomic<bool> active = new Atomic<bool>(false);
-        private Atomic<bool> closing = new Atomic<bool>(false);
-
-        public ulong Id { get => id; set => id = value; }
         public Socket Socket => socket;
 
-        public Atomic<bool> Active => active;
-        public Atomic<bool> Closing => closing;
+        public bool Active => active == 1;
 
         private SessionSender sender = new SessionSender();
         private SessionReceiver receiver = new SessionReceiver();
@@ -29,10 +23,12 @@ namespace Donet.Sessions
         public ReceiveHandle received = null;
         public SessionClose closed = null;
 
-        public void Initialize(ulong id, Socket socket)
+        private volatile int active = 0;
+
+        public void Initialize(int id, Socket socket)
         {
-            using (var local = active.Lock())
-                local.Set(true);
+            if (Interlocked.CompareExchange(ref active, 1, 0) == 1)
+                return;
 
             this.id = id;
             this.socket = socket;
@@ -47,24 +43,14 @@ namespace Donet.Sessions
 
         public void Send(IPacket packet)
         {
-            using var activeLocal = active.Lock();
-            using var closingLocal = closing.Lock();
-            if (activeLocal.Value && !closingLocal.Value)
+            if (Active)
                 sender.Send(packet);
         }
 
         public void Close()
         {
-            using (var local = active.Lock())
-                if (!local.Value)
-                    return;
-
-            using (var local = closing.Lock())
-            {
-                if (local.Value)
-                    return;
-                local.Set(true);
-            }
+            if (Interlocked.CompareExchange(ref active, 0, 1) == 0)
+                return;
 
             socket.Shutdown(SocketShutdown.Both);
 
@@ -80,11 +66,6 @@ namespace Donet.Sessions
             id = 0;
             socket.Close();
             socket = null;
-
-            using (var local = closing.Lock())
-                local.Set(false);
-            using (var local = active.Lock())
-                local.Set(false);
         }
     }
 }

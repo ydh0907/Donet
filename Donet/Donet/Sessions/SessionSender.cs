@@ -22,13 +22,10 @@ namespace Donet.Sessions
 
         private Serializer serializer = new Serializer();
 
-        private Atomic<bool> sending = new Atomic<bool>();
+        private volatile int sending = 0;
 
         public void Initialize(Socket socket, Session session)
         {
-            using (var local = sending.Locker)
-                local.Set(false);
-
             this.socket = socket;
             this.session = session;
 
@@ -40,15 +37,6 @@ namespace Donet.Sessions
 
         public void Dispose()
         {
-            bool active = true;
-            SpinWait wait = new SpinWait();
-            while (active)
-                using (var local = sending.Locker)
-                {
-                    active = local.Value;
-                    wait.SpinOnce();
-                }
-
             socket = null;
             session = null;
 
@@ -62,16 +50,8 @@ namespace Donet.Sessions
         {
             packetQueue.Enqueue(packet);
 
-            using (var local = sending.Locker)
-            {
-                if (!local.Value)
-                {
-                    local.Set(true);
-                }
-                else return;
-            }
-
-            Flash();
+            if (Interlocked.CompareExchange(ref sending, 1, 0) == 0)
+                Flash();
         }
 
         private void Flash()
@@ -107,11 +87,6 @@ namespace Donet.Sessions
                     if (!pending)
                         HandleSendCompleted(socket, sendArgs);
                 }
-                else
-                {
-                    using (var local = sending.Locker)
-                        local.Set(false);
-                }
             }
             catch (Exception ex)
             {
@@ -132,8 +107,7 @@ namespace Donet.Sessions
                 if (!packetQueue.IsEmpty)
                     Flash();
                 else
-                    using (var local = sending.Locker)
-                        local.Set(false);
+                    Interlocked.Exchange(ref sending, 0);
             }
             catch (Exception ex)
             {
@@ -145,9 +119,6 @@ namespace Donet.Sessions
         {
             if (session == null)
                 return;
-
-            using (var local = sending.Locker)
-                local.Set(false);
 
             Logger.Log(level, message);
 

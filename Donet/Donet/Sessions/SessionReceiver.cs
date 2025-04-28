@@ -22,13 +22,8 @@ namespace Donet.Sessions
 
         private Serializer serializer = new Serializer();
 
-        private Atomic<bool> receiving = new Atomic<bool>(false);
-
         public void Initialize(Socket socket, Session session)
         {
-            using (var local = receiving.Locker)
-                local.Set(false);
-
             this.socket = socket;
             this.session = session;
 
@@ -43,15 +38,6 @@ namespace Donet.Sessions
 
         public void Dispose()
         {
-            bool active = true;
-            SpinWait wait = new SpinWait();
-            while (active)
-                using (var local = receiving.Locker)
-                {
-                    active = local.Value;
-                    wait.SpinOnce();
-                }
-
             socket = null;
             session = null;
 
@@ -67,9 +53,6 @@ namespace Donet.Sessions
         {
             try
             {
-                using (var local = receiving.Locker)
-                    local.Set(true);
-
                 receiveArgs.SetBuffer(new ArraySegment<byte>(memory.segment.Array, memory.segment.Offset + right, memory.segment.Count - right));
 
                 bool pending = socket.ReceiveAsync(receiveArgs);
@@ -106,9 +89,6 @@ namespace Donet.Sessions
                 HandleError(LogLevel.Warning, ex.Message);
                 return;
             }
-
-            using (var local = receiving.Locker)
-                local.Set(false);
 
             Receive();
         }
@@ -165,9 +145,6 @@ namespace Donet.Sessions
         {
             if (session == null)
                 return;
-
-            using (var local = receiving.Locker)
-                local.Set(false);
 
             Logger.Log(level, message);
 
