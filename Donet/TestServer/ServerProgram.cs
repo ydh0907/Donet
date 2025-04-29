@@ -1,5 +1,6 @@
 ﻿using System.Net;
 using System.Net.Sockets;
+using System.Text;
 
 using Donet.Connection;
 using Donet.Sessions;
@@ -11,19 +12,15 @@ namespace TestServer
     {
         private static volatile int id = 0;
 
-        private static ulong received = 0;
+        private static ThreadLocal<ulong> received = new ThreadLocal<ulong>(true);
 
         struct TestPacket : IPacket
         {
             public int info;
 
-            public IPacket CreateInstance()
-            {
-                return new TestPacket();
-            }
             public void OnReceived(Session session)
             {
-                Interlocked.Increment(ref received);
+                received.Value++;
                 session.Send(this);
             }
             public void Serialize(Serializer serializer)
@@ -44,12 +41,20 @@ namespace TestServer
             for (int i = 0; i < 3; i++)
                 StartServer(i);
 
+            ulong last = 0;
+            StringBuilder stringBuilder = new StringBuilder();
             while (true)
             {
-                Thread.Sleep(1000);
-                Console.WriteLine(received);
-                Interlocked.Exchange(ref received, 0);
-                Console.WriteLine(id);
+                Thread.Sleep(3000);
+                ulong sum = 0;
+                foreach (var v in received.Values)
+                    sum += v;
+                stringBuilder.AppendLine($"Sum : {sum}");
+                stringBuilder.AppendLine($"PPS : {(sum - last) / 3}");
+                stringBuilder.Append($"CID : {id}");
+                Console.WriteLine(stringBuilder.ToString());
+                stringBuilder.Clear();
+                last = sum;
             }
         }
 

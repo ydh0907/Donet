@@ -13,10 +13,6 @@ namespace TestClient
         {
             public int info;
 
-            public IPacket CreateInstance()
-            {
-                return new TestPacket();
-            }
             public void OnReceived(Session session)
             {
                 session.Send(this);

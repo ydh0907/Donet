@@ -35,7 +35,7 @@ namespace Donet.Sessions
 
         internal static IPacket GetPacket(ushort id)
         {
-            return id2p[id].CreateInstance();
+            return id2p[id];
         }
     }
 }
