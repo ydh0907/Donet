@@ -1,7 +1,9 @@
-﻿using System.Net;
+﻿using System.Collections.Concurrent;
+using System.Net;
 using System.Net.Sockets;
 using System.Text;
 
+using Donet;
 using Donet.Connection;
 using Donet.Sessions;
 using Donet.Utils;
@@ -14,16 +16,23 @@ namespace TestServer
 
         private static ThreadLocal<ulong> received = new ThreadLocal<ulong>(true);
 
+        private static List<Session> sessions = new List<Session>(4096);
+        private static ConcurrentQueue<Session> pendingAdd = new ConcurrentQueue<Session>();
+        private static ConcurrentQueue<Session> pendingRemove = new ConcurrentQueue<Session>();
+
         struct TestPacket : IPacket
         {
             public int info;
 
+            public IPacket Create()
+            {
+                return new TestPacket();
+            }
             public void OnReceived(Session session)
             {
                 received.Value++;
-                session.Send(this);
             }
-            public void Serialize(Serializer serializer)
+            public void Serialize(ref Serializer serializer)
             {
                 serializer.Serialize(ref info);
             }
@@ -31,9 +40,7 @@ namespace TestServer
 
         static void Main(string[] args)
         {
-            Logger.Initialize();
-            MemoryPool.Initialize();
-            PacketFactory.Initialize(new TestPacket());
+            DonetFramework.Initialize(128, new TestPacket());
 
             ThreadPool.SetMaxThreads(24, 24);
             ThreadPool.SetMinThreads(16, 16);
@@ -41,6 +48,41 @@ namespace TestServer
             for (int i = 0; i < 3; i++)
                 StartServer(i);
 
+            Console.WriteLine("[Server] started on 9977");
+
+            Task.Run(ServerLog);
+
+            while (true)
+            {
+                Time.SyncTimer();
+                while (pendingAdd.Count > 0)
+                    if (pendingAdd.TryDequeue(out Session session))
+                        sessions.Add(session);
+                while (pendingRemove.Count > 0)
+                    if (pendingRemove.TryDequeue(out Session session))
+                        sessions.Remove(session);
+
+                int count = sessions.Count / 512;
+                Task[] tasks = new Task[count + 1];
+                for (int i = 0; i <= count; i++)
+                {
+                    tasks[i] = UpdateSession(i);
+                }
+                Task.WaitAll();
+            }
+        }
+
+        private static Task UpdateSession(int index)
+        {
+            return Task.Run(() =>
+            {
+                for (int i = index * 512; i < Math.Min(sessions.Count, (index + 1) * 512); i++)
+                    sessions[i].Send(new TestPacket() { info = Random.Shared.Next() });
+            });
+        }
+
+        private static void ServerLog()
+        {
             ulong last = 0;
             StringBuilder stringBuilder = new StringBuilder();
             while (true)
@@ -49,9 +91,11 @@ namespace TestServer
                 ulong sum = 0;
                 foreach (var v in received.Values)
                     sum += v;
+                stringBuilder.AppendLine("[Server Stats]");
                 stringBuilder.AppendLine($"Sum : {sum}");
                 stringBuilder.AppendLine($"PPS : {(sum - last) / 3}");
-                stringBuilder.Append($"CID : {id}");
+                stringBuilder.AppendLine($"DLT : {Time.delta}");
+                stringBuilder.Append($"CID : {sessions.Count}");
                 Console.WriteLine(stringBuilder.ToString());
                 stringBuilder.Clear();
                 last = sum;
@@ -69,8 +113,15 @@ namespace TestServer
         static void HandleAccept(Socket socket)
         {
             Session session = new Session();
+            session.closed += HandleClose;
             session.Initialize(Interlocked.Increment(ref id), socket);
-            session.Send(new TestPacket() { info = Random.Shared.Next() });
+            pendingAdd.Enqueue(session);
+        }
+
+        private static void HandleClose(Session session)
+        {
+            pendingRemove.Enqueue(session);
+            Console.WriteLine("Client Disconnected!");
         }
     }
 }

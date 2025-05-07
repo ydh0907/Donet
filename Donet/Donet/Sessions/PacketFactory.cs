@@ -1,41 +1,79 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading;
 
 namespace Donet.Sessions
 {
     public static class PacketFactory
     {
-        private static Dictionary<ushort, IPacket> id2p = null;
-        private static Dictionary<Type, ushort> p2id = null;
+        private static Dictionary<ushort, IPacket> idPackets = new Dictionary<ushort, IPacket>();
+        private static Dictionary<Type, ushort> typeId = new Dictionary<Type, ushort>();
 
-        public static void Initialize(params IPacket[] packets)
+        private static ThreadLocal<Dictionary<ushort, Queue<IPacket>>> localPool = new ThreadLocal<Dictionary<ushort, Queue<IPacket>>>();
+
+        private static int poolCount = 0;
+        private static IPacket[] packets = null;
+
+        public static void Initialize(int count = 100, params IPacket[] packets)
         {
-            id2p = new Dictionary<ushort, IPacket>();
-            p2id = new Dictionary<Type, ushort>();
+            poolCount = count;
+            PacketFactory.packets = packets;
 
-            for (ushort i = 0; i < packets.Length; i++)
+            for (int i = 0; i < packets.Length; i++)
             {
-                id2p.Add(i, packets[i]);
-                p2id.Add(packets[i].GetType(), i);
+                idPackets.Add((ushort)i, packets[i]);
+
+                Type type = packets[i].GetType();
+                typeId[type] = (ushort)i;
             }
         }
 
         public static void Dispose()
         {
-            id2p?.Clear();
-            p2id?.Clear();
-            id2p = null;
-            p2id = null;
+            idPackets.Clear();
+            typeId.Clear();
+
+            poolCount = 0;
+            packets = null;
+
+            localPool.Dispose();
         }
 
-        public static ushort GetPacketId(IPacket packet)
+        public static ushort GetId<T>(T packet) where T : IPacket
         {
-            return p2id[packet.GetType()];
+            return typeId[packet.GetType()];
         }
 
-        internal static IPacket GetPacket(ushort id)
+        public static IPacket PopPacket(ushort id)
         {
-            return id2p[id];
+            if (!localPool.IsValueCreated)
+                CreateLocalPool();
+            return localPool.Value[id].Dequeue().Create();
+        }
+
+        public static void PushPacket(IPacket packet)
+        {
+            ushort id = typeId[packet.GetType()];
+            PushPacket(id, packet);
+        }
+
+        public static void PushPacket(ushort id, IPacket packet)
+        {
+            if (!localPool.IsValueCreated)
+                CreateLocalPool();
+            localPool.Value[id].Enqueue(packet);
+        }
+
+        private static void CreateLocalPool()
+        {
+            localPool.Value = new Dictionary<ushort, Queue<IPacket>>();
+            for (int i = 0; i < packets.Length; i++)
+            {
+                Queue<IPacket> queue = new Queue<IPacket>();
+                for (int j = 0; j < poolCount; j++)
+                    queue.Enqueue(packets[i].Create());
+                localPool.Value[(ushort)i] = queue;
+            }
         }
     }
 }

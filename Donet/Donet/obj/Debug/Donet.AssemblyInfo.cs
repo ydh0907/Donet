@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Donet")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+29835463651a6b2659fa6c761950e1061f9d6980")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+d3440630497e2181c7c282fb0105caafecea1b6e")]
 [assembly: System.Reflection.AssemblyProductAttribute("Donet")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Donet")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

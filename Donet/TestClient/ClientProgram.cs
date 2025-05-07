@@ -1,6 +1,7 @@
 ﻿using System.Net;
 using System.Net.Sockets;
 
+using Donet;
 using Donet.Connection;
 using Donet.Sessions;
 using Donet.Utils;
@@ -13,11 +14,17 @@ namespace TestClient
         {
             public int info;
 
+            public IPacket Create()
+            {
+                return new TestPacket();
+            }
+
             public void OnReceived(Session session)
             {
                 session.Send(this);
             }
-            public void Serialize(Serializer serializer)
+
+            public void Serialize(ref Serializer serializer)
             {
                 serializer.Serialize(ref info);
             }
@@ -25,9 +32,7 @@ namespace TestClient
 
         static void Main(string[] args)
         {
-            Logger.Initialize();
-            MemoryPool.Initialize();
-            PacketFactory.Initialize(new TestPacket());
+            DonetFramework.Initialize(128, new TestPacket());
 
             ThreadPool.SetMaxThreads(24, 24);
             ThreadPool.SetMinThreads(16, 16);
@@ -41,7 +46,7 @@ namespace TestClient
         {
             Task.Run(async () =>
             {
-                for (int i = 0; i < 3000; i++)
+                for (int i = 0; i < 8192; i++)
                 {
                     IPEndPoint endPoint = new(IPAddress.Loopback, 9977 + Random.Shared.Next() % 3);
                     Socket socket = await Connector.ConnectAsync(endPoint);

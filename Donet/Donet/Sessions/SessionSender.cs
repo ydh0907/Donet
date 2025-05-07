@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Concurrent;
+using System.Collections.Generic;
 using System.Net.Sockets;
 using System.Threading;
 
@@ -9,6 +10,15 @@ namespace Donet.Sessions
 {
     public delegate void SendHandle(int byteTransferred);
 
+    /// <summary>
+    /// after using. automatically return to memory pool.
+    /// </summary>
+    public struct RawPacket
+    {
+        public MemorySegment memory;
+        public ArraySegment<byte> data;
+    }
+
     public class SessionSender : IDisposable
     {
         private Socket socket = null;
@@ -17,12 +27,13 @@ namespace Donet.Sessions
         private SendHandle handler => session.sended;
 
         private SocketAsyncEventArgs sendArgs = null;
-        private ConcurrentQueue<IPacket> packetQueue = new ConcurrentQueue<IPacket>();
-        private MemorySegment memory = null;
-
-        private Serializer serializer = new Serializer();
+        private ConcurrentQueue<RawPacket> pendingPackets = new ConcurrentQueue<RawPacket>();
+        private Queue<RawPacket> sendingPackets = new Queue<RawPacket>();
+        private List<ArraySegment<byte>> buffers = new List<ArraySegment<byte>>();
 
         private volatile int sending = 0;
+
+        public ConcurrentQueue<MemorySegment> memoryContainer = new ConcurrentQueue<MemorySegment>();
 
         public void Initialize(Socket socket, Session session)
         {
@@ -31,8 +42,9 @@ namespace Donet.Sessions
 
             sendArgs = new SocketAsyncEventArgs();
             sendArgs.Completed += HandleSendCompleted;
-            packetQueue.Clear();
-            memory = MemoryPool.DequeueSendMemory();
+            pendingPackets.Clear();
+            sendingPackets.Clear();
+            buffers.Clear();
         }
 
         public void Dispose()
@@ -42,13 +54,14 @@ namespace Donet.Sessions
 
             sendArgs.Dispose();
             sendArgs = null;
-            packetQueue.Clear();
-            MemoryPool.EnqueueSendMemory(memory);
+            pendingPackets.Clear();
+            sendingPackets.Clear();
+            buffers.Clear();
         }
 
-        public void Send(IPacket packet)
+        public void Send(RawPacket packet)
         {
-            packetQueue.Enqueue(packet);
+            pendingPackets.Enqueue(packet);
 
             if (Interlocked.CompareExchange(ref sending, 1, 0) == 0)
                 Flash();
@@ -58,31 +71,18 @@ namespace Donet.Sessions
         {
             try
             {
-                ushort offset = 0;
-                while (packetQueue.TryDequeue(out IPacket packet))
+                buffers.Clear();
+                sendArgs.BufferList = null;
+
+                while (pendingPackets.TryDequeue(out RawPacket packet))
                 {
-                    try
-                    {
-                        ushort packetId = PacketFactory.GetPacketId(packet);
-                        serializer.Open(NetworkSerializeMode.Serialize, memory.segment, (ushort)(offset + 2));
-                        serializer.Serialize(ref packetId);
-                        serializer.SerializeObject(ref packet);
-                        ushort next = serializer.GetOffset();
-                        serializer.SetOffset(offset);
-                        ushort size = (ushort)(next - offset);
-                        serializer.Serialize(ref size);
-                        offset = next;
-                    }
-                    catch
-                    {
-                        packetQueue.Enqueue(packet);
-                        break;
-                    }
+                    buffers.Add(packet.data);
+                    sendingPackets.Enqueue(packet);
                 }
 
-                if (offset > 0)
+                if (buffers.Count > 0)
                 {
-                    sendArgs.SetBuffer(memory.segment.Slice(0, offset));
+                    sendArgs.BufferList = buffers;
                     bool pending = socket.SendAsync(sendArgs);
                     if (!pending)
                         HandleSendCompleted(socket, sendArgs);
@@ -104,10 +104,23 @@ namespace Donet.Sessions
 
             try
             {
-                if (!packetQueue.IsEmpty)
+                while (memoryContainer.Count > 0)
+                    if (memoryContainer.TryDequeue(out MemorySegment memory))
+                        MemoryPool.EnqueueSendMemory(memory);
+
+                while (sendingPackets.Count > 0)
+                    memoryContainer.Enqueue(sendingPackets.Dequeue().memory);
+
+                handler?.Invoke(args.BytesTransferred);
+
+                if (!pendingPackets.IsEmpty)
                     Flash();
                 else
+                {
                     Interlocked.Exchange(ref sending, 0);
+                    if (!pendingPackets.IsEmpty && Interlocked.CompareExchange(ref sending, 1, 0) == 0)
+                        Flash();
+                }
             }
             catch (Exception ex)
             {

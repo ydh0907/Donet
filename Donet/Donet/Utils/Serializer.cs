@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using System.Text;
-using System.Threading;
 
 namespace Donet.Utils
 {
@@ -14,11 +13,11 @@ namespace Donet.Utils
 
     public interface INetworkSerializable
     {
-        public void Serialize(Serializer serializer);
+        public void Serialize(ref Serializer serializer);
     }
 
     [Serializable]
-    public sealed class Serializer
+    public struct Serializer
     {
         private NetworkSerializeMode mode;
         private ArraySegment<byte> buffer;
@@ -42,7 +41,7 @@ namespace Donet.Utils
         #region serializable
         public void SerializeObject<T>(ref T value) where T : INetworkSerializable
         {
-            value.Serialize(this);
+            value.Serialize(ref this);
         }
         public void SerializeObject<T>(ref T[] array) where T : INetworkSerializable
         {
@@ -89,7 +88,7 @@ namespace Donet.Utils
             ushort size = (ushort)sizeof(T);
 
             if (buffer.Count - offset < size)
-                throw new Exception("value bigger then buffer");
+                throw new Exception($"Not enough buffer: required {size}, available {buffer.Count - offset}");
 
             if (mode == NetworkSerializeMode.Serialize)
                 MemoryMarshal.Write(new Span<byte>(buffer.Array, buffer.Offset + offset, size), ref value);
@@ -147,13 +146,13 @@ namespace Donet.Utils
             Serialize(ref size);
 
             if (buffer.Count - offset < size)
-                throw new Exception("string bigger then buffer");
+                throw new Exception($"Not enough buffer: required {size}, available {buffer.Count - offset}"); ;
 
             if (mode == NetworkSerializeMode.Serialize)
             {
                 int written = encoding.GetBytes(value, new Span<byte>(buffer.Array, buffer.Offset + offset, size));
                 if (written != size)
-                    throw new Exception("invalid write on buffer");
+                    throw new Exception($"Not enough buffer: required {size}, available {buffer.Count - offset}");
             }
             else
             {

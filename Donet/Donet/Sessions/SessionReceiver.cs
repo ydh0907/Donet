@@ -1,12 +1,11 @@
 ﻿using System;
 using System.Net.Sockets;
-using System.Threading;
 
 using Donet.Utils;
 
 namespace Donet.Sessions
 {
-    public delegate void ReceiveHandle(ushort id, IPacket packet);
+    public delegate void ReceiveHandle(ushort id, ArraySegment<byte> body);
 
     public class SessionReceiver : IDisposable
     {
@@ -127,14 +126,10 @@ namespace Donet.Sessions
                     ushort id = 0;
                     serializer.Serialize(ref id);
 
-                    IPacket packet = PacketFactory.GetPacket(id);
-                    serializer.SerializeObject(ref packet);
+                    handler?.Invoke(id, memory.segment.Slice(left + 4, size - 4));
 
-                    packet.OnReceived(session);
                     left += size;
                     raw -= size;
-
-                    handler?.Invoke(id, packet);
                 }
                 else
                     break;
