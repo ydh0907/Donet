@@ -67,7 +67,7 @@ namespace Donet.Utils
             return memory;
         }
 
-        public static void Initialize()
+        public static void Initialize(bool checkMemoryUsage)
         {
             sendBuffer = new byte[sendBufferSize];
             receiveBuffer = new byte[receiveBufferSize];
@@ -78,7 +78,8 @@ namespace Donet.Utils
             AddSendPool();
             AddReceivePool();
 
-            Task.Run(MemoryUsage);
+            if (checkMemoryUsage)
+                Task.Run(MemoryUsage);
         }
 
         private static void MemoryUsage()

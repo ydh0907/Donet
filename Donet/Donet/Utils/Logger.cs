@@ -46,6 +46,9 @@ namespace Donet.Utils
 
         public static void Log(LogLevel level, string message)
         {
+            if (path == null || string.IsNullOrEmpty(message))
+                return;
+
             lock (locker)
             {
                 string log = MakeMessage(level, message);
@@ -68,7 +71,8 @@ namespace Donet.Utils
 
         public static void Save()
         {
-            if (logBuf == null || logBuf.Length == 0) return;
+            if (path == null || logBuf == null || logBuf.Length == 0)
+                return;
 
             if (!Directory.Exists(path))
                 Directory.CreateDirectory(path);
