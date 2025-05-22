@@ -14,7 +14,7 @@ namespace Donet.Sessions
         private static int poolCount = 0;
         private static IPacket[] packets = null;
 
-        public static void Initialize(int count = 100, params IPacket[] packets)
+        public static void Initialize(int count = 16, params IPacket[] packets)
         {
             poolCount = count;
             PacketFactory.packets = packets;
@@ -48,7 +48,11 @@ namespace Donet.Sessions
         {
             if (!localPool.IsValueCreated)
                 CreateLocalPool();
-            return localPool.Value[id].Dequeue().Create();
+
+            if (localPool.Value.Count == 0)
+                return idPackets[id].Create();
+
+            return localPool.Value[id].Dequeue();
         }
 
         public static void PushPacket(IPacket packet)

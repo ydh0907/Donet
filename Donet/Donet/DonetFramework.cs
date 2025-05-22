@@ -5,10 +5,11 @@ namespace Donet
 {
     public static class DonetFramework
     {
-        public static void Initialize(bool checkMemoryUsage = true, int packetPoolCount = 64, params IPacket[] packets)
+        public static void Initialize(bool useLogger = true, bool logMemoryUsage = true, int packetPoolCount = 64, params IPacket[] packets)
         {
-            Logger.Initialize();
-            MemoryPool.Initialize(checkMemoryUsage);
+            if (useLogger)
+                Logger.Initialize();
+            MemoryPool.Initialize(logMemoryUsage && useLogger);
             PacketFactory.Initialize(packetPoolCount, packets);
         }
 

@@ -3,24 +3,36 @@
   "WorkspaceRootPath": "D:\\GitHub\\Donet\\Donet\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{201EEB76-BAE0-4336-A5F4-E0C588144AED}|Donet\\Donet.csproj|d:\\github\\donet\\donet\\donet\\donetframework.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{201EEB76-BAE0-4336-A5F4-E0C588144AED}|Donet\\Donet.csproj|solutionrelative:donet\\donetframework.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{201EEB76-BAE0-4336-A5F4-E0C588144AED}|Donet\\Donet.csproj|d:\\github\\donet\\donet\\donet\\sessions\\packetfactory.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{201EEB76-BAE0-4336-A5F4-E0C588144AED}|Donet\\Donet.csproj|solutionrelative:donet\\sessions\\packetfactory.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{201EEB76-BAE0-4336-A5F4-E0C588144AED}|Donet\\Donet.csproj|d:\\github\\donet\\donet\\donet\\utils\\memorypool.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{201EEB76-BAE0-4336-A5F4-E0C588144AED}|Donet\\Donet.csproj|solutionrelative:donet\\utils\\memorypool.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{201EEB76-BAE0-4336-A5F4-E0C588144AED}|Donet\\Donet.csproj|d:\\github\\donet\\donet\\donet\\sessions\\session.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{201EEB76-BAE0-4336-A5F4-E0C588144AED}|Donet\\Donet.csproj|solutionrelative:donet\\sessions\\session.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{201EEB76-BAE0-4336-A5F4-E0C588144AED}|Donet\\Donet.csproj|d:\\github\\donet\\donet\\donet\\donet.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{201EEB76-BAE0-4336-A5F4-E0C588144AED}|Donet\\Donet.csproj|solutionrelative:donet\\donet.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{201EEB76-BAE0-4336-A5F4-E0C588144AED}|Donet\\Donet.csproj|d:\\github\\donet\\donet\\donet\\donetframework.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{201EEB76-BAE0-4336-A5F4-E0C588144AED}|Donet\\Donet.csproj|solutionrelative:donet\\donetframework.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{201EEB76-BAE0-4336-A5F4-E0C588144AED}|Donet\\Donet.csproj|d:\\github\\donet\\donet\\donet\\utils\\logger.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{201EEB76-BAE0-4336-A5F4-E0C588144AED}|Donet\\Donet.csproj|solutionrelative:donet\\utils\\logger.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{21BAC189-4524-4E55-98F1-258FA18B07D1}|TestClient\\TestClient.csproj|d:\\github\\donet\\donet\\testclient\\clientprogram.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{21BAC189-4524-4E55-98F1-258FA18B07D1}|TestClient\\TestClient.csproj|solutionrelative:testclient\\clientprogram.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{770B50C2-8EB3-4718-BB69-EB1391B2C7AB}|TestServer\\TestServer.csproj|d:\\github\\donet\\donet\\testserver\\serverprogram.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{770B50C2-8EB3-4718-BB69-EB1391B2C7AB}|TestServer\\TestServer.csproj|solutionrelative:testserver\\serverprogram.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{201EEB76-BAE0-4336-A5F4-E0C588144AED}|Donet\\Donet.csproj|d:\\github\\donet\\donet\\donet\\donet.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
-      "RelativeMoniker": "D:0:0:{201EEB76-BAE0-4336-A5F4-E0C588144AED}|Donet\\Donet.csproj|solutionrelative:donet\\donet.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+      "AbsoluteMoniker": "D:0:0:{201EEB76-BAE0-4336-A5F4-E0C588144AED}|Donet\\Donet.csproj|d:\\github\\donet\\donet\\donet\\utils\\memorypool.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{201EEB76-BAE0-4336-A5F4-E0C588144AED}|Donet\\Donet.csproj|solutionrelative:donet\\utils\\memorypool.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{21BAC189-4524-4E55-98F1-258FA18B07D1}|TestClient\\TestClient.csproj|d:\\github\\donet\\donet\\testclient\\clientprogram.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{21BAC189-4524-4E55-98F1-258FA18B07D1}|TestClient\\TestClient.csproj|solutionrelative:testclient\\clientprogram.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{770B50C2-8EB3-4718-BB69-EB1391B2C7AB}|TestServer\\TestServer.csproj|d:\\github\\donet\\donet\\testserver\\testserver.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
@@ -38,11 +50,11 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 8,
+          "SelectedChildIndex": 1,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 2,
               "Title": "Donet.csproj",
               "DocumentMoniker": "D:\\GitHub\\Donet\\Donet\\Donet\\Donet.csproj",
               "RelativeDocumentMoniker": "Donet\\Donet.csproj",
@@ -55,15 +67,15 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "MemoryPool.cs",
-              "DocumentMoniker": "D:\\GitHub\\Donet\\Donet\\Donet\\Utils\\MemoryPool.cs",
-              "RelativeDocumentMoniker": "Donet\\Utils\\MemoryPool.cs",
-              "ToolTip": "D:\\GitHub\\Donet\\Donet\\Donet\\Utils\\MemoryPool.cs",
-              "RelativeToolTip": "Donet\\Utils\\MemoryPool.cs",
-              "ViewState": "AgIAAEMAAAAAAAAAAAD4v08AAAAAAAAAAAAAAA==",
+              "DocumentIndex": 0,
+              "Title": "PacketFactory.cs",
+              "DocumentMoniker": "D:\\GitHub\\Donet\\Donet\\Donet\\Sessions\\PacketFactory.cs",
+              "RelativeDocumentMoniker": "Donet\\Sessions\\PacketFactory.cs",
+              "ToolTip": "D:\\GitHub\\Donet\\Donet\\Donet\\Sessions\\PacketFactory.cs",
+              "RelativeToolTip": "Donet\\Sessions\\PacketFactory.cs",
+              "ViewState": "AgIAAAsAAAAAAAAAAAAAwBUAAAAbAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-07T08:29:38.694Z",
+              "WhenOpened": "2025-05-12T10:38:29.301Z",
               "EditorCaption": ""
             },
             {
@@ -88,7 +100,44 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 1,
+              "Title": "Session.cs",
+              "DocumentMoniker": "D:\\GitHub\\Donet\\Donet\\Donet\\Sessions\\Session.cs",
+              "RelativeDocumentMoniker": "Donet\\Sessions\\Session.cs",
+              "ToolTip": "D:\\GitHub\\Donet\\Donet\\Donet\\Sessions\\Session.cs",
+              "RelativeToolTip": "Donet\\Sessions\\Session.cs",
+              "ViewState": "AgIAACAAAAAAAAAAAAAgwCoAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-12T10:19:54.899Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "ServerProgram.cs",
+              "DocumentMoniker": "D:\\GitHub\\Donet\\Donet\\TestServer\\ServerProgram.cs",
+              "RelativeDocumentMoniker": "TestServer\\ServerProgram.cs",
+              "ToolTip": "D:\\GitHub\\Donet\\Donet\\TestServer\\ServerProgram.cs",
+              "RelativeToolTip": "TestServer\\ServerProgram.cs",
+              "ViewState": "AgIAADMAAAAAAAAAAAAowDgAAAAeAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-07T08:46:11.714Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "MemoryPool.cs",
+              "DocumentMoniker": "D:\\GitHub\\Donet\\Donet\\Donet\\Utils\\MemoryPool.cs",
+              "RelativeDocumentMoniker": "Donet\\Utils\\MemoryPool.cs",
+              "ToolTip": "D:\\GitHub\\Donet\\Donet\\Donet\\Utils\\MemoryPool.cs",
+              "RelativeToolTip": "Donet\\Utils\\MemoryPool.cs",
+              "ViewState": "AgIAAEMAAAAAAAAAAAD4v08AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-07T08:29:38.694Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
               "Title": "ClientProgram.cs",
               "DocumentMoniker": "D:\\GitHub\\Donet\\Donet\\TestClient\\ClientProgram.cs",
               "RelativeDocumentMoniker": "TestClient\\ClientProgram.cs",
@@ -100,33 +149,31 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 3,
               "Title": "DonetFramework.cs",
               "DocumentMoniker": "D:\\GitHub\\Donet\\Donet\\Donet\\DonetFramework.cs",
               "RelativeDocumentMoniker": "Donet\\DonetFramework.cs",
               "ToolTip": "D:\\GitHub\\Donet\\Donet\\Donet\\DonetFramework.cs",
               "RelativeToolTip": "Donet\\DonetFramework.cs",
-              "ViewState": "AgIAAAMAAAAAAAAAAAAAAAoAAAA0AAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAA/AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-07T08:26:37.752Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-05-07T08:26:37.752Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 4,
               "Title": "Logger.cs",
               "DocumentMoniker": "D:\\GitHub\\Donet\\Donet\\Donet\\Utils\\Logger.cs",
               "RelativeDocumentMoniker": "Donet\\Utils\\Logger.cs",
               "ToolTip": "D:\\GitHub\\Donet\\Donet\\Donet\\Utils\\Logger.cs",
               "RelativeToolTip": "Donet\\Utils\\Logger.cs",
-              "ViewState": "AgIAABgAAAAAAAAAAAAMwBsAAAAmAAAAAAAAAA==",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAwwCcAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-07T08:24:48.775Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-05-07T08:24:48.775Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 8,
               "Title": "TestServer.csproj",
               "DocumentMoniker": "D:\\GitHub\\Donet\\Donet\\TestServer\\TestServer.csproj",
               "RelativeDocumentMoniker": "TestServer\\TestServer.csproj",
@@ -138,7 +185,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 9,
               "Title": "TestClient.csproj",
               "DocumentMoniker": "D:\\GitHub\\Donet\\Donet\\TestClient\\TestClient.csproj",
               "RelativeDocumentMoniker": "TestClient\\TestClient.csproj",
