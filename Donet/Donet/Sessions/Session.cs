@@ -43,7 +43,7 @@ namespace Donet.Sessions
 
         private void HandleReceive(ushort id, ArraySegment<byte> body)
         {
-            IPacket packet = PacketFactory.PopPacket(id);
+            IPacket packet = PacketFactory.GetPacket(id);
             Serializer serializer = new Serializer();
             serializer.Open(NetworkSerializeMode.Deserialize, body, 0);
             serializer.SerializeObject(ref packet);
