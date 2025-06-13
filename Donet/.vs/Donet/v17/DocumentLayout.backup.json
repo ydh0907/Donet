@@ -3,20 +3,20 @@
   "WorkspaceRootPath": "D:\\GitHub\\Donet\\Donet\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{201EEB76-BAE0-4336-A5F4-E0C588144AED}|Donet\\Donet.csproj|d:\\github\\donet\\donet\\donet\\sessions\\packetfactory.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{201EEB76-BAE0-4336-A5F4-E0C588144AED}|Donet\\Donet.csproj|solutionrelative:donet\\sessions\\packetfactory.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{201EEB76-BAE0-4336-A5F4-E0C588144AED}|Donet\\Donet.csproj|d:\\github\\donet\\donet\\donet\\sessions\\session.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{201EEB76-BAE0-4336-A5F4-E0C588144AED}|Donet\\Donet.csproj|solutionrelative:donet\\sessions\\session.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{201EEB76-BAE0-4336-A5F4-E0C588144AED}|Donet\\Donet.csproj|d:\\github\\donet\\donet\\donet\\utils\\serializer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{201EEB76-BAE0-4336-A5F4-E0C588144AED}|Donet\\Donet.csproj|solutionrelative:donet\\utils\\serializer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{201EEB76-BAE0-4336-A5F4-E0C588144AED}|Donet\\Donet.csproj|d:\\github\\donet\\donet\\donet\\donet.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
       "RelativeMoniker": "D:0:0:{201EEB76-BAE0-4336-A5F4-E0C588144AED}|Donet\\Donet.csproj|solutionrelative:donet\\donet.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{201EEB76-BAE0-4336-A5F4-E0C588144AED}|Donet\\Donet.csproj|d:\\github\\donet\\donet\\donet\\sessions\\packetfactory.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{201EEB76-BAE0-4336-A5F4-E0C588144AED}|Donet\\Donet.csproj|solutionrelative:donet\\sessions\\packetfactory.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{201EEB76-BAE0-4336-A5F4-E0C588144AED}|Donet\\Donet.csproj|d:\\github\\donet\\donet\\donet\\utils\\serializer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{201EEB76-BAE0-4336-A5F4-E0C588144AED}|Donet\\Donet.csproj|solutionrelative:donet\\utils\\serializer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{201EEB76-BAE0-4336-A5F4-E0C588144AED}|Donet\\Donet.csproj|d:\\github\\donet\\donet\\donet\\donetframework.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -54,11 +54,11 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 7,
+          "SelectedChildIndex": 8,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 1,
               "Title": "Donet.csproj",
               "DocumentMoniker": "D:\\GitHub\\Donet\\Donet\\Donet\\Donet.csproj",
               "RelativeDocumentMoniker": "Donet\\Donet.csproj",
@@ -67,7 +67,8 @@
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAA/AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
               "WhenOpened": "2025-05-07T07:09:00.969Z",
-              "IsPinned": true
+              "IsPinned": true,
+              "EditorCaption": ""
             },
             {
               "$type": "Bookmark",
@@ -91,7 +92,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 3,
               "Title": "Serializer.cs",
               "DocumentMoniker": "D:\\GitHub\\Donet\\Donet\\Donet\\Utils\\Serializer.cs",
               "RelativeDocumentMoniker": "Donet\\Utils\\Serializer.cs",
@@ -103,26 +104,26 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 2,
               "Title": "PacketFactory.cs",
               "DocumentMoniker": "D:\\GitHub\\Donet\\Donet\\Donet\\Sessions\\PacketFactory.cs",
               "RelativeDocumentMoniker": "Donet\\Sessions\\PacketFactory.cs",
               "ToolTip": "D:\\GitHub\\Donet\\Donet\\Donet\\Sessions\\PacketFactory.cs",
               "RelativeToolTip": "Donet\\Sessions\\PacketFactory.cs",
-              "ViewState": "AgIAACwAAAAAAAAAAAAgwDsAAABAAAAAAAAAAA==",
+              "ViewState": "AgIAACQAAAAAAAAAAAAYwDMAAAArAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-05-12T10:38:29.301Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 0,
               "Title": "Session.cs",
               "DocumentMoniker": "D:\\GitHub\\Donet\\Donet\\Donet\\Sessions\\Session.cs",
               "RelativeDocumentMoniker": "Donet\\Sessions\\Session.cs",
               "ToolTip": "D:\\GitHub\\Donet\\Donet\\Donet\\Sessions\\Session.cs",
               "RelativeToolTip": "Donet\\Sessions\\Session.cs",
-              "ViewState": "AgIAACEAAAAAAAAAAAAMwC0AAAA0AAAAAAAAAA==",
+              "ViewState": "AgIAACYAAAAAAAAAAAAMwDEAAAAkAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-05-12T10:19:54.899Z",
               "EditorCaption": ""

@@ -48,7 +48,6 @@ namespace Donet.Sessions
             serializer.Open(NetworkSerializeMode.Deserialize, body, 0);
             serializer.SerializeObject(ref packet);
             packet.OnReceived(this);
-            PacketFactory.PushPacket(packet);
         }
 
         public void Send(RawPacket packet)
