@@ -40,7 +40,7 @@ namespace TestServer
 
         static void Main(string[] args)
         {
-            DonetFramework.Initialize(128, new TestPacket());
+            DonetFramework.Initialize(false, false, new TestPacket());
 
             ThreadPool.SetMaxThreads(24, 24);
             ThreadPool.SetMinThreads(16, 16);
@@ -121,7 +121,6 @@ namespace TestServer
         private static void HandleClose(Session session)
         {
             pendingRemove.Enqueue(session);
-            Console.WriteLine("Client Disconnected!");
         }
     }
 }

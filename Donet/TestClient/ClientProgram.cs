@@ -1,5 +1,6 @@
 ﻿using System.Net;
 using System.Net.Sockets;
+using System.Runtime.InteropServices;
 
 using Donet;
 using Donet.Connection;
@@ -32,7 +33,7 @@ namespace TestClient
 
         static void Main(string[] args)
         {
-            DonetFramework.Initialize(128, new TestPacket());
+            DonetFramework.Initialize(false, false, new TestPacket());
 
             ThreadPool.SetMaxThreads(24, 24);
             ThreadPool.SetMinThreads(16, 16);

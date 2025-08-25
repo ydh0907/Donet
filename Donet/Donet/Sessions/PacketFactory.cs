@@ -11,12 +11,10 @@ namespace Donet.Sessions
 
         private static ThreadLocal<Dictionary<ushort, IPacket>> localPool = new ThreadLocal<Dictionary<ushort, IPacket>>();
 
-        private static int poolCount = 0;
         private static IPacket[] packets = null;
 
-        public static void Initialize(int count = 16, params IPacket[] packets)
+        public static void Initialize(params IPacket[] packets)
         {
-            poolCount = count;
             PacketFactory.packets = packets;
 
             for (int i = 0; i < packets.Length; i++)
@@ -33,7 +31,6 @@ namespace Donet.Sessions
             idPackets.Clear();
             typeId.Clear();
 
-            poolCount = 0;
             packets = null;
 
             localPool.Dispose();
